@@ -16,7 +16,7 @@ __Credits:__
 
 ---
 
-## Setup
+## Development Environment Setup
 
 1. __Development environment:__ [Teensyduino 1.56](https://www.pjrc.com/teensy/td_download.html) (as of Mar 2022)
 
@@ -31,3 +31,9 @@ __Credits:__
     2. Install the latest Artnet library in the Arduino's Library dirtectory (as of Mar 2022) (do not install it using Arduino's Library Manager): `git clone https://github.com/natcl/Artnet.git`
     3. Remove the NativeEthernet library (if you have installed it in Arduino library directory previously) as it will be there in the Teensyduino IDE app.
     4. Install the Adafruit Neopixel library using Arduino's LIbrary Manager (or Teensyduino's Library Manager)  
+
+## Program's Context
+
+---
+
+__License:__  (MIT)[]
