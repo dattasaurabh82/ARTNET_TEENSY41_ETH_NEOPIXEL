@@ -15,7 +15,8 @@ __Credits:__
 
 ## Hardware Setup
 
-1. Schematic:
+1. Schematic: [Schematuc.pdf](https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL/blob/main/Schematic.pdf)
+![Screenshot 2022-03-18 at 6 06 32 PM](https://user-images.githubusercontent.com/4619862/158983284-2409939a-90e1-4d3d-ba66-2f355a3bd0c1.png)
 
 2. PCB deisgn:
 
