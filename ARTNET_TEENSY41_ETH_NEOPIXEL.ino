@@ -3,7 +3,7 @@
    Repository (with HW description): https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL
    Developer/s: Saurabh Datta
    License: MIT
-   About: An ARTNET based multi single strip neopixel (WS2811) system; running on Teensy 4.1 (using NativeEthernet and Artnet) 
+   About: An ARTNET based multi single strip neopixel (WS2811) system; running on Teensy 4.1 (using NativeEthernet and Artnet)
           where it receives DMX universe 0 and sets them parallel to all 4 strips
    Credits:
       1. PaulStoffregen : for the Teensy platform and initial Ethernet library    [https://github.com/PaulStoffregen/cores]
@@ -307,8 +307,18 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
   previousDataLength = length;
 
   if (sendFrame) {
+#ifdef ENABLE_STRIP1
+    strip1.show();
+#endif
+#ifdef ENABLE_STRIP2
+    strip2.show();
+#endif
+#ifdef ENABLE_STRIP3
     strip3.show();
+#endif
+#ifdef ENABLE_STRIP4
     strip4.show();
+#endif
     // Reset universeReceived to 0
     memset(universesReceived, 0, maxUniverses);
   }
