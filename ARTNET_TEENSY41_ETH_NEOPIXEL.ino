@@ -1,14 +1,14 @@
 /*
    Platform: Teensy 4.1 @ 400MHz with Native Ethernet
-   Hardware Setup: https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL
+   Repository (with HW description): https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL
    Developer/s: Saurabh Datta
    License: MIT
    About: An ARTNET based multi single strip neopixel (WS2811) system; running on Teensy 4.1 (using NativeEthernet and Artnet)
    Credits: 
-      1. PaulStoffregen : for the Teensy platform
-      2. Nathanaël Lécaudé : for the Artnet library
-      3. 
-      4. Adafruit : for the Neopixel libray
+      1. PaulStoffregen : for the Teensy platform and initial Ethernet library    [https://github.com/PaulStoffregen/cores]
+      2. Nathanaël Lécaudé : for the Artnet library                               [https://github.com/natcl/Artnet]
+      3. vjmuzik: For the Native Ethernet library                                 [https://github.com/vjmuzik/NativeEthernet]
+      4. Adafruit : for the Neopixel libray                                       [https://github.com/adafruit/Adafruit_NeoPixel]
 */
 
 // https://forum.pjrc.com/threads/67780-Teensy-4-1-Native-Ethernet-max-SocketSize-lower-than-set?highlight=native+ethernet
