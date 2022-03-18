@@ -3,8 +3,9 @@
    Repository (with HW description): https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL
    Developer/s: Saurabh Datta
    License: MIT
-   About: An ARTNET based multi single strip neopixel (WS2811) system; running on Teensy 4.1 (using NativeEthernet and Artnet)
-   Credits: 
+   About: An ARTNET based multi single strip neopixel (WS2811) system; running on Teensy 4.1 (using NativeEthernet and Artnet) 
+          where it receives DMX universe 0 and sets them parallel to all 4 strips
+   Credits:
       1. PaulStoffregen : for the Teensy platform and initial Ethernet library    [https://github.com/PaulStoffregen/cores]
       2. Nathanaël Lécaudé : for the Artnet library                               [https://github.com/natcl/Artnet]
       3. vjmuzik: For the Native Ethernet library                                 [https://github.com/vjmuzik/NativeEthernet]
@@ -18,16 +19,16 @@
 
 /*
    TODO:
-   [] Yellow LED from the RJ-45 jack
-   [] ARTNET Broadcast functionality
-   [] Button press + interrupt
-   [] dmx callack to all or 1 strip
+   [] ARTNET Broadcast functionality.
+   [] Button press + interrupt.
+   [] dmx callack to all or 1 strip.
+   [] i2c OLED display + interrupt.
 */
 
 // ------------------------------------------------------------------------------------------------------------ //
 // Un-commenting => Enables and comment out => Disables Serial interface for messages (e.g: for debug logs)
 // ------------------------------------------------------------------------------------------------------------ //
-#define DEBUG
+// #define DEBUG
 
 #ifdef DEBUG
 #define log(x) Serial.print(x);
@@ -271,22 +272,52 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
   for (int i = 0; i < length / channelsPerLed; i++) {
     int led = i + (universe - startUniverse) * (previousDataLength / channelsPerLed);
     if (led < numLeds) {
-      if (channelsPerLed == 4)
+      if (channelsPerLed == 4) {
         // For RGBW or GRBW type strips
+#ifdef ENABLE_STRIP1
+        strip1.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
+#endif
+#ifdef ENABLE_STRIP2
+        strip2.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
+#endif
+#ifdef ENABLE_STRIP3
         strip3.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
-      if (channelsPerLed == 3)
+#endif
+#ifdef ENABLE_STRIP4
+        strip4.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
+#endif
+      }
+      if (channelsPerLed == 3) {
         // For RGB or GRB type strips
+#ifdef ENABLE_STRIP1
+        strip1.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
+#endif
+#ifdef ENABLE_STRIP2
+        strip2.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
+#endif
+#ifdef ENABLE_STRIP3
         strip3.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
+#endif
+#ifdef ENABLE_STRIP4
+        strip4.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
+#endif
+      }
     }
   }
   previousDataLength = length;
 
   if (sendFrame) {
     strip3.show();
+    strip4.show();
     // Reset universeReceived to 0
     memset(universesReceived, 0, maxUniverses);
   }
 }
+
+
+//void onSync() {
+//  strip3.show();
+//}
 
 
 
@@ -296,11 +327,12 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
 // ------------------------------- //
 // ------ ETHERNET SETTINGS ------ //
 // ------------------------------- //
-byte querryMAC[] = { 0xE5, 0x2A, 0xFC, 0x41, 0x13, 0x2D }; // Dummy random MAC addr used for retreiving Teensy 4.1's actual MAC addr
-byte teensyMAC[6] = {};                                    // Array to hold the actual MACaddr of Teensy 4.1 (To be used for starting Ethernet Interface later)
 byte fixedIP[] = { 192, 168, 132, 150 };                   // Use a fixed IP to avoid conflict.
 byte resIP[] = { 0, 0, 0, 0 };                             // IP addr container to compare if the ETH conn was successfully established or not?
 byte broadcast[] = {192, 168, 132, 255};                   // if we want our system to broadcast feedback upon receiving DMX artnet universe/s
+byte querryMAC[] = { 0xE5, 0x2A, 0xFC, 0x41, 0x13, 0x2D }; // Dummy random MAC addr used for retreiving Teensy 4.1's actual MAC addr
+byte teensyMAC[6] = {};                                    // Array to hold the actual MACaddr of Teensy 4.1 (To be used for starting Ethernet Interface later)
+
 
 void assignMAC(byte *_mac) {
   for (uint8_t by = 0; by < 2; by++) _mac[by] = (HW_OCOTP_MAC1 >> ((1 - by) * 8)) & 0xFF;
@@ -416,6 +448,7 @@ void setup() {
 
   artnet.setBroadcast(broadcast);
   artnet.setArtDmxCallback(onDmxFrame);
+  //  artnet.setArtSyncCallback(onSync);
 }
 
 //boolean print_polls = false;
