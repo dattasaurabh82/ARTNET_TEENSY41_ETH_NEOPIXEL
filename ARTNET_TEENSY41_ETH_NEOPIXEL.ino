@@ -76,13 +76,6 @@ void initDebugLeds() {
   digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
 }
 
-// ------------------------------------------------------------------------------------------------------------ //
-// We have below 4 pins from Teensy 4.1 broken out, which can be readily connected to a ws211 neopixel strip
-// ------------------------------------------------------------------------------------------------------------ //
-// const byte stripPins[4] = { Strip 1 pin, Strip 2 pin, Strip 3 pin, Strip 4 pin };
-const byte stripPins[4] = { 24, 25, 15, 14 };
-// ** Note: of-course, you can use any other digital pin at their disposal (for example, if not using our dev PCB)
-
 
 
 
@@ -97,19 +90,38 @@ const byte stripPins[4] = { 24, 25, 15, 14 };
 //#endif
 #include <Artnet.h>
 #include <Adafruit_NeoPixel.h>
+#include <Wire.h>
+// [TBD] for showing MAC and IP on-board, if ethernet interface was successfully initiated
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
+
+// ------------------------------------- //
+// ------ SSD1306 128x32 OLED DISP------ //
+// ------------------------------------- //
+#define SCREEN_WIDTH  128                // OLED display width, in pixels
+#define SCREEN_HEIGHT 32                 // OLED display height, in pixels
+#define OLED_RESET_PIN  4                // Reset pin # (or -1 if sharing Arduino reset pin)
+#define OLED_SCREEN_ADDRESS 0x3C         //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+
+Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET_PIN);
 
 // --------------------------------------- //
 // ------ WS2811 LED STRIP SETTINGS ------ //
 // --------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------ //
+// We have below 4 pins from Teensy 4.1 broken out, which can be readily connected to a ws211 neopixel strip
+// ------------------------------------------------------------------------------------------------------------ //
+// const byte stripPins[4] = { Strip 1 pin, Strip 2 pin, Strip 3 pin, Strip 4 pin };
+const byte stripPins[4] = { 24, 25, 15, 14 };
+// ** Note: of-course, you can use any other digital pin at their disposal (for example, if not using our dev PCB)
+
+// -- For Neopixel lib -- //
 const int ledsPerStrip = 144;                               // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs )
 const byte numStrips = 1;                                   // change for your setup ( e.g: I'm using 1 strip, to begin with )
 const int numLeds = ledsPerStrip * numStrips;
 const int channelsPerLed = 3;                               // (for RGB, GRB etc. it is 3 ) (for RGBW, GRBW etc. it would be 4)
 const int numberOfChannels = numLeds * channelsPerLed;      // Total number of channels you want to receive
-
-// [TBD] ...
-//Adafruit_NeoPixel strips[4];
 
 #ifdef ENABLE_STRIP1
 Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB + NEO_KHZ800);
@@ -145,6 +157,9 @@ uint32_t RED4 = strip4.Color(127, 0, 0);
 uint32_t GREEN4 = strip4.Color(0, 127, 0);
 uint32_t BLUE4 =  strip4.Color(0, 0, 127);
 #endif
+
+
+
 
 
 
@@ -325,11 +340,6 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
 }
 
 
-//void onSync() {
-//  strip3.show();
-//}
-
-
 
 
 
@@ -382,6 +392,24 @@ void setup() {
   // Initiates on board LEDs that are used by our logic to show some status like if "network setup was successful or not..." etc.
   initDebugLeds();
 
+
+  Wire.begin();
+  // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
+  if (!oled.begin(SSD1306_SWITCHCAPVCC, OLED_SCREEN_ADDRESS)) {
+    logln(F("SSD1306 allocation failed"));
+    logln("ARTNET STATUS: fail");
+  } else {
+    // oled was successfully initiated, so Cclear the oled buffer
+    oled.clearDisplay();
+    // set text parameters (assuming we won;t change anything down the lane)
+    display.setTextSize(1);             // Normal 1:1 pixel scale
+    display.setTextColor(SSD1306_WHITE);        // Draw white text
+    //    display.setTextColor(SSD1306_BLACK, SSD1306_WHITE); // Draw 'inverse' text
+    display.setCursor(0, 0);            // Start at top-left corner
+  }
+
+
+
   // Begin & Clear the WS2811 LEDs
 #ifdef ENABLE_STRIP1
   strip1.begin();
@@ -409,6 +437,8 @@ void setup() {
   logln("Trying to begin ARTNET with Fixed IP and the above MAC addr...");
   delay(1000);
 
+  // [TBD] draw MAC address on the oled display
+
   //  Begin art-net with the new MAC addr and the fixed IP
   artnet.begin(teensyMAC, fixedIP);
   delay(2000);
@@ -418,6 +448,7 @@ void setup() {
   log("ETH LINK STATUS: ");
   logln(Ethernet.linkStatus());
 
+  // [TBD] draw IP addr on the oled display
 
   /* if the fixed IP was assigned successfully, proceed; or else notify and block*/
   //  Since Artnet.begin(mac, ip) actually calls Ethernet.begin(mac, ip) underneath, we can check if our uC got the intended fixed IP address.
