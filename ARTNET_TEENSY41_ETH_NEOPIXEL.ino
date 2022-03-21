@@ -94,6 +94,7 @@ void initDebugLeds() {
 // [TBD] for showing MAC and IP on-board, if ethernet interface was successfully initiated
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+//#include <U8g2lib.h>
 
 
 // ------------------------------------- //
@@ -105,6 +106,20 @@ void initDebugLeds() {
 #define OLED_SCREEN_ADDRESS 0x3C         //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 
 Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET_PIN);
+
+/*
+  IIC Constructor
+  @param  rotation：    U8G2_R0 No rotation, horizontal, draw from left to right
+                        U8G2_R1 Rotate 90 degrees clockwise, draw from top to  bottom
+                        U8G2_R2 Rotate 180 degrees clockwise, draw from right to left
+                        U8G2_R3 Rotate 270 degrees clockwise, draw from bottom to top.
+                        U8G2_MIRROR Display image content normally（v2.6.x and above)   Note: U8G2_MIRROR needs to be used with setFlipMode（）.
+  @param reset：U8x8_PIN_NONE Empty pin, reset pin will not be used.
+*/
+//U8G2_SSD1306_128X32_UNIVISION_1_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);   // Adafruit ESP8266/32u4/ARM Boards + FeatherWing OLED
+
+
+
 
 // --------------------------------------- //
 // ------ WS2811 LED STRIP SETTINGS ------ //
@@ -434,13 +449,7 @@ void setup() {
   oled.println("checking LEDs...");
   oled.display();
   initLEDTest();
-  /*
-    byte fixedIP[] = { 192, 168, 132, 150 };                   // Use a fixed IP to avoid conflict.
-    byte resIP[] = { 0, 0, 0, 0 };                             // IP addr container to compare if the ETH conn was successfully established or not?
-    byte broadcast[] = {192, 168, 132, 255};                   // if we want our system to broadcast feedback upon receiving DMX artnet universe/s
-    byte querryMAC[] = { 0xE5, 0x2A, 0xFC, 0x41, 0x13, 0x2D }; // Dummy random MAC addr used for retreiving Teensy 4.1's actual MAC addr
-    byte teensyMAC[6] = {};
-  */
+
 
   //  Get and asisgn new found MAC addr of Teensy4.1
   logln("Getting new mac addr...");
@@ -450,7 +459,7 @@ void setup() {
   // [TBD] draw MAC address on the oled display
   oled.clearDisplay();
   oled.setCursor(0, 0);
-  //  oled.print(mac address...);
+  //  oled.print(teensyMAC);
   oled.display();
 
   //  Begin art-net with the new MAC addr and the fixed IP
@@ -476,7 +485,7 @@ void setup() {
 
     // [TBD] draw IP addr on the oled display
     oled.setCursor(0, 1);
-    //  oled.print(ip address...);
+    oled.print(Ethernet.localIP());
     oled.display();
   } else {
     logln("ARTNET STATUS: fail");
@@ -485,9 +494,9 @@ void setup() {
 
     // [TBD] draw IP addr on the oled display
     oled.setCursor(0, 1);
-    //  oled.println(ip address...);
+    oled.println(Ethernet.localIP());
     oled.setCursor(0, 2);
-    oled.print("[x] IP wasn't assigned !");
+    oled.print("[x] IP FAILED!");
     oled.display();
 
     // also if failed, do not proceed, show red on all strips & block...
