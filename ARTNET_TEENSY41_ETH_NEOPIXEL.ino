@@ -401,11 +401,12 @@ void setup() {
   } else {
     // oled was successfully initiated, so Cclear the oled buffer
     oled.clearDisplay();
-    // set text parameters (assuming we won;t change anything down the lane)
-    display.setTextSize(1);             // Normal 1:1 pixel scale
-    display.setTextColor(SSD1306_WHITE);        // Draw white text
-    //    display.setTextColor(SSD1306_BLACK, SSD1306_WHITE); // Draw 'inverse' text
-    display.setCursor(0, 0);            // Start at top-left corner
+    // set text parameters (assuming we won't change anything down the lane)
+    oled.setTextSize(1);                              // Normal 1:1 pixel scale
+    oled.setTextColor(SSD1306_WHITE);                 // Draw white text
+    //    oled.setTextColor(SSD1306_BLACK, SSD1306_WHITE);  // Draw 'inverse' text
+    oled.setCursor(0, 0);                             // Start at top-left corner
+    oled.cp437(true);                                 // Use full 256 char 'Code Page 437' font
   }
 
 
@@ -424,11 +425,14 @@ void setup() {
   strip4.begin();
 #endif
 
-  //[TBD] Set bright ness may be ...
-
+  //[TBD] Set brightness of ws2812 LEDs here may be ...
   clearLEDs();
 
   // On init, test WS2811 LEDs
+  oled.clearDisplay();
+  oled.setCursor(0, 0);
+  oled.println("checking LEDs...");
+  oled.display();
   initLEDTest();
 
   //  Get and asisgn new found MAC addr of Teensy4.1
@@ -438,6 +442,10 @@ void setup() {
   delay(1000);
 
   // [TBD] draw MAC address on the oled display
+  oled.clearDisplay();
+  oled.setCursor(0, 0);
+  //  oled.print(mac address...);
+  oled.display();
 
   //  Begin art-net with the new MAC addr and the fixed IP
   artnet.begin(teensyMAC, fixedIP);
@@ -448,7 +456,6 @@ void setup() {
   log("ETH LINK STATUS: ");
   logln(Ethernet.linkStatus());
 
-  // [TBD] draw IP addr on the oled display
 
   /* if the fixed IP was assigned successfully, proceed; or else notify and block*/
   //  Since Artnet.begin(mac, ip) actually calls Ethernet.begin(mac, ip) underneath, we can check if our uC got the intended fixed IP address.
@@ -460,10 +467,22 @@ void setup() {
     logln("ARTNET INIT: ok");
     digitalWrite(NET_INIT_SUCCESS_LED_PIN, HIGH);
     digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
+
+    // [TBD] draw IP addr on the oled display
+    oled.setCursor(0, 1);
+    //  oled.print(ip address...);
+    oled.display();
   } else {
     logln("ARTNET STATUS: fail");
     digitalWrite(NET_INIT_SUCCESS_LED_PIN, LOW);
     digitalWrite(NET_INIT_FAIL_LED_PIN, HIGH);
+
+    // [TBD] draw IP addr on the oled display
+    oled.setCursor(0, 1);
+    //  oled.println(ip address...);
+    oled.setCursor(0, 2);
+    oled.print("[x] IP wasn't assigned !");
+    oled.display();
 
     // also if failed, do not proceed, show red on all strips & block...
 #ifdef ENABLE_STRIP1
@@ -489,7 +508,6 @@ void setup() {
 
   artnet.setBroadcast(broadcast);
   artnet.setArtDmxCallback(onDmxFrame);
-  //  artnet.setArtSyncCallback(onSync);
 }
 
 //boolean print_polls = false;
