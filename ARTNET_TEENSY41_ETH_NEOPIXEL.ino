@@ -434,13 +434,19 @@ void setup() {
   oled.println("checking LEDs...");
   oled.display();
   initLEDTest();
+  /*
+    byte fixedIP[] = { 192, 168, 132, 150 };                   // Use a fixed IP to avoid conflict.
+    byte resIP[] = { 0, 0, 0, 0 };                             // IP addr container to compare if the ETH conn was successfully established or not?
+    byte broadcast[] = {192, 168, 132, 255};                   // if we want our system to broadcast feedback upon receiving DMX artnet universe/s
+    byte querryMAC[] = { 0xE5, 0x2A, 0xFC, 0x41, 0x13, 0x2D }; // Dummy random MAC addr used for retreiving Teensy 4.1's actual MAC addr
+    byte teensyMAC[6] = {};
+  */
 
   //  Get and asisgn new found MAC addr of Teensy4.1
   logln("Getting new mac addr...");
   assignMAC(querryMAC);
   logln("Trying to begin ARTNET with Fixed IP and the above MAC addr...");
   delay(1000);
-
   // [TBD] draw MAC address on the oled display
   oled.clearDisplay();
   oled.setCursor(0, 0);
