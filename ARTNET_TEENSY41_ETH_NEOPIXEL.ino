@@ -21,12 +21,15 @@
 
 /*
    TODO:
-   [-] create array of strips and not individual objects?
+   [*] create array of strips and not individual objects?
    [*] dmx callack to all or 1 strip.
-   [-] check multiple dmx universe assignment
-   [*] i2c OLED display setup 
-   [-] Check network once in a while (make it hot swappable) 
-   [-] Check dev support on platformio env
+   [-] check multiple dmx universe assignment to differebt strips
+      [-] Same universe to all strips.
+      [-] diff universes to diff strips.
+   [*] i2c OLED display setup
+   [-] Check dev support on platformio env1
+   [-] Check cmdline compile for teensy4.1 and setting macros while compiling...  
+   [-] Check network once in a while (make it hot swappable)
 */
 
 // [Optional] Mainly to support from platformio, so that thsi cwhole code can be copy pasted in main.cpp [TBD]
@@ -35,9 +38,9 @@
 #include <Arduino.h>
 
 
-// ---------------------------------------------- //
-// ------- User Configurable Parameters --------- //
-// ---------------------------------------------- //
+// --------------------------------------------- //
+// ------- User Configurable Parameters -------- //
+// --------------------------------------------- //
 // Un-commenting => Enables and comment out => Disables, Serial interface for messages (e.g: for debug logs)
 #define DEBUG
 
@@ -51,6 +54,14 @@
 // #define ENABLE_STRIP2
 #define ENABLE_STRIP3
 #define ENABLE_STRIP4
+
+// For neopixelled on strips
+const int ledsPerStrip = 144;                   // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs ). 
+// Note: Max is 170, as in what DMX allows/universe for artnet
+
+const byte numLEDStripsPerStripSocket = 1;      // change for your setup ( e.g: I'm using 1 strip, to begin with )
+const int numLeds = ledsPerStrip * numLEDStripsPerStripSocket;
+const int channelsPerLed = 3;                   // (for RGB, GRB etc. it is 3 ) (for RGBW, GRBW etc. it would be 4)
 
 // A fixed IP addres for your Teensy4.1 uC, as an Artnet node, on the network (Change it a/c to your Router settings)
 byte fixedIP[] = { 192, 168, 132, 150 };
@@ -132,6 +143,7 @@ void initDebugLeds() {
 #define OLED_RESET_PIN  4                // Reset pin # (or -1 if sharing Arduino reset pin)
 //#define OLED_SCREEN_ADDRESS 0x3C       //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 uint8_t OLED_SCREEN_ADDRESS = 0x3C;      //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+uint8_t SSD1306_ADDRESSES[] = { 0x3c, 0x3D };
 
 // --- OLED display's i2c addr auto-discovery feature --- //
 uint8_t getDisplayAddr() {
@@ -173,6 +185,20 @@ uint8_t getDisplayAddr() {
   return foundAddr;
 }
 
+boolean validAddr(uint8_t _addr) {
+  bool isValidAddr = false;
+
+  for (int i = 0; i < sizeof(SSD1306_ADDRESSES); i++) {
+    if (_addr == SSD1306_ADDRESSES[i]) {
+      isValidAddr = true;
+      break;
+    } else {
+      isValidAddr = false;
+    }
+  }
+  return isValidAddr;
+}
+
 Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET_PIN);
 
 
@@ -188,69 +214,41 @@ const byte stripPins[4] = { 24, 25, 15, 14 };
 // ** Note: of-course, you can use any other digital pin at their disposal (for example, if not using our dev PCB)
 
 // -- For Neopixel lib -- //
-const int ledsPerStrip = 144;                               // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs )
-const byte numStrips = 1;                                   // change for your setup ( e.g: I'm using 1 strip, to begin with )
-const int numLeds = ledsPerStrip * numStrips;
-const int channelsPerLed = 3;                               // (for RGB, GRB etc. it is 3 ) (for RGBW, GRBW etc. it would be 4)
 const int numberOfChannels = numLeds * channelsPerLed;      // Total number of channels you want to receive
 byte channelBuffer[numberOfChannels]; // Combined universes into a single arra09
 
-#ifdef ENABLE_STRIP1
-Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB + NEO_KHZ800);
-#endif
-#ifdef ENABLE_STRIP2
-Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(numLeds, stripPins[1], NEO_GRB + NEO_KHZ800);
-#endif
-#ifdef ENABLE_STRIP3
-Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(numLeds, stripPins[2], NEO_GRB + NEO_KHZ800);
-#endif
-#ifdef ENABLE_STRIP4
-Adafruit_NeoPixel strip4 = Adafruit_NeoPixel(numLeds, stripPins[3], NEO_GRB + NEO_KHZ800);
-#endif
+Adafruit_NeoPixel strips[4] = Adafruit_NeoPixel(numLeds, stripPins, NEO_GRB + NEO_KHZ800);
+
+
 
 // Define colors.
-#ifdef ENABLE_STRIP1
-uint32_t RED1 = strip1.Color(127, 0, 0);
-uint32_t GREEN1 = strip1.Color(0, 127, 0);
-uint32_t BLUE1 =  strip1.Color(0, 0, 127);
-#endif
-#ifdef ENABLE_STRIP2
-uint32_t RED2 = strip2.Color(127, 0, 0);
-uint32_t GREEN2 = strip2.Color(0, 127, 0);
-uint32_t BLUE2 =  strip2.Color(0, 0, 127);
-#endif
-#ifdef ENABLE_STRIP3
-uint32_t RED3 = strip3.Color(127, 0, 0);
-uint32_t GREEN3 = strip3.Color(0, 127, 0);
-uint32_t BLUE3 =  strip3.Color(0, 0, 127);
-#endif
-#ifdef ENABLE_STRIP4
-uint32_t RED4 = strip4.Color(127, 0, 0);
-uint32_t GREEN4 = strip4.Color(0, 127, 0);
-uint32_t BLUE4 =  strip4.Color(0, 0, 127);
-#endif
-
-
+#define RED    0x160000
+#define GREEN  0x001600
+#define BLUE   0x000016
+//#define YELLOW 0x101400
+//#define PINK   0x120009
+//#define ORANGE 0x100400
+//#define WHITE  0x101010
 
 
 
 
 void clearLEDs() {
 #ifdef ENABLE_STRIP1
-  strip1.clear();
-  strip1.show();
+  strips[0].clear();
+  strips[0].show();
 #endif
 #ifdef ENABLE_STRIP2
-  strip2.clear();
-  strip2.show();
+  strips[1].clear();
+  strips[1].show();
 #endif
 #ifdef ENABLE_STRIP3
-  strip3.clear();
-  strip3.show();
+  strips[2].clear();
+  strips[2].show();
 #endif
 #ifdef ENABLE_STRIP4
-  strip4.clear();
-  strip4.show();
+  strips[3].clear();
+  strips[3].show();
 #endif
 }
 
@@ -263,17 +261,17 @@ void initLEDTest() {
 
   log("Testing Strip 1... ");
 
-  strip1.fill(RED1);
-  strip1.show();
+  strips[0].fill(RED);
+  strips[0].show();
   delay(500);
-  strip1.fill(GREEN1);
-  strip1.show();
+  strips[0].fill(GREEN);
+  strips[0].show();
   delay(500);
-  strip1.fill(BLUE1);
-  strip1.show();
+  strips[0].fill(BLUE);
+  strips[0].show();
   delay(500);
-  strip1.clear();
-  strip1.show();
+  strips[0].clear();
+  strips[0].show();
 
 
   oled.println("Done!");
@@ -292,17 +290,17 @@ void initLEDTest() {
 
   log("Testing Strip 2... ");
 
-  strip2.fill(RED2);
-  strip2.show();
+  strips[1].fill(RED);
+  strips[1].show();
   delay(500);
-  strip2.fill(GREEN2);
-  strip2.show();
+  strips[1].fill(GREEN);
+  strips[1].show();
   delay(500);
-  strip2.fill(BLUE2);
-  strip2.show();
+  strips[1].fill(BLUE);
+  strips[1].show();
   delay(500);
-  strip2.clear();
-  strip2.show();
+  strips[1].clear();
+  strips[1].show();
 
   oled.println("Done!");
   oled.display();
@@ -320,17 +318,17 @@ void initLEDTest() {
 
   log("Testing Strip 3... ");
 
-  strip3.fill(RED3);
-  strip3.show();
+  strips[2].fill(RED);
+  strips[2].show();
   delay(500);
-  strip3.fill(GREEN3);
-  strip3.show();
+  strips[2].fill(GREEN);
+  strips[2].show();
   delay(500);
-  strip3.fill(BLUE3);
-  strip3.show();
+  strips[2].fill(BLUE);
+  strips[2].show();
   delay(500);
-  strip3.clear();
-  strip3.show();
+  strips[2].clear();
+  strips[2].show();
 
   oled.println("Done!");
   oled.display();
@@ -348,17 +346,17 @@ void initLEDTest() {
 
   log("Testing Strip 4... ");
 
-  strip4.fill(RED4);
-  strip4.show();
+  strips[3].fill(RED);
+  strips[3].show();
   delay(500);
-  strip4.fill(GREEN4);
-  strip4.show();
+  strips[3].fill(GREEN);
+  strips[3].show();
   delay(500);
-  strip4.fill(BLUE4);
-  strip4.show();
+  strips[3].fill(BLUE);
+  strips[3].show();
   delay(500);
-  strip4.clear();
-  strip4.show();
+  strips[3].clear();
+  strips[3].show();
 
   oled.println("Done!");
   oled.display();
@@ -387,20 +385,20 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
   // Set brightness of the whole strip
   if (universe == 15) {
 #ifdef ENABLE_STRIP1
-    strip1.setBrightness(data[0]);
-    strip1.show();
+    strips[0].setBrightness(data[0]);
+    strips[0].show();
 #endif
 #ifdef ENABLE_STRIP2
-    strip2.setBrightness(data[0]);
-    strip2.show();
+    strips[1].setBrightness(data[0]);
+    strips[1].show();
 #endif
 #ifdef ENABLE_STRIP3
-    strip3.setBrightness(data[0]);
-    strip3.show();
+    strips[2].setBrightness(data[0]);
+    strips[2].show();
 #endif
 #ifdef ENABLE_STRIP4
-    strip4.setBrightness(data[0]);
-    strip4.show();
+    strips[3].setBrightness(data[0]);
+    strips[3].show();
 #endif
   }
 
@@ -426,31 +424,31 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       if (channelsPerLed == 4) {
         // For RGBW or GRBW type strips
 #ifdef ENABLE_STRIP1
-        strip1.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
+        strips[0].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
 #endif
 #ifdef ENABLE_STRIP2
-        strip2.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
+        strips[1].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
 #endif
 #ifdef ENABLE_STRIP3
-        strip3.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
+        strips[2].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
 #endif
 #ifdef ENABLE_STRIP4
-        strip4.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
+        strips[3].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
 #endif
       }
       if (channelsPerLed == 3) {
         // For RGB or GRB type strips
 #ifdef ENABLE_STRIP1
-        strip1.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
+        strips[0].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
 #endif
 #ifdef ENABLE_STRIP2
-        strip2.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
+        strips[1].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
 #endif
 #ifdef ENABLE_STRIP3
-        strip3.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
+        strips[2].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
 #endif
 #ifdef ENABLE_STRIP4
-        strip4.setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
+        strips[3].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
 #endif
       }
     }
@@ -459,16 +457,16 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
 
   if (sendFrame) {
 #ifdef ENABLE_STRIP1
-    strip1.show();
+    strips[0].show();
 #endif
 #ifdef ENABLE_STRIP2
-    strip2.show();
+    strips[1].show();
 #endif
 #ifdef ENABLE_STRIP3
-    strip3.show();
+    strips[2].show();
 #endif
 #ifdef ENABLE_STRIP4
-    strip4.show();
+    strips[3].show();
 #endif
     // Reset universeReceived to 0
     memset(universesReceived, 0, maxUniverses);
@@ -517,21 +515,22 @@ void setup() {
   OLED_SCREEN_ADDRESS = getDisplayAddr();
   Wire.end();
 
-  //[TBD] if oled screen address is not from the known look up table...
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-  if (!oled.begin(SSD1306_SWITCHCAPVCC, OLED_SCREEN_ADDRESS)) {
-    logln(F("\nOLED SSD1306 INITIATED: FAILED [x]\n"));
-  } else {
-    oled.setFont();                                       // default font
-    // oled was successfully initiated, so Clear the OLED buffer
-    oled.clearDisplay();
-    oled.display();
-    oled.setTextSize(1);                                  // Normal 1:1 pixel scale
-    oled.setTextColor(SSD1306_WHITE);                     // Draw white text
-    oled.setCursor(0, 0);                                 // Start at top-left corner
+  if (OLED_SCREEN_ADDRESS != 0 && validAddr(OLED_SCREEN_ADDRESS)) {
+    if (!oled.begin(SSD1306_SWITCHCAPVCC, OLED_SCREEN_ADDRESS)) {
+      logln(F("\nOLED SSD1306 INITIATED: FAILED [x]\n"));
+    } else {
+      oled.setFont();                                       // default font
+      // oled was successfully initiated, so Clear the OLED buffer
+      oled.clearDisplay();
+      oled.display();
+      oled.setTextSize(1);                                  // Normal 1:1 pixel scale
+      oled.setTextColor(SSD1306_WHITE);                     // Draw white text
+      oled.setCursor(0, 0);                                 // Start at top-left corner
 
-    logln("\nOLED SSD1306 INITIATED: OK!\n");
+      logln("\nOLED SSD1306 INITIATED: OK!\n");
+    }
   }
 
 
@@ -544,16 +543,16 @@ void setup() {
 
   // Begin & Clear the WS2811 LEDs
 #ifdef ENABLE_STRIP1
-  strip1.begin();
+  strips[0].begin();
 #endif
 #ifdef ENABLE_STRIP2
-  strip2.begin();
+  strips[1].begin();
 #endif
 #ifdef ENABLE_STRIP3
-  strip3.begin();
+  strips[2].begin();
 #endif
 #ifdef ENABLE_STRIP4
-  strip4.begin();
+  strips[3].begin();
 #endif
 
   // [TBD] Set brightness of ws2812 LEDs here may be ...
@@ -661,20 +660,20 @@ void setup() {
     oled.display();
     // also if failed, do not proceed, show red on all strips & block...
 #ifdef ENABLE_STRIP1
-    strip1.fill(RED1);
-    strip1.show();
+    strips[0].fill(RED);
+    strips[0].show();
 #endif
 #ifdef ENABLE_STRIP2
-    strip2.fill(RED2);
-    strip2.show();
+    strips[1].fill(RED);
+    strips[1].show();
 #endif
 #ifdef ENABLE_STRIP3
-    strip3.fill(RED3);
-    strip3.show();
+    strips[2].fill(RED);
+    strips[2].show();
 #endif
 #ifdef ENABLE_STRIP4
-    strip4.fill(RED4);
-    strip4.show();
+    strips[3].fill(RED);
+    strips[3].show();
 #endif
     while (true) {
       ;
