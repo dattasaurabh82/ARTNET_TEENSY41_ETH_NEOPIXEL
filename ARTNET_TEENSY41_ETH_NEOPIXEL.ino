@@ -26,8 +26,14 @@
    [-] check multiple dmx universe assignment
    [*] i2c OLED display setup 
    [-] Check network once in a while (make it hot swappable) 
-   [-] Button press + interrupt.
+   [-] Check dev support on platformio env
 */
+
+// [Optional] Mainly to support from platformio, so that thsi cwhole code can be copy pasted in main.cpp [TBD]
+// Not needed from Teensy duino
+#include <stdint.h>
+#include <Arduino.h>
+
 
 // ---------------------------------------------- //
 // ------- User Configurable Parameters --------- //
@@ -50,7 +56,6 @@
 byte fixedIP[] = { 192, 168, 132, 150 };
 byte broadcast[] = {192, 168, 132, 255};
 // -------------------------------------------- //
-
 
 
 
