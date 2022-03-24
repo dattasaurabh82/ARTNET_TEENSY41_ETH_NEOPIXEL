@@ -10,6 +10,8 @@
       2. Nathanaël Lécaudé : for the Artnet library                               [https://github.com/natcl/Artnet]
       3. vjmuzik: For the Native Ethernet library                                 [https://github.com/vjmuzik/NativeEthernet]
       4. Adafruit : for the Neopixel libray                                       [https://github.com/adafruit/Adafruit_NeoPixel]
+      5. Adafruit : for the SSD1306 libray                                        [https://github.com/adafruit/Adafruit_SSD1306]
+      6. Adafruit : for the graphics libray                                       [https://github.com/adafruit/Adafruit-GFX-Library]
 */
 
 // https://forum.pjrc.com/threads/67780-Teensy-4-1-Native-Ethernet-max-SocketSize-lower-than-set?highlight=native+ethernet
@@ -19,38 +21,61 @@
 
 /*
    TODO:
-   [] ARTNET Broadcast functionality.
-   [] Button press + interrupt.
-   [] dmx callack to all or 1 strip.
-   [] i2c OLED display + interrupt.
+  
+   [*] dmx callack to all or 1 strip.
+   [-] check multiple dmx universe assignment
+   [*] i2c OLED display setup 
+   [-] Checknetwork once in a while (make it hot swappable) 
+   [-] Button press + interrupt.
 */
 
-// ------------------------------------------------------------------------------------------------------------ //
-// Un-commenting => Enables and comment out => Disables Serial interface for messages (e.g: for debug logs)
-// ------------------------------------------------------------------------------------------------------------ //
-// #define DEBUG
+// ---------------------------------------------- //
+// ------- User Configurable Parameters --------- //
+// ---------------------------------------------- //
+// Un-commenting => Enables and comment out => Disables, Serial interface for messages (e.g: for debug logs)
+#define DEBUG
 
+// On board OLED display's parameters (for our SSD1306-128x32)
+// Note: If you are using another SSD1306 screen resolution, say 128x64, then change the screen height ...
+#define SCREEN_WIDTH  128
+#define SCREEN_HEIGHT 64
+
+// Enable or Disable strips during pre-compilation already by un-commenting or commenting (we have 4 on our PCB)
+// #define ENABLE_STRIP1
+// #define ENABLE_STRIP2
+#define ENABLE_STRIP3
+#define ENABLE_STRIP4
+
+// A fixed IP addres for your Teensy4.1 uC, as an Artnet node, on the network (Change it a/c to your Router settings)
+byte fixedIP[] = { 192, 168, 132, 150 };
+byte broadcast[] = {192, 168, 132, 255};
+// -------------------------------------------- //
+
+
+
+
+
+
+
+
+
+
+// ------------------------------------------------------------------------------------------------------------ //
+// Enable/disable Serial print functionalities
+// ------------------------------------------------------------------------------------------------------------ //
 #ifdef DEBUG
 #define log(x) Serial.print(x);
 #define logln(x) Serial.println(x);
+#define loglnHex(x) Serial.println(x, HEX);
+#define logHex(x) Serial.print(x, HEX);
 #else
 #define log(x) x;
 #define logln(x) x;
+#define loglnHex(x) x;
+#define logHex(x) x;
 #endif
 
 
-
-// ---------------------------------------------- //
-// ------ ** SETUPS SPECIFIC TO OUR PCB ** ------ //
-// ---------------------------------------------- //
-
-// ------------------------------------------------------------------------------------------------------------ //
-// Enable or Disable strips (we have 4 on our PCB) by un-commenting or commenting out for respective reasons
-// ------------------------------------------------------------------------------------------------------------ //
-//#define ENABLE_STRIP1
-//#define ENABLE_STRIP2
-#define ENABLE_STRIP3
-#define ENABLE_STRIP4
 
 // ------------------------------------------------------------------------------------------------------------ //
 // On-board Push Buttons (which are placed next to each strip sockts)
@@ -78,7 +103,6 @@ void initDebugLeds() {
 
 
 
-
 // --------------------------------------- //
 // ----------- LIBRARY IMPORTS ----------- //
 // --------------------------------------- //
@@ -100,24 +124,51 @@ void initDebugLeds() {
 // ------------------------------------- //
 // ------ SSD1306 128x32 OLED DISP------ //
 // ------------------------------------- //
-#define SCREEN_WIDTH  128                // OLED display width, in pixels
-#define SCREEN_HEIGHT 32                 // OLED display height, in pixels
 #define OLED_RESET_PIN  4                // Reset pin # (or -1 if sharing Arduino reset pin)
-#define OLED_SCREEN_ADDRESS 0x3C         //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+//#define OLED_SCREEN_ADDRESS 0x3C       //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+uint8_t OLED_SCREEN_ADDRESS = 0x3C;      //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+
+// --- OLED display's i2c addr auto-discovery feature --- //
+uint8_t getDisplayAddr() {
+  byte error;
+  byte address;
+  byte foundAddr;
+  int nDevices = 0;
+
+  // Buffer time to let the device initialize
+  delay(500);
+
+  for (address = 1; address < 127; address++ ) {
+    // The i2c_scanner uses the return value of
+    // the Write.endTransmisstion to see if
+    // a device did acknowledge to the address.
+    Wire.beginTransmission(address);
+    error = Wire.endTransmission();
+    if (error == 0) {
+      foundAddr = address;
+
+      logln("Found a i2c slave!");
+      nDevices++;
+    } else if (error == 4) {
+      foundAddr = 0;
+      // foundAddr = 0x00;
+
+      log("Error code: ");
+      logln(error);
+      log(F("Unknown error at address 0x"));
+      logHex(foundAddr);
+      logln("\n");
+    }
+  }
+
+  if (nDevices == 0) {
+    logln(F("No I2C devices found\n"));
+  }
+  log("i2C SLAVE'S ADDR: [ Hex: 0x"); logHex(foundAddr); log(", Binary: "); log(foundAddr); logln("]");
+  return foundAddr;
+}
 
 Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET_PIN);
-
-/*
-  IIC Constructor
-  @param  rotation：    U8G2_R0 No rotation, horizontal, draw from left to right
-                        U8G2_R1 Rotate 90 degrees clockwise, draw from top to  bottom
-                        U8G2_R2 Rotate 180 degrees clockwise, draw from right to left
-                        U8G2_R3 Rotate 270 degrees clockwise, draw from bottom to top.
-                        U8G2_MIRROR Display image content normally（v2.6.x and above)   Note: U8G2_MIRROR needs to be used with setFlipMode（）.
-  @param reset：U8x8_PIN_NONE Empty pin, reset pin will not be used.
-*/
-//U8G2_SSD1306_128X32_UNIVISION_1_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);   // Adafruit ESP8266/32u4/ARM Boards + FeatherWing OLED
-
 
 
 
@@ -137,6 +188,7 @@ const byte numStrips = 1;                                   // change for your s
 const int numLeds = ledsPerStrip * numStrips;
 const int channelsPerLed = 3;                               // (for RGB, GRB etc. it is 3 ) (for RGBW, GRBW etc. it would be 4)
 const int numberOfChannels = numLeds * channelsPerLed;      // Total number of channels you want to receive
+byte channelBuffer[numberOfChannels]; // Combined universes into a single arra09
 
 #ifdef ENABLE_STRIP1
 Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB + NEO_KHZ800);
@@ -199,69 +251,113 @@ void clearLEDs() {
 
 void initLEDTest() {
 #ifdef ENABLE_STRIP1
+  oled.clearDisplay();
+  oled.setCursor(0, 0);
+  oled.println("Checking Strip 1\n...");
+  oled.display();
+
   log("Testing Strip 1... ");
+
   strip1.fill(RED1);
   strip1.show();
-  delay(1000);
+  delay(500);
   strip1.fill(GREEN1);
   strip1.show();
-  delay(1000);
+  delay(500);
   strip1.fill(BLUE1);
   strip1.show();
-  delay(1000);
+  delay(500);
   strip1.clear();
   strip1.show();
+
+
+  oled.println("Done!");
+  oled.display();
+
   logln("Done!");
-  delay(1000);
+
+  delay(3000);
 #endif
 
 #ifdef ENABLE_STRIP2
+  oled.clearDisplay();
+  oled.setCursor(0, 0);
+  oled.println("Checking Strip 2\n...");
+  oled.display();
+
   log("Testing Strip 2... ");
+
   strip2.fill(RED2);
   strip2.show();
-  delay(1000);
+  delay(500);
   strip2.fill(GREEN2);
   strip2.show();
-  delay(1000);
+  delay(500);
   strip2.fill(BLUE2);
   strip2.show();
-  delay(1000);
+  delay(500);
   strip2.clear();
   strip2.show();
+
+  oled.println("Done!");
+  oled.display();
+
   logln("Done!");
-  delay(1000);
+
+  delay(3000);
 #endif
 
 #ifdef ENABLE_STRIP3
+  oled.clearDisplay();
+  oled.setCursor(0, 0);
+  oled.println("Checking Strip 3\n...");
+  oled.display();
+
   log("Testing Strip 3... ");
+
   strip3.fill(RED3);
   strip3.show();
-  delay(1000);
+  delay(500);
   strip3.fill(GREEN3);
   strip3.show();
-  delay(1000);
+  delay(500);
   strip3.fill(BLUE3);
   strip3.show();
-  delay(1000);
+  delay(500);
   strip3.clear();
   strip3.show();
+
+  oled.println("Done!");
+  oled.display();
+
   logln("Done!");
-  delay(1000);
+
+  delay(3000);
 #endif
 
 #ifdef ENABLE_STRIP4
+  oled.clearDisplay();
+  oled.setCursor(0, 0);
+  oled.println("Checking Strip 4\n...");
+  oled.display();
+
   log("Testing Strip 4... ");
+
   strip4.fill(RED4);
   strip4.show();
-  delay(1000);
+  delay(500);
   strip4.fill(GREEN4);
   strip4.show();
-  delay(1000);
+  delay(500);
   strip4.fill(BLUE4);
   strip4.show();
-  delay(1000);
+  delay(500);
   strip4.clear();
   strip4.show();
+
+  oled.println("Done!");
+  oled.display();
+
   logln("Done!\n");
 #endif
 }
@@ -278,17 +374,36 @@ bool universesReceived[maxUniverses];
 bool sendFrame = 1;
 int previousDataLength = 0;
 
+
+
+
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
   sendFrame = 1;
   // Set brightness of the whole strip
   if (universe == 15) {
+#ifdef ENABLE_STRIP1
+    strip1.setBrightness(data[0]);
+    strip1.show();
+#endif
+#ifdef ENABLE_STRIP2
+    strip2.setBrightness(data[0]);
+    strip2.show();
+#endif
+#ifdef ENABLE_STRIP3
     strip3.setBrightness(data[0]);
     strip3.show();
+#endif
+#ifdef ENABLE_STRIP4
+    strip4.setBrightness(data[0]);
+    strip4.show();
+#endif
   }
 
   // Store which universe has got in
-  if ((universe - startUniverse) < maxUniverses)
+  if ((universe - startUniverse) < maxUniverses) {
     universesReceived[universe - startUniverse] = 1;
+  }
+
 
   for (int i = 0 ; i < maxUniverses ; i++) {
     if (universesReceived[i] == 0) {
@@ -298,9 +413,10 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
     }
   }
 
-  // Read universe and put into the right part of the display buffer
+
   for (int i = 0; i < length / channelsPerLed; i++) {
     int led = i + (universe - startUniverse) * (previousDataLength / channelsPerLed);
+
     if (led < numLeds) {
       if (channelsPerLed == 4) {
         // For RGBW or GRBW type strips
@@ -357,46 +473,28 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
 
 
 
-
-
 // ------------------------------- //
 // ------ ETHERNET SETTINGS ------ //
 // ------------------------------- //
-byte fixedIP[] = { 192, 168, 132, 150 };                   // Use a fixed IP to avoid conflict.
-byte resIP[] = { 0, 0, 0, 0 };                             // IP addr container to compare if the ETH conn was successfully established or not?
-byte broadcast[] = {192, 168, 132, 255};                   // if we want our system to broadcast feedback upon receiving DMX artnet universe/s
 byte querryMAC[] = { 0xE5, 0x2A, 0xFC, 0x41, 0x13, 0x2D }; // Dummy random MAC addr used for retreiving Teensy 4.1's actual MAC addr
 byte teensyMAC[6] = {};                                    // Array to hold the actual MACaddr of Teensy 4.1 (To be used for starting Ethernet Interface later)
 
 
-void assignMAC(byte *_mac) {
+void assignMAC(byte * _mac) {
   for (uint8_t by = 0; by < 2; by++) _mac[by] = (HW_OCOTP_MAC1 >> ((1 - by) * 8)) & 0xFF;
   for (uint8_t by = 0; by < 4; by++) _mac[by + 2] = (HW_OCOTP_MAC0 >> ((3 - by) * 8)) & 0xFF;
-#ifdef DEBUG
-  Serial.printf("byte teensyMAC[] = { 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x };\n", _mac[0], _mac[1], _mac[2], _mac[3], _mac[4], _mac[5]);
-#endif
   for (int i = 0; i < 6; i++) {
     teensyMAC[i] = _mac[i];
   }
 }
 
-// Utility to convert the "IPAddress" into a usable type (String),
-// for example, you know, may be you want to display it somewhere someday.
-//String StringIPAddr(IPAddress address) {
-//  return String(address[0]) + "." + String(address[1]) + "." + String(address[2]) + "." + String(address[3]);
-//}
-//byte *getIPAddr(IPAddress address) {
-//  byte IP_ARR[4] = { 0, 0, 0, 0 };
-//  for (int i = 0; i < sizeof(IP_ARR); i++) {
-//    IP_ARR[i] = address[i];
-//  }
-//  return IP_ARR;
-//}
 
 
 
 
-
+// ------------------------------------------- //
+// ------ MAIN SETUP FOR THE WHOLE CODE ------ //
+// ------------------------------------------- //
 void setup() {
 #ifdef DEBUG
   while (!Serial) {
@@ -407,24 +505,37 @@ void setup() {
   // Initiates on board LEDs that are used by our logic to show some status like if "network setup was successful or not..." etc.
   initDebugLeds();
 
-
+  logln("---------------------------------------------------------");
+  logln("OLED SCREEN INIT SECTION");
+  logln("---------------------------------------------------------");
   Wire.begin();
+  OLED_SCREEN_ADDRESS = getDisplayAddr();
+  Wire.end();
+
+  //[TBD] if oled screen address is not from the known look up table...
+
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if (!oled.begin(SSD1306_SWITCHCAPVCC, OLED_SCREEN_ADDRESS)) {
-    logln(F("SSD1306 allocation failed"));
-    logln("ARTNET STATUS: fail");
+    logln(F("\nOLED SSD1306 INITIATED: FAILED [x]\n"));
   } else {
-    // oled was successfully initiated, so Cclear the oled buffer
+    oled.setFont();                                       // default font
+    // oled was successfully initiated, so Clear the OLED buffer
     oled.clearDisplay();
-    // set text parameters (assuming we won't change anything down the lane)
-    oled.setTextSize(1);                              // Normal 1:1 pixel scale
-    oled.setTextColor(SSD1306_WHITE);                 // Draw white text
-    //    oled.setTextColor(SSD1306_BLACK, SSD1306_WHITE);  // Draw 'inverse' text
-    oled.setCursor(0, 0);                             // Start at top-left corner
-    oled.cp437(true);                                 // Use full 256 char 'Code Page 437' font
+    oled.display();
+    oled.setTextSize(1);                                  // Normal 1:1 pixel scale
+    oled.setTextColor(SSD1306_WHITE);                     // Draw white text
+    oled.setCursor(0, 0);                                 // Start at top-left corner
+
+    logln("\nOLED SSD1306 INITIATED: OK!\n");
   }
 
 
+
+
+
+  logln("\n---------------------------------------------------------");
+  logln("NEIOPIXEL STRIP/S INIT SECTION");
+  logln("---------------------------------------------------------");
 
   // Begin & Clear the WS2811 LEDs
 #ifdef ENABLE_STRIP1
@@ -440,37 +551,74 @@ void setup() {
   strip4.begin();
 #endif
 
-  //[TBD] Set brightness of ws2812 LEDs here may be ...
+  // [TBD] Set brightness of ws2812 LEDs here may be ...
+
   clearLEDs();
 
-  // On init, test WS2811 LEDs
   oled.clearDisplay();
   oled.setCursor(0, 0);
-  oled.println("checking LEDs...");
+  oled.println("Checking LEDs...");
   oled.display();
+
+  delay(3000);
+
+  // On init, test WS2811 LEDs
   initLEDTest();
 
+  delay(3000);
 
   //  Get and asisgn new found MAC addr of Teensy4.1
+  logln("\n---------------------------------------------------------");
+  logln("ETH + ARTNET INTERFACE INIT");
+  logln("---------------------------------------------------------");
   logln("Getting new mac addr...");
-  assignMAC(querryMAC);
-  logln("Trying to begin ARTNET with Fixed IP and the above MAC addr...");
-  delay(1000);
-  // [TBD] draw MAC address on the oled display
+  // oled screen text prompt
   oled.clearDisplay();
   oled.setCursor(0, 0);
-  //  oled.print(teensyMAC);
+  oled.println("Trying to get new \n\nMAC ADDRESS ...");
   oled.display();
 
+  delay(3000);
+
+  assignMAC(querryMAC);
+
+#ifdef DEBUG
+  Serial.printf("byte teensyMAC[] = { 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x };\n", teensyMAC[0], teensyMAC[1], teensyMAC[2], teensyMAC[3], teensyMAC[4], teensyMAC[5]);
+#endif
+
+  // display on OLED
+  oled.clearDisplay();
+  oled.setCursor(0, 0);
+  oled.println("MAC ADDR:");
+  for (int i = 0; i < sizeof(teensyMAC); i++) {
+    oled.print("0x");
+    if (teensyMAC[i] < 16) {
+      oled.print(0);
+    }
+    oled.print(teensyMAC[i], HEX);
+    oled.print(":");
+  }
+  oled.display();
+
+  delay(3000);
+
+
   //  Begin art-net with the new MAC addr and the fixed IP
+  logln("Trying to begin ARTNET with Fixed IP and the above MAC addr...");
+
+  oled.clearDisplay();
+  oled.setCursor(0, 0);
+  oled.println("Trying to begin \n\nARTNET ...");
+  oled.display();
+
+  delay(2000);
   artnet.begin(teensyMAC, fixedIP);
   delay(2000);
 
-  log("CURR IP ADDR: ");
+  log("\nCURR IP ADDR: ");
   logln(Ethernet.localIP());
   log("ETH LINK STATUS: ");
   logln(Ethernet.linkStatus());
-
 
   /* if the fixed IP was assigned successfully, proceed; or else notify and block*/
   //  Since Artnet.begin(mac, ip) actually calls Ethernet.begin(mac, ip) underneath, we can check if our uC got the intended fixed IP address.
@@ -479,26 +627,33 @@ void setup() {
   IPAddress currIP = Ethernet.localIP();
 
   if (currIP[0] != 0 && currIP[1] != 0 && currIP[2] != 0 && currIP[3] != 0 && Ethernet.linkStatus() == 1) {
-    logln("ARTNET INIT: ok");
+    logln("\nARTNET INITIATED: OK!\n");
+
+    // Show on on board LEDs
     digitalWrite(NET_INIT_SUCCESS_LED_PIN, HIGH);
     digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
 
-    // [TBD] draw IP addr on the oled display
-    oled.setCursor(0, 1);
-    oled.print(Ethernet.localIP());
+    // Draw IP addr on the oled display
+    oled.clearDisplay();
+    oled.setCursor(0, 0);
+    oled.println("ARTNET: OK");
+    oled.println("FIXED IP ADDR:");
+    oled.println(Ethernet.localIP());
     oled.display();
   } else {
-    logln("ARTNET STATUS: fail");
+    logln("\nARTNET INITIATED: FAILED [x]!\n");
+
+    // show on on board LEDs
     digitalWrite(NET_INIT_SUCCESS_LED_PIN, LOW);
     digitalWrite(NET_INIT_FAIL_LED_PIN, HIGH);
 
-    // [TBD] draw IP addr on the oled display
-    oled.setCursor(0, 1);
+    // Show failed result on OLED
+    oled.clearDisplay();
+    oled.setCursor(0, 0);
+    oled.println("ARTNET: FAAILED!");
+    oled.println("FIXED IP ADDR:");
     oled.println(Ethernet.localIP());
-    oled.setCursor(0, 2);
-    oled.print("[x] IP FAILED!");
     oled.display();
-
     // also if failed, do not proceed, show red on all strips & block...
 #ifdef ENABLE_STRIP1
     strip1.fill(RED1);
@@ -525,7 +680,11 @@ void setup() {
   artnet.setArtDmxCallback(onDmxFrame);
 }
 
-//boolean print_polls = false;
+
+
+// --------------------------- //
+// ------ INFINITE LOOP ------ //
+// --------------------------- //
 void loop() {
   artnet.read();
 }
