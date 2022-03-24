@@ -21,11 +21,11 @@
 
 /*
    TODO:
-  
+   [-] create array of strips and not individual objects?
    [*] dmx callack to all or 1 strip.
    [-] check multiple dmx universe assignment
    [*] i2c OLED display setup 
-   [-] Checknetwork once in a while (make it hot swappable) 
+   [-] Check network once in a while (make it hot swappable) 
    [-] Button press + interrupt.
 */
 
