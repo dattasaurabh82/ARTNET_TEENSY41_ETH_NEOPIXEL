@@ -70,8 +70,8 @@ jobs:
           DEBUG_FALSE="--build-property build.extra_flags=-DDEBUG=false"
           sudo Xvfb :1 -screen 0 1024x768x24 </dev/null &
           export DISPLAY=":1"
-          ./arduino-cli compile $FQBN_ARG $DEBUG_TRUE $OUTPUT_ARG
-          # cd build
-          # ls -l
-          # cd ..
+          ./arduino-cli compile $FQBN_ARG $DEBUG_TRUE $OUTPUT_ARG --quiet
+          cd build
+          ls -l
+          cd ..
           
