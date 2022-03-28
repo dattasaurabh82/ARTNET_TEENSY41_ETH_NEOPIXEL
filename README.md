@@ -89,4 +89,4 @@ lib_deps =
 
 ---
 
-__License:__  (MIT)[]
+__License:__  [MIT](https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL/blob/main/LICENSE)
