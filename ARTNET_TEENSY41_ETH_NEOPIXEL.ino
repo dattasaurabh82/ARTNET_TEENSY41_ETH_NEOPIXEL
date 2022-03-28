@@ -38,19 +38,12 @@
 #define SCREEN_WIDTH  128
 #define SCREEN_HEIGHT 64
 
-// Enable or Disable strips during pre-compilation already by un-commenting or commenting (we have 4 on our PCB)
-// #define ENABLE_STRIP1
-// #define ENABLE_STRIP2
-#define ENABLE_STRIP3
-#define ENABLE_STRIP4
-
-
 // For neopixel on strips
-// const int ledsPerStrip = 144;                  // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs ).
+const int ledsPerStrip = 144;                   // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs ).
+const byte numLEDStripsPerStripSocket = 1;      // change for your setup ( e.g: I'm using 1 strip, to begin with )
 // Note: Max is 170, as in what DMX allows/universe for artnet
-// const byte numLEDStripsPerStripSocket = 1;    // change for your setup ( e.g: I'm using 1 strip, to begin with )
-// const int numLeds = ledsPerStrip * numLEDStripsPerStripSocket;
-const int numLeds = 144;
+const int numLeds = ((ledsPerStrip*numLEDStripsPerStripSocket) <= 170) ? ledsPerStrip*numLEDStripsPerStripSocket : 170;
+
 const int channelsPerLed = 3;                   // (for RGB, GRB etc. it is 3 ) (for RGBW, GRBW etc. it would be 4)
 
 // A fixed IP addres for your Teensy4.1 uC, as an Artnet node, on the network (Change it a/c to your Router settings)
@@ -221,30 +214,19 @@ void setupOLEDdisplay() {
 // ------------------------------------------------------------------------------------------------------------ //
 // We have below 4 pins from Teensy 4.1 broken out, which can be readily connected to a ws211 neopixel strip
 // ------------------------------------------------------------------------------------------------------------ //
-// const byte stripPins[4] = { Strip 1 pin, Strip 2 pin, Strip 3 pin, Strip 4 pin };
 #define totalLEDStrips 4
+
+boolean stripsEnabled[totalLEDStrips] = {0, 0, 1, 1};
+
 const byte stripPins[totalLEDStrips] = { 24, 25, 15, 14 };
+
 Adafruit_NeoPixel strips[totalLEDStrips] = {
   Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB + NEO_KHZ800),
   Adafruit_NeoPixel(numLeds, stripPins[1], NEO_GRB + NEO_KHZ800),
   Adafruit_NeoPixel(numLeds, stripPins[2], NEO_GRB + NEO_KHZ800),
   Adafruit_NeoPixel(numLeds, stripPins[3], NEO_GRB + NEO_KHZ800),
 };
-boolean stripsEnabled[totalLEDStrips] = {0, 0, 1, 1};
 
-// ** Note: of-course, you can use any other digital pin at their disposal (for example, if not using our dev PCB)
-//#ifdef ENABLE_STRIP1
-//Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB + NEO_KHZ800);
-//#endif
-//#ifdef ENABLE_STRIP2
-//Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(numLeds, stripPins[1], NEO_GRB + NEO_KHZ800);
-//#endif
-//#ifdef ENABLE_STRIP3
-//Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(numLeds, stripPins[2], NEO_GRB + NEO_KHZ800);
-//#endif
-//#ifdef ENABLE_STRIP4
-//Adafruit_NeoPixel strip4 = Adafruit_NeoPixel(numLeds, stripPins[3], NEO_GRB + NEO_KHZ800);
-//#endif
 
 
 
@@ -315,7 +297,7 @@ byte teensyMAC[6] = {};                                    // Array to hold the 
 //--
 Artnet artnet;
 const int startUniverse = 0;
-const int numberOfChannels = numLeds * channelsPerLed;      // Total number of channels you want to receive over DMX
+const int numberOfChannels = numLeds * channelsPerLed;     // Total number of channels you want to receive over DMX
 // CHANGE FOR YOUR SETUP most software this is 1, some software send out artnet first universe as 0.
 const int maxUniverses = numberOfChannels / 512 + ((numberOfChannels % 512) ? 1 : 0); // Check if we got all universes...
 bool universesReceived[maxUniverses];
@@ -366,74 +348,8 @@ void assignMAC(byte * _mac) {
   }
 }
 
-void inititateArtnet() {
-  //  Begin art-net with the new MAC addr and the fixed IP
-  logln("Trying to begin ARTNET with Fixed IP and the above MAC addr...");
-  if (ENABLE_OLED) {
-    oled.clearDisplay();
-    oled.setCursor(0, 0);
-    oled.println("Trying to begin \n\nARTNET ...");
-    oled.display();
-  }
-  delay(2000);
-  artnet.begin(teensyMAC, fixedIP);
-  delay(2000);
-  log("\nCURR IP ADDR: ");
-  logln(Ethernet.localIP());
-  log("ETH LINK STATUS: ");
-  logln(Ethernet.linkStatus());
 
-  /* if the fixed IP was assigned successfully, proceed; or else notify and block*/
-  //  Since Artnet.begin(mac, ip) actually calls Ethernet.begin(mac, ip) underneath, we can check if our uC got the intended fixed IP address.
-  //  If so, proceed.
-  //  Or else, notify and block.
-  IPAddress currIP = Ethernet.localIP();
 
-  if (currIP[0] != 0 && currIP[1] != 0 && currIP[2] != 0 && currIP[3] != 0 && Ethernet.linkStatus() == 1) {
-    logln("\nARTNET INITIATED: OK!\n");
-    // Show on on-board LEDs
-    digitalWrite(NET_INIT_SUCCESS_LED_PIN, HIGH);
-    digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
-    // Draw IP addr on the oled display
-    if (ENABLE_OLED) {
-      oled.clearDisplay();
-      oled.setCursor(0, 0);
-      oled.println("ARTNET: OK");
-      oled.println("FIXED IP ADDR:");
-      oled.println(Ethernet.localIP());
-      oled.display();
-    }
-  } else {
-    logln("\nARTNET INITIATED: FAILED [x]!\n");
-    // show on on board LEDs
-    digitalWrite(NET_INIT_SUCCESS_LED_PIN, LOW);
-    digitalWrite(NET_INIT_FAIL_LED_PIN, HIGH);
-    // Show failed result on OLED
-    if (ENABLE_OLED) {
-      oled.clearDisplay();
-      oled.setCursor(0, 0);
-      oled.println("ARTNET: FAAILED!");
-      oled.println("FIXED IP ADDR:");
-      oled.println(Ethernet.localIP());
-      oled.display();
-    }
-    // also if failed, do not proceed, show red on all strips & block...
-    for (byte i = 0; i < totalLEDStrips; i++) {
-      if (stripsEnabled[i]) {
-        strips[i].fill(RED);
-        strips[i].show();
-      }
-    }
-    // and block...
-    while (true) {
-      ;
-    }
-  }
-}
-
-// ---------------------------------------------- //
-// ------ CALLBACK FUNCTION FOR ARTNET DMX ------ //
-// ---------------------------------------------- //
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
   sendFrame = 1;
   // Set brightness ofthe whole strip, for all the strips, if they are enabled
@@ -501,44 +417,115 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
   }
 }
 
+void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
+  //void inititateArtnet() {
+  //  Begin art-net with the new MAC addr and the fixed IP
+  logln("Trying to begin ARTNET with Fixed IP and the above MAC addr...");
+  if (ENABLE_OLED) {
+    oled.clearDisplay();
+    oled.setCursor(0, 0);
+    oled.println("Trying to begin \n\nARTNET ...");
+    oled.display();
+  }
+  delay(2000);
+  artnet.begin(_teensyMAC, _fixedIP);
+  delay(2000);
+  log("\nCURR IP ADDR: ");
+  logln(Ethernet.localIP());
+  log("ETH LINK STATUS: ");
+  logln(Ethernet.linkStatus());
+
+  /* if the fixed IP was assigned successfully, proceed; or else notify and block*/
+  //  Since Artnet.begin(mac, ip) actually calls Ethernet.begin(mac, ip) underneath, we can check if our uC got the intended fixed IP address.
+  //  If so, proceed.
+  //  Or else, notify and block.
+  IPAddress currIP = Ethernet.localIP();
+
+  if (currIP[0] != 0 && currIP[1] != 0 && currIP[2] != 0 && currIP[3] != 0 && Ethernet.linkStatus() == 1) {
+    logln("\nARTNET INITIATED: OK!\n");
+    // Show on on-board LEDs
+    digitalWrite(NET_INIT_SUCCESS_LED_PIN, HIGH);
+    digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
+    // Draw IP addr on the oled display
+    if (ENABLE_OLED) {
+      oled.clearDisplay();
+      oled.setCursor(0, 0);
+      oled.println("ARTNET: OK");
+      oled.println("FIXED IP ADDR:");
+      oled.println(Ethernet.localIP());
+      oled.display();
+    }
+  } else {
+    logln("\nARTNET INITIATED: FAILED [x]!\n");
+    // show on on board LEDs
+    digitalWrite(NET_INIT_SUCCESS_LED_PIN, LOW);
+    digitalWrite(NET_INIT_FAIL_LED_PIN, HIGH);
+    // Show failed result on OLED
+    if (ENABLE_OLED) {
+      oled.clearDisplay();
+      oled.setCursor(0, 0);
+      oled.println("ARTNET: FAAILED!");
+      oled.println("FIXED IP ADDR:");
+      oled.println(Ethernet.localIP());
+      oled.display();
+    }
+    // also if failed, do not proceed, show red on all strips & block...
+    for (byte i = 0; i < totalLEDStrips; i++) {
+      if (stripsEnabled[i]) {
+        strips[i].fill(RED);
+        strips[i].show();
+      }
+    }
+    // and block...
+    while (true) {
+      ;
+    }
+  }
+}
 
 
 
 
-// ------------------------------------------- //
-// ------ MAIN SETUP FOR THE WHOLE CODE ------ //
-// ------------------------------------------- //
+
 void setup() {
 #ifdef DEBUG
   Serial.begin(115200);
   while (!Serial) {
     ; // wait for serial port to connect
   }
+  logln(numLeds);
 #endif
 
-  // Initiates on board LEDs that are used by our logic to show some status like if "network setup was successful or not..." etc.
+  // [1] Initiates on board LEDs that are used by our logic to show some status like if "network setup was successful or not..." etc.
   initDebugLeds();
-  // setup oled display if an old screen is attached (it will find the i2c address and initiate a display)
+  // [2] setup oled display if an old screen is attached (it will find the i2c address and initiate a display)
   setupOLEDdisplay();
-  // Begin & Clear the WS2811 LEDs
+  // [3] Begin & Clear the WS2811 LEDs
   initStrips();
-  // On init, test WS2811 LEDs
+  // [4] On init, test WS2811 LEDs
   initLEDTest();
 
   delay(2000);
-  //  Get and asisgn new found MAC addr of Teensy4.1
+  
+  // [4] Get and asisgn new found MAC addr of Teensy4.1
+  
+  // Note: This is very much Teensy specific. 
+  // On Arduino HW platforms, we could provide any random MAC address with a fixed IP to initiate the net iface. 
+  // But on Teensy, we need to get the board's specific MAC address to provide it as a paramater for initiating the net iface. 
+  // Or else the router doesn;t assigns an IP address to the HW. 
+  // The below is thus a helper func which gets a Teensy board's unique MAC address and assigns it to a global variable "teensyMAC"      
   assignMAC(querryMAC);
   delay(3000);
-  inititateArtnet();
+  
+  // [5] Start the Artnet functionalities.
+  inititateArtnet(teensyMAC, fixedIP);
   artnet.setBroadcast(broadcast);
   artnet.setArtDmxCallback(onDmxFrame);
 }
 
 
 
-// --------------------------- //
-// ------ INFINITE LOOP ------ //
-// --------------------------- //
+
 void loop() {
   artnet.read();
 }

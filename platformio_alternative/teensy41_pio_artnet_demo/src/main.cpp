@@ -275,14 +275,14 @@ const byte stripPins[totalLEDStrips] = {24, 25, 15, 14};
 // };
 // #define NEO_GRB ((1 << 6) | (1 << 4) | (0 << 2) | (2)) ///< Transmit as G,R,B
 // #define NEO_KHZ800 0x0000 ///< 800 KHz data transmission
-// Adafruit_NeoPixel strips[totalLEDStrips] = {
-//     Adafruit_NeoPixel(numLeds, stripPins[0], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
-//     Adafruit_NeoPixel(numLeds, stripPins[1], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
-//     Adafruit_NeoPixel(numLeds, stripPins[2], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
-//     Adafruit_NeoPixel(numLeds, stripPins[3], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
-// };
+Adafruit_NeoPixel strips[totalLEDStrips] = {
+    Adafruit_NeoPixel(numLeds, stripPins[0], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
+    Adafruit_NeoPixel(numLeds, stripPins[1], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
+    Adafruit_NeoPixel(numLeds, stripPins[2], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
+    Adafruit_NeoPixel(numLeds, stripPins[3], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
+};
 
-Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB);
+// Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB);
 
 // Define colors.
 const uint32_t RED = 0x160000;
