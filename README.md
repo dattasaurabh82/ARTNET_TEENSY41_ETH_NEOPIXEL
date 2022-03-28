@@ -76,7 +76,7 @@ arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=e
 arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --build-property build.extra_flags=-DDEBUG=true --output-dir build/ --clean -u -p <port> -v
 ```
 
-_As the teensy sub-system comes with some built in libraries baked in,  but just make sure the latest ones, installed by the users are ebing used as the baked in libs may be old version (but sometimes can be a good idea to use the bake dones instead as they might be otimized). but for here, use the user installed libs form the user lib dir._
+_As the teensy sub-system comes with some built in libraries baked in, so just make sure the latest ones are installed and usally by the users (but sometimes it can be a good idea to use the baked ones instead as they might be otimized for Teensy platforms). But for this repo, as of Mar 2022, I found that most libraries installed by the user in Arduino's lib dir is preferrable to be used in the firmware then t5he ones that came baked in the Teensyduino._
 
 ```shell
 Multiple libraries were found for "NativeEthernet.h"
