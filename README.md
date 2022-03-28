@@ -75,16 +75,19 @@ PIO specific instractions: (from scratch)
 platform = teensy
 board = teensy41
 framework = arduino
+board_build.mcu = imxrt1062
+board_build.f_cpu = 600000000L ; max freq available on T4.1
 monitor_speed = 115200
+upload_protocol = teensy-cli ; teensy-gui is default also "jlink" is available
 lib_deps = 
- SPI
- Wire
- https://github.com/vjmuzik/NativeEthernet
- https://github.com/natcl/Artnet
- adafruit/Adafruit NeoPixel@^1.10.4
- adafruit/Adafruit BusIO@^1.11.3
- adafruit/Adafruit GFX Library@^1.10.14
- adafruit/Adafruit SSD1306@^2.5.1
+    SPI
+    Wire
+    https://github.com/vjmuzik/NativeEthernet
+    https://github.com/natcl/Artnet
+    adafruit/Adafruit NeoPixel@^1.10.4
+    adafruit/Adafruit BusIO@^1.11.3
+    adafruit/Adafruit GFX Library@^1.10.14
+    adafruit/Adafruit SSD1306@^2.5.1
 ```
 
 ---
