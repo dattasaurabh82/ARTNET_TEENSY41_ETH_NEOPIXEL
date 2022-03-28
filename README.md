@@ -29,9 +29,9 @@ __Credits:__
 
 ## Development Environment Setup
 
-1. __Development environment:__ [Teensyduino 1.56](https://www.pjrc.com/teensy/td_download.html) (as of Mar 2022)
+### __Development environment:__ [Teensyduino 1.56](https://www.pjrc.com/teensy/td_download.html) (as of Mar 2022)
 
-2. __Library Installation:__
+1. __Library Installation:__
 
     1. Remove the compiled Artnet library from the Teensyduino IDE App. On my mac, I did it like this:
 
@@ -43,8 +43,27 @@ __Credits:__
     3. Remove the NativeEthernet library (if you have installed it in Arduino library directory previously) as it will be there in the Teensyduino IDE app.
     4. Install the Adafruit Neopixel library using Arduino's LIbrary Manager (or Teensyduino's Library Manager)  
 
-## Program's Context
+### __Development environment:__ platformio (in VSCode)
 
----
+PIO specific instractions: (from scratch)
+
+    1. Add manually Adafruit Busio lib from pio's library registry, to this project
+    2. Add manually Adafruit GFX lib from pio's library registry, to this project
+    3. Add manually Adafruit SSD1306 pio's library registry, to this project
+    4. In main.cpp try importing the following libs:
+
+    ```c++
+    #include <Arduino.h>
+    #include <SPI.h>
+    #include <Wire.h>
+    #include <Adafruit_GFX.h>
+    #include <Adafruit_SSD1306.h>
+    ```
+
+    5. It will highlight in red complaining it couldn't find the libariues in path.
+    6. In vscode, here a small light bulb will appear, asking "Fix the quickway", do that (for both the libraries)
+    7. Come back to main.cpp and compile, the errors would be gone.
+    8. In platformio.ini, in "lib_deps" section, add https://github.com/vjmuzik/NativeEthernet (although is baked in Teensy System, but it might not be the latest)
+    9. In platformio.ini, in "lib_deps" section, add https://github.com/natcl/Artnet, (May in pio lib registry, there is the Artnet library, but it's not latest [as of Mar 20222])
 
 __License:__  (MIT)[]
