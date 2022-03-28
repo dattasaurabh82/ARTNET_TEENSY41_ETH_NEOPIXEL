@@ -29,7 +29,7 @@ __Credits:__
 
 ## Development Environment Setup
 
-### __Development environment:__ [Teensyduino 1.56](https://www.pjrc.com/teensy/td_download.html) (as of Mar 2022)
+### 1. __Development environment:__ [Teensyduino 1.56](https://www.pjrc.com/teensy/td_download.html) (as of Mar 2022)
 
 1. __Library Installation:__
 
@@ -43,7 +43,7 @@ __Credits:__
     3. Remove the NativeEthernet library (if you have installed it in Arduino library directory previously) as it will be there in the Teensyduino IDE app.
     4. Install the Adafruit Neopixel library using Arduino's LIbrary Manager (or Teensyduino's Library Manager)  
 
-### __Development environment:__ platformio (in VSCode)
+### 2. __Development environment:__ [platformio](https://platformio.org/) (in VSCode)
 
 PIO specific instractions: (from scratch)
 
