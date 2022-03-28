@@ -23,7 +23,7 @@ jobs:
       - name: Update System and install sys necessities
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y software-properties-common xvfb 
+          sudo apt-get install -y software-properties-common xvfb libxrender1 libxtst6 libxi6
           sudo apt-get install -y libsdl2-2.0-0
           wget -qO arduino-cli.tar.gz https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz
           sudo tar xf arduino-cli.tar.gz
@@ -68,8 +68,9 @@ jobs:
           OUTPUT_ARG="--output-dir $(pwd)/build"
           DEBUG_TRUE="--build-property build.extra_flags=-DDEBUG=true"
           DEBUG_FALSE="--build-property build.extra_flags=-DDEBUG=false"
-          sudo xvfb-run --auto-servernum --server-args "-screen 0 1024x768x24" ./arduino-cli compile $FQBN_ARG $DEBUG_TRUE $OUTPUT_ARG >> res.txt
-          cat res.txt
+          sudo Xvfb :1 -screen 0 1024x768x24 </dev/null &
+          export DISPLAY=":1"
+          ./arduino-cli compile $FQBN_ARG $DEBUG_TRUE $OUTPUT_ARG
           # cd build
           # ls -l
           # cd ..
