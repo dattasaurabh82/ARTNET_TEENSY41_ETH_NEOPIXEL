@@ -42,7 +42,7 @@
 const int ledsPerStrip = 144;                   // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs ).
 const byte numLEDStripsPerStripSocket = 1;      // change for your setup ( e.g: I'm using 1 strip, to begin with )
 // Note: Max is 170, as in what DMX allows/universe for artnet
-const int numLeds = ((ledsPerStrip*numLEDStripsPerStripSocket) <= 170) ? ledsPerStrip*numLEDStripsPerStripSocket : 170;
+const int numLeds = ((ledsPerStrip*numLEDStripsPerStripSocket) <= 170) ? ledsPerStrip * numLEDStripsPerStripSocket : 170;
 
 const int channelsPerLed = 3;                   // (for RGB, GRB etc. it is 3 ) (for RGBW, GRBW etc. it would be 4)
 
@@ -221,10 +221,10 @@ boolean stripsEnabled[totalLEDStrips] = {0, 0, 1, 1};
 const byte stripPins[totalLEDStrips] = { 24, 25, 15, 14 };
 
 Adafruit_NeoPixel strips[totalLEDStrips] = {
-  Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(numLeds, stripPins[1], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(numLeds, stripPins[2], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(numLeds, stripPins[3], NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(ledsPerStrip, stripPins[0], NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(ledsPerStrip, stripPins[1], NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(ledsPerStrip, stripPins[2], NEO_GRB + NEO_KHZ800),
+  Adafruit_NeoPixel(ledsPerStrip, stripPins[3], NEO_GRB + NEO_KHZ800),
 };
 
 
@@ -301,6 +301,8 @@ const int numberOfChannels = numLeds * channelsPerLed;     // Total number of ch
 // CHANGE FOR YOUR SETUP most software this is 1, some software send out artnet first universe as 0.
 const int maxUniverses = numberOfChannels / 512 + ((numberOfChannels % 512) ? 1 : 0); // Check if we got all universes...
 bool universesReceived[maxUniverses];
+//const int maxUniverses = 512; // Check if we got all universes...
+//bool universesReceived[maxUniverses];
 bool sendFrame = 1;
 int previousDataLength = 0;
 //--
@@ -349,9 +351,34 @@ void assignMAC(byte * _mac) {
 }
 
 
+/*
+  void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
+  // print out our data
+  log("universe number = ");
+  log(universe);
+  log("\tdata length = ");
+  log(length);
+  log("\tsequence n0. = ");
+  logln(sequence);
+  log("DMX data: ");
+  for (int i = 0 ; i < length ; i++)
+  {
+    log(data[i]);
+    log("  ");
+    if (i % 3 == 0) {
+      logln("");
+    }
+  }
+  logln();
+  logln();
+
+  }
+*/
+
 
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
   sendFrame = 1;
+
   // Set brightness ofthe whole strip, for all the strips, if they are enabled
   if (universe == 15) {
     for (byte i = 0; i < totalLEDStrips; i++) {
@@ -416,6 +443,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
     memset(universesReceived, 0, maxUniverses);
   }
 }
+* /
 
 void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
   //void inititateArtnet() {
@@ -506,17 +534,17 @@ void setup() {
   initLEDTest();
 
   delay(2000);
-  
+
   // [4] Get and asisgn new found MAC addr of Teensy4.1
-  
-  // Note: This is very much Teensy specific. 
-  // On Arduino HW platforms, we could provide any random MAC address with a fixed IP to initiate the net iface. 
-  // But on Teensy, we need to get the board's specific MAC address to provide it as a paramater for initiating the net iface. 
-  // Or else the router doesn;t assigns an IP address to the HW. 
-  // The below is thus a helper func which gets a Teensy board's unique MAC address and assigns it to a global variable "teensyMAC"      
+
+  // Note: This is very much Teensy specific.
+  // On Arduino HW platforms, we could provide any random MAC address with a fixed IP to initiate the net iface.
+  // But on Teensy, we need to get the board's specific MAC address to provide it as a paramater for initiating the net iface.
+  // Or else the router doesn;t assigns an IP address to the HW.
+  // The below is thus a helper func which gets a Teensy board's unique MAC address and assigns it to a global variable "teensyMAC"
   assignMAC(querryMAC);
   delay(3000);
-  
+
   // [5] Start the Artnet functionalities.
   inititateArtnet(teensyMAC, fixedIP);
   artnet.setBroadcast(broadcast);
