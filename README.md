@@ -50,7 +50,7 @@ For headless compiling and uploading
 
 Install or upgrade the latest [arduino-cli](https://github.com/arduino/arduino-cli)
 
-__Note:__ Install libraries (listed above) using cli, if you are using in an headless envirnment where this was never compiled.
+__Note:__ Install libraries (listed above) using cli, if you are using in an headless environment where this was never compiled before.
 Since, in my test system (also my development system), the listed libraries were already installed (from the above steps), I didn;t need to use it using `arduino-cli`
 
 ```shell
@@ -67,7 +67,7 @@ arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=e
 #UPLOAD
 arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --output-dir build/ --clean -u -p <port> -v
 
-#ENABLE/disable serial debug:
+#ENABLE/DISABLE serial debug:
 # we just have to set DEBUG=true/flase for that and we can change that MACRO during our compilation as such:
 #build.extra_flags=-DDEBUG=false
 #Disable Serial Debug
