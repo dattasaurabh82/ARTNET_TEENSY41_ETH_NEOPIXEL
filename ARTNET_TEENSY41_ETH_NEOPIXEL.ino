@@ -31,7 +31,7 @@
 // ------- User Configurable Parameters -------- //
 // --------------------------------------------- //
 // Un-commenting => Enables and comment out => Disables, Serial interface for messages (e.g: for debug logs)
-#define DEBUG
+//#define DEBUG
 
 // On board OLED display's parameters (for our SSD1306-128x32)
 // Note: If you are using another SSD1306 screen resolution, say 128x64, then change the screen height ...

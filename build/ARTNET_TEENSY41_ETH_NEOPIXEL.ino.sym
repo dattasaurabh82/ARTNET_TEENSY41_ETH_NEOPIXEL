@@ -6,14 +6,14 @@ SYMBOL TABLE:
 60001400 l    d  .text.code	00000000 .text.code
 60022b88 l    d  .text.progmem	00000000 .text.progmem
 00000000 l    d  .text.itcm	00000000 .text.itcm
-00014d90 l    d  .fini	00000000 .fini
-00014d94 l    d  .ARM.exidx	00000000 .ARM.exidx
+00014990 l    d  .fini	00000000 .fini
+00014994 l    d  .ARM.exidx	00000000 .ARM.exidx
 20000000 l    d  .data	00000000 .data
-200062c0 l    d  NonCacheable	00000000 NonCacheable
-200088dc l    d  .bss	00000000 .bss
+20005ec0 l    d  NonCacheable	00000000 NonCacheable
+200084dc l    d  .bss	00000000 .bss
 20200000 l    d  .bss.dma	00000000 .bss.dma
 70000000 l    d  .bss.extram	00000000 .bss.extram
-6004d200 l    d  .text.csf	00000000 .text.csf
+6004ca00 l    d  .text.csf	00000000 .text.csf
 00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
 00000000 l    d  .comment	00000000 .comment
 00000000 l    d  .debug_info	00000000 .debug_info
@@ -114,7 +114,7 @@ SYMBOL TABLE:
 60007824 l     F .text.code	00000018 get_no_padding
 6000783c l     F .text.code	0000005c get_one_and_zeros_padding
 60007898 l     F .text.code	00000048 get_zeros_padding
-20009848 l     O .bss	00000004 supported_init
+20009448 l     O .bss	00000004 supported_init
 00000000 l    df *ABS*	00000000 cipher_wrap.c
 6000806c l     F .text.code	00000004 aes_crypt_ecb_wrap
 60008070 l     F .text.code	0000000a aes_crypt_cbc_wrap
@@ -245,11 +245,11 @@ SYMBOL TABLE:
 6000b804 l     F .text.code	00000410 mbedtls_ecp_mul.part.6
 6000bc9c l     F .text.code	0000007c mbedtls_ecp_mul_shortcuts
 6002ba48 l     O .text.progmem	0000003c ecp_supported_curves
-20008eb0 l     O .bss	00000004 dbl_count
-20009508 l     O .bss	00000004 init_done.8277
-20009520 l     O .bss	00000004 mul_count
-20009124 l     O .bss	00000005 ecp_supported_grp_id
-20008b4c l     O .bss	00000004 add_count
+20008ab0 l     O .bss	00000004 dbl_count
+20009108 l     O .bss	00000004 init_done.8277
+20009120 l     O .bss	00000004 mul_count
+20008d24 l     O .bss	00000005 ecp_supported_grp_id
+2000874c l     O .bss	00000004 add_count
 00000000 l    df *ABS*	00000000 ecp_curves.c
 6000c268 l     F .text.code	000001a4 ecp_mod_p192
 6000c40c l     F .text.code	00000586 ecp_mod_p384
@@ -275,7 +275,7 @@ SYMBOL TABLE:
 6002bc8c l     O .text.progmem	00000030 secp384r1_n
 6002bcbc l     O .text.progmem	00000030 secp384r1_gx
 6002bcec l     O .text.progmem	00000030 secp384r1_gy
-20005c94 l     O .data	00000004 one.7426
+200059c4 l     O .data	00000004 one.7426
 00000000 l    df *ABS*	00000000 gcm.c
 6000d0f0 l     F .text.code	00000184 gcm_mult
 6002c8f8 l     O .text.progmem	00000018 key_index
@@ -298,7 +298,7 @@ SYMBOL TABLE:
 6002c948 l     O .text.progmem	00000050 result_pr
 6002c998 l     O .text.progmem	00000028 entropy_nopr
 6002c9c0 l     O .text.progmem	00000050 result_nopr
-20009860 l     O .bss	00000004 test_offset
+20009460 l     O .bss	00000004 test_offset
 00000000 l    df *ABS*	00000000 md.c
 6002ca10 l     O .text.progmem	0000001c supported_digests
 20000520 l     O .data	00000018 CSWTCH.2
@@ -411,7 +411,7 @@ SYMBOL TABLE:
 600114f8 l     F .text.code	000000e8 pk_parse_key_pkcs8_unencrypted_der
 600115e0 l     F .text.code	00000114 pk_parse_key_pkcs8_encrypted_der
 00000000 l    df *ABS*	00000000 platform_util.c
-20005c90 l     O .data	00000004 memset_func
+200059c0 l     O .data	00000004 memset_func
 00000000 l    df *ABS*	00000000 rsa.c
 60011b6c l     F .text.code	000000a4 mgf_mask
 60011c10 l     F .text.code	0000013c rsa_rsassa_pkcs1_v15_encode
@@ -438,8 +438,8 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 ssl_ciphersuites.c
 6002e060 l     O .text.progmem	00001060 ciphersuite_definitions
 6002f0c0 l     O .text.progmem	00000340 ciphersuite_preference
-2000963c l     O .bss	0000020c supported_ciphersuites
-2000984c l     O .bss	00000004 supported_init
+2000923c l     O .bss	0000020c supported_ciphersuites
+2000944c l     O .bss	00000004 supported_init
 00000000 l    df *ABS*	00000000 ssl_cli.c
 600180d4 l     F .text.code	00000030 ssl_check_server_ecdh_params
 60018104 l     F .text.code	000000e8 ssl_write_encrypted_pms
@@ -476,11 +476,11 @@ SYMBOL TABLE:
 6001db24 l     F .text.code	0000005a ssl_resend_hello_request
 6001dc14 l     F .text.code	00000066 ssl_check_ctr_renegotiate
 6001dc7c l     F .text.code	0000005c ssl_write_real
-20005cc8 l     O .data	0000000c ssl_preset_suiteb_hashes
-20005cb8 l     O .data	0000000c ssl_preset_suiteb_ciphersuites
-20005cc4 l     O .data	00000003 ssl_preset_suiteb_curves
+200059f8 l     O .data	0000000c ssl_preset_suiteb_hashes
+200059e8 l     O .data	0000000c ssl_preset_suiteb_ciphersuites
+200059f4 l     O .data	00000003 ssl_preset_suiteb_curves
 20000538 l     O .data	00000006 CSWTCH.216
-20005ca0 l     O .data	00000018 ssl_preset_default_hashes
+200059d0 l     O .data	00000018 ssl_preset_default_hashes
 20000540 l     O .data	00000006 CSWTCH.218
 20000510 l     O .data	00000010 CSWTCH.176
 20000558 l     O .data	00000010 CSWTCH.88
@@ -496,45 +496,44 @@ SYMBOL TABLE:
 6002f400 l     O .text.progmem	000000a8 x509_crt_verify_strings
 00000000 l    df *ABS*	00000000 WireIMXRT.cpp
 00000000 l    df *ABS*	00000000 tempmon.c
-200095cc l     O .bss	00000004 s_hotTemp
-200095d0 l     O .bss	00000004 s_hot_ROOM
-200095d4 l     O .bss	00000004 s_roomC_hotC
-200095c8 l     O .bss	00000004 s_hotCount
+200091cc l     O .bss	00000004 s_hotTemp
+200091d0 l     O .bss	00000004 s_hot_ROOM
+200091d4 l     O .bss	00000004 s_roomC_hotC
+200091c8 l     O .bss	00000004 s_hotCount
 00000000 l    df *ABS*	00000000 usb.c
-0000c714 l     F .text.itcm	00000090 schedule_transfer
-0000c7a4 l     F .text.itcm	00000036 run_callbacks
-0000c7dc l     F .text.itcm	000000a0 endpoint0_transmit.constprop.1
-20009138 l     O .bss	00000004 endpointN_notify_mask
-20009884 l     O .bss	00000001 sof_usage
-20009134 l     O .bss	00000004 endpoint0_notify_mask
-2000988b l     O .bss	00000001 usb_reboot_timer
-20008a80 l     O .bss	00000008 endpoint0_setupdata
-20009590 l     O .bss	00000008 reply_buffer
-2000912c l     O .bss	00000008 endpoint0_buffer
+0000c3f8 l     F .text.itcm	00000090 schedule_transfer
+0000c488 l     F .text.itcm	00000036 run_callbacks
+0000c4c0 l     F .text.itcm	000000a0 endpoint0_transmit.constprop.1
+20008d38 l     O .bss	00000004 endpointN_notify_mask
+20009484 l     O .bss	00000001 sof_usage
+20008d34 l     O .bss	00000004 endpoint0_notify_mask
+2000948b l     O .bss	00000001 usb_reboot_timer
+20008680 l     O .bss	00000008 endpoint0_setupdata
+20009190 l     O .bss	00000008 reply_buffer
+20008d2c l     O .bss	00000008 endpoint0_buffer
 00000000 l    df *ABS*	00000000 analog.c
-20009880 l     O .bss	00000001 calibrating
+20009480 l     O .bss	00000001 calibrating
 00000000 l    df *ABS*	00000000 /Users/saurabhdatta/Library/Arduino15/packages/teensy/tools/teensy-compile/1.56.1/arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/fpv5-d16/crti.o
 00000000 l    df *ABS*	00000000 /Users/saurabhdatta/Library/Arduino15/packages/teensy/tools/teensy-compile/1.56.1/arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/fpv5-d16/crtn.o
 00000000 l    df *ABS*	00000000 crtstuff.c
 00000020 l     F .text.itcm	00000000 __do_global_dtors_aux
-20008a88 l       .bss	00000000 completed.8605
+20008688 l       .bss	00000000 completed.8605
 00000044 l     F .text.itcm	00000000 frame_dummy
-20008a8c l       .bss	00000000 object.8610
+2000868c l       .bss	00000000 object.8610
 60022b78 l     O .text.code	00000000 __frame_dummy_init_array_entry
 00000000 l    df *ABS*	00000000 ARTNET_TEENSY41_ETH_NEOPIXEL.ino.cpp
 000001a8 l     F .text.itcm	0000002c __tcf_0
-000001d4 l     F .text.itcm	00000038 validAddr(unsigned char) [clone .part.4]
-000004b8 l     F .text.itcm	0000009c _GLOBAL__sub_I_fixedIP
+00000364 l     F .text.itcm	0000009c _GLOBAL__sub_I_fixedIP
 00000000 l    df *ABS*	00000000 NativeEthernet.cpp
-00001134 l     F .text.itcm	0000002c _GLOBAL__sub_I__ZN13EthernetClass17_dnsServerAddressE
+00000e18 l     F .text.itcm	0000002c _GLOBAL__sub_I__ZN13EthernetClass17_dnsServerAddressE
 20000bc8 l     O .data	00000010 EthernetClass::begin(unsigned char*, IPAddress, IPAddress, IPAddress, IPAddress)::teensy_mutex_api
-20008af8 l     O .bss	00000010 EthernetClass::link_callback(void*, fnet_bool_t, void*)::dhcp_params
+200086f8 l     O .bss	00000010 EthernetClass::link_callback(void*, fnet_bool_t, void*)::dhcp_params
 20000bd8 l     O .data	00000008 EthernetClass::begin(unsigned char*, IPAddress, IPAddress, IPAddress, IPAddress)::timer_api
 00000000 l    df *ABS*	00000000 certs.c
 60028b64 l     O .text.progmem	0000051b mbedtls_test_ca_crt_rsa_sha1
 60029080 l     O .text.progmem	0000051b mbedtls_test_ca_crt_rsa_sha256
 00000000 l    df *ABS*	00000000 Adafruit_SSD1306.cpp
-0000b024 l     F .text.itcm	0000009a Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.9] [clone .constprop.10]
+0000ad08 l     F .text.itcm	0000009a Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.9] [clone .constprop.10]
 6002f5bc l     O .text.progmem	000002c0 splash1_data
 6002f87c l     O .text.progmem	000001e0 splash2_data
 6002fa5c l     O .text.progmem	00000004 Adafruit_SSD1306::begin(unsigned char, unsigned char, bool, bool)::init1
@@ -556,209 +555,209 @@ SYMBOL TABLE:
 6002faac l     O .text.progmem	00000002 Adafruit_SSD1306::startscrolldiagleft(unsigned char, unsigned char)::scrollList4c
 00000000 l    df *ABS*	00000000 usb_desc.c
 6002fb7c l     O .text.progmem	0000000a qualifier_descriptor
-20005a28 l     O .data	00000012 device_descriptor
+20005758 l     O .data	00000012 device_descriptor
 00000000 l    df *ABS*	00000000 serialEvent.cpp
 00000000 l    df *ABS*	00000000 SPI.cpp
 00000000 l    df *ABS*	00000000 NativeDns.cpp
 00000000 l    df *ABS*	00000000 NativeEthernetServer.cpp
 00000000 l    df *ABS*	00000000 NativeEthernetUdp.cpp
-20005cf1 l     O .data	00000001 EthernetUDP::begin(unsigned short)::first_call
+20005a21 l     O .data	00000001 EthernetUDP::begin(unsigned short)::first_call
 00000000 l    df *ABS*	00000000 Nativesocket.cpp
 00000000 l    df *ABS*	00000000 fnet_cpu.c
 00000000 l    df *ABS*	00000000 fnet_mimxrt_eth.c
-0000198c l     F .text.itcm	00000004 fnet_mimxrt_eth_phy_init
-00001990 l     F .text.itcm	00000180 fnet_mimxrt_eth_init
-20005b00 l     O .data	0000011c fnet_mimxrt_eth0_if
+00001670 l     F .text.itcm	00000004 fnet_mimxrt_eth_phy_init
+00001674 l     F .text.itcm	00000180 fnet_mimxrt_eth_init
+20005830 l     O .data	0000011c fnet_mimxrt_eth0_if
 00000000 l    df *ABS*	00000000 fnet_mimxrt_isr.c
 00000000 l    df *ABS*	00000000 fnet_mimxrt_isr_inst.c
 00000000 l    df *ABS*	00000000 fnet_fec.c
-00001b9c l     F .text.itcm	00000042 _fnet_fec_get_hw_addr
-00001be0 l     F .text.itcm	00000026 _fnet_fec_get_statistics
-00001c08 l     F .text.itcm	0000001e fnet_fec_isr_handler_top
-00001c28 l     F .text.itcm	00000064 _fnet_fec_phy_read
-00001c8c l     F .text.itcm	00000064 _fnet_fec_phy_write
-00001cf0 l     F .text.itcm	00000080 _fnet_fec_set_hw_addr
-00001d70 l     F .text.itcm	00000028 _fnet_fec_release
-00001d98 l     F .text.itcm	000001c4 _fnet_fec_init
-00001ff8 l     F .text.itcm	00000026 fnet_fec_isr_handler_bottom
-00001f5c l     F .text.itcm	0000009a _fnet_fec_input
+00001880 l     F .text.itcm	00000042 _fnet_fec_get_hw_addr
+000018c4 l     F .text.itcm	00000026 _fnet_fec_get_statistics
+000018ec l     F .text.itcm	0000001e fnet_fec_isr_handler_top
+0000190c l     F .text.itcm	00000064 _fnet_fec_phy_read
+00001970 l     F .text.itcm	00000064 _fnet_fec_phy_write
+000019d4 l     F .text.itcm	00000080 _fnet_fec_set_hw_addr
+00001a54 l     F .text.itcm	00000028 _fnet_fec_release
+00001a7c l     F .text.itcm	000001c4 _fnet_fec_init
+00001cdc l     F .text.itcm	00000026 fnet_fec_isr_handler_bottom
+00001c40 l     F .text.itcm	0000009a _fnet_fec_input
 00000000 l    df *ABS*	00000000 fnet_service.c
-20009434 l     O .bss	00000090 fnet_poll_if
-200094c8 l     O .bss	00000004 fnet_service_mutex
+20009034 l     O .bss	00000090 fnet_poll_if
+200090c8 l     O .bss	00000004 fnet_service_mutex
 00000000 l    df *ABS*	00000000 fnet_dhcp.c
 00000000 l    df *ABS*	00000000 fnet_dhcp_cln.c
-00002314 l     F .text.itcm	000001c6 _fnet_dhcp_cln_parse_options
-000024dc l     F .text.itcm	000000e8 _fnet_dhcp_cln_receive_message
-000025c4 l     F .text.itcm	00000218 _fnet_dhcp_cln_send_message
-000027dc l     F .text.itcm	0000011e _fnet_dhcp_cln_set_state
-000028fc l     F .text.itcm	00000056 _fnet_dhcp_cln_apply_params
-00002954 l     F .text.itcm	00000018 fnet_dhcp_cln_release.part.1
-0000296c l     F .text.itcm	00000204 _fnet_dhcp_cln_poll
-20005a9c l     O .data	00000006 fnet_dhcp_cln_parameter_request_list
-2000913c l     O .bss	000002cc fnet_dhcp_cln_if_list
+00001ff8 l     F .text.itcm	000001c6 _fnet_dhcp_cln_parse_options
+000021c0 l     F .text.itcm	000000e8 _fnet_dhcp_cln_receive_message
+000022a8 l     F .text.itcm	00000218 _fnet_dhcp_cln_send_message
+000024c0 l     F .text.itcm	0000011e _fnet_dhcp_cln_set_state
+000025e0 l     F .text.itcm	00000056 _fnet_dhcp_cln_apply_params
+00002638 l     F .text.itcm	00000018 fnet_dhcp_cln_release.part.1
+00002650 l     F .text.itcm	00000204 _fnet_dhcp_cln_poll
+200057cc l     O .data	00000006 fnet_dhcp_cln_parameter_request_list
+20008d3c l     O .bss	000002cc fnet_dhcp_cln_if_list
 00000000 l    df *ABS*	00000000 fnet_dns.c
-00002ca0 l     F .text.itcm	00000066 _fnet_dns_cmp_name
-00002f98 l     F .text.itcm	000001ce _fnet_dns_poll
-20008eb4 l     O .bss	00000270 dns_if_list
+00002984 l     F .text.itcm	00000066 _fnet_dns_cmp_name
+00002c7c l     F .text.itcm	000001ce _fnet_dns_poll
+20008ab4 l     O .bss	00000270 dns_if_list
 00000000 l    df *ABS*	00000000 fnet_link.c
-00003168 l     F .text.itcm	00000022 _fnet_link_poll
-20009410 l     O .bss	00000018 fnet_link_if_list
+00002e4c l     F .text.itcm	00000022 _fnet_link_poll
+20009010 l     O .bss	00000018 fnet_link_if_list
 00000000 l    df *ABS*	00000000 fnet_tls.c
 00000000 l    df *ABS*	00000000 fnet_arp.c
-00003200 l     F .text.itcm	00000004 _fnet_arp_ip4_addr_conflict
-00003204 l     F .text.itcm	00000044 _fnet_arp_timer
-00003248 l     F .text.itcm	000000ce _fnet_arp_add_entry.isra.0
+00002ee4 l     F .text.itcm	00000004 _fnet_arp_ip4_addr_conflict
+00002ee8 l     F .text.itcm	00000044 _fnet_arp_timer
+00002f2c l     F .text.itcm	000000ce _fnet_arp_add_entry.isra.0
 00000000 l    df *ABS*	00000000 fnet_checksum.c
-000036e0 l     F .text.itcm	000000e8 _fnet_checksum32_low
-000037c8 l     F .text.itcm	0000005c _fnet_checksum32_nb
+000033c4 l     F .text.itcm	000000e8 _fnet_checksum32_low
+000034ac l     F .text.itcm	0000005c _fnet_checksum32_nb
 00000000 l    df *ABS*	00000000 fnet_error.c
-20009879 l     O .bss	00000001 FNET_ERR_NUMBER
+20009479 l     O .bss	00000001 FNET_ERR_NUMBER
 00000000 l    df *ABS*	00000000 fnet_eth.c
-20009408 l     O .bss	00000004 fnet_eth_number
+20009008 l     O .bss	00000004 fnet_eth_number
 00000000 l    df *ABS*	00000000 fnet_icmp4.c
-00003ce0 l     F .text.itcm	0000005e _fnet_icmp4_output
-00003d40 l     F .text.itcm	0000008a _fnet_icmp4_notify_protocol
-00003dcc l     F .text.itcm	00000120 _fnet_icmp4_input
+000039c4 l     F .text.itcm	0000005e _fnet_icmp4_output
+00003a24 l     F .text.itcm	0000008a _fnet_icmp4_notify_protocol
+00003ab0 l     F .text.itcm	00000120 _fnet_icmp4_input
 00000000 l    df *ABS*	00000000 fnet_inet.c
-00004008 l     F .text.itcm	00000090 _fnet_inet_pton_ip4
+00003cec l     F .text.itcm	00000090 _fnet_inet_pton_ip4
 00000000 l    df *ABS*	00000000 fnet_ip.c
 00000000 l    df *ABS*	00000000 fnet_ip4.c
-00004198 l     F .text.itcm	00000060 _fnet_ip4_frag_list_free.part.1
-000041f8 l     F .text.itcm	00000038 _fnet_ip4_timer
-00004480 l     F .text.itcm	00000482 _fnet_ip4_input_low
-00004904 l     F .text.itcm	00000074 _fnet_ip4_netif_output
-20009870 l     O .bss	00000002 ip_id.9544
-20009514 l     O .bss	00000008 ip_queue
-2000951c l     O .bss	00000004 ip_timer_ptr
-20009510 l     O .bss	00000004 ip_frag_list_head
-2000950c l     O .bss	00000004 ip_event
+00003e7c l     F .text.itcm	00000060 _fnet_ip4_frag_list_free.part.1
+00003edc l     F .text.itcm	00000038 _fnet_ip4_timer
+00004164 l     F .text.itcm	00000482 _fnet_ip4_input_low
+000045e8 l     F .text.itcm	00000074 _fnet_ip4_netif_output
+20009470 l     O .bss	00000002 ip_id.9544
+20009114 l     O .bss	00000008 ip_queue
+2000911c l     O .bss	00000004 ip_timer_ptr
+20009110 l     O .bss	00000004 ip_frag_list_head
+2000910c l     O .bss	00000004 ip_event
 00000000 l    df *ABS*	00000000 fnet_isr.c
-20009428 l     O .bss	00000004 fnet_locked
-2000940c l     O .bss	00000004 fnet_isr_table
-20005aa4 l     O .data	00000004 fnet_event_desc_last
+20009028 l     O .bss	00000004 fnet_locked
+2000900c l     O .bss	00000004 fnet_isr_table
+200057d4 l     O .data	00000004 fnet_event_desc_last
 00000000 l    df *ABS*	00000000 fnet_mempool.c
 00000000 l    df *ABS*	00000000 fnet_netbuf.c
-00005224 l     F .text.itcm	000000b2 _fnet_netbuf_trim.part.0
-2000942c l     O .bss	00000004 fnet_mempool_main
+00004f08 l     F .text.itcm	000000b2 _fnet_netbuf_trim.part.0
+2000902c l     O .bss	00000004 fnet_mempool_main
 00000000 l    df *ABS*	00000000 fnet_netif.c
-20009430 l     O .bss	00000004 fnet_netif_callback_ip4_addr_conflict
+20009030 l     O .bss	00000004 fnet_netif_callback_ip4_addr_conflict
 00000000 l    df *ABS*	00000000 fnet_prot.c
 200010dc l     O .data	00000010 fnet_prot_if_list
 00000000 l    df *ABS*	00000000 fnet_raw.c
-00005e38 l     F .text.itcm	00000018 _fnet_raw_attach
-00005e50 l     F .text.itcm	00000030 _fnet_raw_shutdown
-00005e80 l     F .text.itcm	000000f6 _fnet_raw_snd
-00005f78 l     F .text.itcm	00000062 _fnet_raw_rcv
-00005fdc l     F .text.itcm	00000034 _fnet_raw_connect
-00006010 l     F .text.itcm	0000001c _fnet_raw_detach
-0000602c l     F .text.itcm	0000001c _fnet_raw_release
+00005b1c l     F .text.itcm	00000018 _fnet_raw_attach
+00005b34 l     F .text.itcm	00000030 _fnet_raw_shutdown
+00005b64 l     F .text.itcm	000000f6 _fnet_raw_snd
+00005c5c l     F .text.itcm	00000062 _fnet_raw_rcv
+00005cc0 l     F .text.itcm	00000034 _fnet_raw_connect
+00005cf4 l     F .text.itcm	0000001c _fnet_raw_detach
+00005d10 l     F .text.itcm	0000001c _fnet_raw_release
 200010ec l     O .data	0000002c fnet_raw_socket_api
 00000000 l    df *ABS*	00000000 fnet_socket.c
-000061d0 l     F .text.itcm	0000003c _fnet_socket_desc_alloc
-0000620c l     F .text.itcm	00000024 fnet_socket_addr_are_equal.part.1
-00006230 l     F .text.itcm	00000014 _fnet_socket_addr_copy.part.3
-20005cee l     O .data	00000002 fnet_port_last
-200094cc l     O .bss	00000030 fnet_socket_desc
+00005eb4 l     F .text.itcm	0000003c _fnet_socket_desc_alloc
+00005ef0 l     F .text.itcm	00000024 fnet_socket_addr_are_equal.part.1
+00005f14 l     F .text.itcm	00000014 _fnet_socket_addr_copy.part.3
+20005a1e l     O .data	00000002 fnet_port_last
+200090cc l     O .bss	00000030 fnet_socket_desc
 00000000 l    df *ABS*	00000000 fnet_stack.c
-20008b3c l     O .bss	00000004 _fnet_mutex_api
-200094fc l     O .bss	00000004 fnet_stack_mutex
+2000873c l     O .bss	00000004 _fnet_mutex_api
+200090fc l     O .bss	00000004 fnet_stack_mutex
 00000000 l    df *ABS*	00000000 fnet_stdlib.c
-200094c4 l     O .bss	00000004 fnet_rand_seed
+200090c4 l     O .bss	00000004 fnet_rand_seed
 00000000 l    df *ABS*	00000000 fnet_tcp.c
-00007330 l     F .text.itcm	00000058 _fnet_tcp_set_synopt
-00007388 l     F .text.itcm	00000080 _fnet_tcp_init_connection
-00007408 l     F .text.itcm	00000028 _fnet_tcp_del_cb
-00007430 l     F .text.itcm	00000080 _fnet_tcp_getsockopt
-000074b0 l     F .text.itcm	00000034 _fnet_tcp_accept
-000074e4 l     F .text.itcm	0000005c _fnet_tcp_attach
-00007540 l     F .text.itcm	000000e0 _fnet_tcp_find_socket
-00007620 l     F .text.itcm	0000005a _fnet_tcp_process_fin.isra.0
-0000767c l     F .text.itcm	00000090 _fnet_tcp_get_opt.isra.4
-0000770c l     F .text.itcm	00000090 _fnet_tcp_close_socket
-0000779c l     F .text.itcm	000000a2 _fnet_tcp_setsockopt
-00007840 l     F .text.itcm	00000078 _fnet_tcp_control_input
-000078b8 l     F .text.itcm	00000068 _fnet_tcp_init
-00007e6c l     F .text.itcm	00000034 _fnet_tcp_fasttimo
-00009424 l     F .text.itcm	0000005c _fnet_tcp_slowtimo
-00007920 l     F .text.itcm	0000019c _fnet_tcp_send_seg.constprop.13
-00007abc l     F .text.itcm	0000015e _fnet_tcp_send_dataseg.constprop.12
-00007c1c l     F .text.itcm	0000009a _fnet_tcp_send_rst.isra.5
-00007cb8 l     F .text.itcm	0000012a _fnet_tcp_send_headseg
-00007de4 l     F .text.itcm	00000070 _fnet_tcp_send_ack
-00007e54 l     F .text.itcm	00000018 _fnet_tcp_fasttimosk
-00007ea0 l     F .text.itcm	000000be _fnet_tcp_rcv
-00007f60 l     F .text.itcm	00000150 _fnet_tcp_send_anydata
-000080b0 l     F .text.itcm	00000062 _fnet_tcp_shutdown
-00008114 l     F .text.itcm	0000050e _fnet_tcp_dataprocess
-00008624 l     F .text.itcm	00000164 _fnet_tcp_snd
-00008788 l     F .text.itcm	000000b8 _fnet_tcp_connect
-00008840 l     F .text.itcm	000006e4 _fnet_tcp_input
-00008f24 l     F .text.itcm	0000007a _fnet_tcp_send_rstsk
-00008fa0 l     F .text.itcm	00000048 _fnet_tcp_abort_socket
-00008fe8 l     F .text.itcm	0000005c _fnet_tcp_listen
-00009044 l     F .text.itcm	00000060 _fnet_tcp_drain
-000090a4 l     F .text.itcm	000000d8 _fnet_tcp_close
-0000917c l     F .text.itcm	000002a6 _fnet_tcp_slowtimosk
-00009480 l     F .text.itcm	00000050 _fnet_tcp_release
-20009500 l     O .bss	00000004 fnet_tcp_fasttimer
+00007014 l     F .text.itcm	00000058 _fnet_tcp_set_synopt
+0000706c l     F .text.itcm	00000080 _fnet_tcp_init_connection
+000070ec l     F .text.itcm	00000028 _fnet_tcp_del_cb
+00007114 l     F .text.itcm	00000080 _fnet_tcp_getsockopt
+00007194 l     F .text.itcm	00000034 _fnet_tcp_accept
+000071c8 l     F .text.itcm	0000005c _fnet_tcp_attach
+00007224 l     F .text.itcm	000000e0 _fnet_tcp_find_socket
+00007304 l     F .text.itcm	0000005a _fnet_tcp_process_fin.isra.0
+00007360 l     F .text.itcm	00000090 _fnet_tcp_get_opt.isra.4
+000073f0 l     F .text.itcm	00000090 _fnet_tcp_close_socket
+00007480 l     F .text.itcm	000000a2 _fnet_tcp_setsockopt
+00007524 l     F .text.itcm	00000078 _fnet_tcp_control_input
+0000759c l     F .text.itcm	00000068 _fnet_tcp_init
+00007b50 l     F .text.itcm	00000034 _fnet_tcp_fasttimo
+00009108 l     F .text.itcm	0000005c _fnet_tcp_slowtimo
+00007604 l     F .text.itcm	0000019c _fnet_tcp_send_seg.constprop.13
+000077a0 l     F .text.itcm	0000015e _fnet_tcp_send_dataseg.constprop.12
+00007900 l     F .text.itcm	0000009a _fnet_tcp_send_rst.isra.5
+0000799c l     F .text.itcm	0000012a _fnet_tcp_send_headseg
+00007ac8 l     F .text.itcm	00000070 _fnet_tcp_send_ack
+00007b38 l     F .text.itcm	00000018 _fnet_tcp_fasttimosk
+00007b84 l     F .text.itcm	000000be _fnet_tcp_rcv
+00007c44 l     F .text.itcm	00000150 _fnet_tcp_send_anydata
+00007d94 l     F .text.itcm	00000062 _fnet_tcp_shutdown
+00007df8 l     F .text.itcm	0000050e _fnet_tcp_dataprocess
+00008308 l     F .text.itcm	00000164 _fnet_tcp_snd
+0000846c l     F .text.itcm	000000b8 _fnet_tcp_connect
+00008524 l     F .text.itcm	000006e4 _fnet_tcp_input
+00008c08 l     F .text.itcm	0000007a _fnet_tcp_send_rstsk
+00008c84 l     F .text.itcm	00000048 _fnet_tcp_abort_socket
+00008ccc l     F .text.itcm	0000005c _fnet_tcp_listen
+00008d28 l     F .text.itcm	00000060 _fnet_tcp_drain
+00008d88 l     F .text.itcm	000000d8 _fnet_tcp_close
+00008e60 l     F .text.itcm	000002a6 _fnet_tcp_slowtimosk
+00009164 l     F .text.itcm	00000050 _fnet_tcp_release
+20009100 l     O .bss	00000004 fnet_tcp_fasttimer
 20001118 l     O .data	0000002c fnet_tcp_socket_api
-20008b40 l     O .bss	00000004 _fnet_tcp_initial_seq_number
-20009504 l     O .bss	00000004 fnet_tcp_slowtimer
+20008740 l     O .bss	00000004 _fnet_tcp_initial_seq_number
+20009104 l     O .bss	00000004 fnet_tcp_slowtimer
 00000000 l    df *ABS*	00000000 fnet_timer.c
-20008b48 l     O .bss	00000004 _fnet_timer_head
+20008748 l     O .bss	00000004 _fnet_timer_head
 00000000 l    df *ABS*	00000000 fnet_udp.c
-000095e4 l     F .text.itcm	00000026 _fnet_udp_attach
-0000960c l     F .text.itcm	00000030 _fnet_udp_shutdown
-0000963c l     F .text.itcm	00000196 _fnet_udp_snd
-000097d4 l     F .text.itcm	00000060 _fnet_udp_rcv
-00009834 l     F .text.itcm	0000002a _fnet_udp_connect
-00009860 l     F .text.itcm	0000001c _fnet_udp_detach
-0000987c l     F .text.itcm	0000001c _fnet_udp_release
-00009898 l     F .text.itcm	000001e4 _fnet_udp_input
-00009a7c l     F .text.itcm	00000094 _fnet_udp_control_input
+000092c8 l     F .text.itcm	00000026 _fnet_udp_attach
+000092f0 l     F .text.itcm	00000030 _fnet_udp_shutdown
+00009320 l     F .text.itcm	00000196 _fnet_udp_snd
+000094b8 l     F .text.itcm	00000060 _fnet_udp_rcv
+00009518 l     F .text.itcm	0000002a _fnet_udp_connect
+00009544 l     F .text.itcm	0000001c _fnet_udp_detach
+00009560 l     F .text.itcm	0000001c _fnet_udp_release
+0000957c l     F .text.itcm	000001e4 _fnet_udp_input
+00009760 l     F .text.itcm	00000094 _fnet_udp_control_input
 20001144 l     O .data	0000002c fnet_udp_socket_api
 00000000 l    df *ABS*	00000000 Artnet.cpp
 00000000 l    df *ABS*	00000000 Adafruit_NeoPixel.cpp
-00009ea4 l     F .text.itcm	00000066 Adafruit_NeoPixel::setPixelColor(unsigned short, unsigned long) [clone .part.3]
+00009b88 l     F .text.itcm	00000066 Adafruit_NeoPixel::setPixelColor(unsigned short, unsigned long) [clone .part.3]
 00000000 l    df *ABS*	00000000 Adafruit_GFX.cpp
 20000568 l     O .data	00000500 font
 00000000 l    df *ABS*	00000000 memcpy-armv7m.S.o
 00000000 l    df *ABS*	00000000 clockspeed.c
 00000000 l    df *ABS*	00000000 delay.c
 00000000 l    df *ABS*	00000000 digital.c
-0000c3f0 l     F .text.itcm	0000004c digitalWrite.part.0
+0000c0d4 l     F .text.itcm	0000004c digitalWrite.part.0
 00000000 l    df *ABS*	00000000 usb_serial.c
-0000d074 l     F .text.itcm	0000006c rx_queue_transfer
-0000d0e0 l     F .text.itcm	000000b4 rx_event
-0000d194 l     F .text.itcm	00000098 usb_serial_flush_callback
-0000d22c l     F .text.itcm	00000194 usb_serial_write.part.1
-200095ac l     O .bss	00000010 rx_index
-20009876 l     O .bss	00000002 tx_packet_size
-20009887 l     O .bss	00000001 tx_noautoflush
-20009886 l     O .bss	00000001 tx_head
-20008900 l     O .bss	00000100 rx_transfer
-20009883 l     O .bss	00000001 rx_tail
-200095bc l     O .bss	00000009 rx_list
-20009872 l     O .bss	00000002 rx_packet_size
+0000cd58 l     F .text.itcm	0000006c rx_queue_transfer
+0000cdc4 l     F .text.itcm	000000b4 rx_event
+0000ce78 l     F .text.itcm	00000098 usb_serial_flush_callback
+0000cf10 l     F .text.itcm	00000194 usb_serial_write.part.1
+200091ac l     O .bss	00000010 rx_index
+20009476 l     O .bss	00000002 tx_packet_size
+20009487 l     O .bss	00000001 tx_noautoflush
+20009486 l     O .bss	00000001 tx_head
+20008500 l     O .bss	00000100 rx_transfer
+20009483 l     O .bss	00000001 rx_tail
+200091bc l     O .bss	00000009 rx_list
+20009472 l     O .bss	00000002 rx_packet_size
 20200080 l     O .bss.dma	00001000 rx_buffer
 20201080 l     O .bss.dma	00002000 txbuffer
-2000959c l     O .bss	00000010 rx_count
-20009598 l     O .bss	00000004 rx_available
-20009882 l     O .bss	00000001 rx_head
-20009885 l     O .bss	00000001 transmit_previous_timeout
-20009874 l     O .bss	00000002 tx_available
-20008a00 l     O .bss	00000080 tx_transfer
+2000919c l     O .bss	00000010 rx_count
+20009198 l     O .bss	00000004 rx_available
+20009482 l     O .bss	00000001 rx_head
+20009485 l     O .bss	00000001 transmit_previous_timeout
+20009474 l     O .bss	00000002 tx_available
+20008600 l     O .bss	00000080 tx_transfer
 00000000 l    df *ABS*	00000000 EventResponder.cpp
 00000000 l    df *ABS*	00000000 IPAddress.cpp
 00000000 l    df *ABS*	00000000 IntervalTimer.cpp
-0000d874 l     F .text.itcm	00000068 pit_isr()
-200088e0 l     O .bss	00000010 funct_table
+0000d558 l     F .text.itcm	00000068 pit_isr()
+200084e0 l     O .bss	00000010 funct_table
 00000000 l    df *ABS*	00000000 Print.cpp
 00000000 l    df *ABS*	00000000 main.cpp
 00000000 l    df *ABS*	00000000 new.cpp
 00000000 l    df *ABS*	00000000 usb_inst.cpp
 00000000 l    df *ABS*	00000000 yield.cpp
-2000987e l     O .bss	00000001 yield::running
+2000947e l     O .bss	00000001 yield::running
 00000000 l    df *ABS*	00000000 nonstd.c
 00000000 l    df *ABS*	00000000 pwm.c
 00000000 l    df *ABS*	00000000 rtc.c
@@ -792,25 +791,24 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 lib_a-strcmp.o
 00000000 l    df *ABS*	00000000 lib_a-strlen.o
 00000000 l    df *ABS*	00000000 strstr.c
-0000f69c l     F .text.itcm	000000b8 critical_factorization
-0000f754 l     F .text.itcm	000001fe two_way_long_needle
+0000f35c l     F .text.itcm	000000b8 critical_factorization
+0000f414 l     F .text.itcm	000001fe two_way_long_needle
 00000000 l    df *ABS*	00000000 vfprintf.c
-20004edc l     O .data	00000010 zeroes.7258
+20004c0c l     O .data	00000010 zeroes.7258
 20000cf8 l     O .data	00000010 blanks.7257
-00000000 l    df *ABS*	00000000 vdprintf.c
 00000000 l    df *ABS*	00000000 vfprintf.c
-000127c8 l     F .text.itcm	0000006a __sbprintf
-20004eec l     O .data	00000010 zeroes.7273
+00012420 l     F .text.itcm	0000006a __sbprintf
+20004c1c l     O .data	00000010 zeroes.7273
 20000d08 l     O .data	00000010 blanks.7272
 00000000 l    df *ABS*	00000000 wctomb_r.c
 00000000 l    df *ABS*	00000000 writer.c
 00000000 l    df *ABS*	00000000 wsetup.c
 00000000 l    df *ABS*	00000000 __atexit.c
 00000000 l    df *ABS*	00000000 dtoa.c
-000129e8 l     F .text.itcm	00000128 quorem
+00012640 l     F .text.itcm	00000128 quorem
 00000000 l    df *ABS*	00000000 fflush.c
 00000000 l    df *ABS*	00000000 findfp.c
-00013914 l     F .text.itcm	000000f0 __sinit.part.1
+0001356c l     F .text.itcm	000000f0 __sinit.part.1
 00000000 l    df *ABS*	00000000 mallocr.c
 00000000 l    df *ABS*	00000000 fvwrite.c
 00000000 l    df *ABS*	00000000 fwalk.c
@@ -822,9 +820,8 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 putc.c
 00000000 l    df *ABS*	00000000 stdio.c
 00000000 l    df *ABS*	00000000 vfprintf.c
-00000000 l    df *ABS*	00000000 vasnprintf.c
 00000000 l    df *ABS*	00000000 vfprintf.c
-000149d0 l     F .text.itcm	00000078 __sprint_r.part.0
+000145d0 l     F .text.itcm	00000078 __sprint_r.part.0
 00000000 l    df *ABS*	00000000 wbuf.c
 00000000 l    df *ABS*	00000000 closer.c
 00000000 l    df *ABS*	00000000 fclose.c
@@ -836,228 +833,226 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 wcrtomb.c
 00000000 l    df *ABS*	00000000 ctype_.c
 00000000 l    df *ABS*	00000000 impure.c
-20004f00 l     O .data	00000428 impure_data
+20004c30 l     O .data	00000428 impure_data
 00000000 l    df *ABS*	00000000 HardwareSerial.cpp
 00000000 l    df *ABS*	00000000 reent.c
 00000000 l    df *ABS*	00000000 
 00000000 l       *UND*	00000000 __fini_array_end
 00000000 l       *UND*	00000000 __bss_start__
-6004e000 l       .text.csf	00000000 __text_csf_end
+6004d800 l       .text.csf	00000000 __text_csf_end
 00000000 l       *UND*	00000000 __bss_end__
 00000000 l       *UND*	00000000 software_init_hook
 00000000 l       *UND*	00000000 __fini_array_start
 00000000 l       *UND*	00000000 hardware_init_hook
 00000000 l       *UND*	00000000 __libc_fini
 00000000 l       *UND*	00000000 __stack
-00014d68 l     F .text.itcm	00000008 __mbedtls_ssl_close_notify_veneer
-00014d70 l     F .text.itcm	00000008 ___init_veneer
-00014d78 l     F .text.itcm	00000008 __mbedtls_ssl_free_veneer
-00014d80 l     F .text.itcm	00000008 ___ZN7TwoWire5beginEv_veneer
-00014d88 l     F .text.itcm	00000008 ___reboot_Teensyduino__veneer
-60022ac8 l     F .text.code	00000008 __set_arm_clock_veneer
-60022ad0 l     F .text.code	00000008 __memcmp_veneer
-60022ad8 l     F .text.code	00000008 __rand_veneer
+00014968 l     F .text.itcm	00000008 ___ZN7TwoWire5beginEv_veneer
+00014970 l     F .text.itcm	00000008 ___init_veneer
+00014978 l     F .text.itcm	00000008 __mbedtls_ssl_close_notify_veneer
+00014980 l     F .text.itcm	00000008 ___reboot_Teensyduino__veneer
+00014988 l     F .text.itcm	00000008 __mbedtls_ssl_free_veneer
+60022ac8 l     F .text.code	00000008 __memcmp_veneer
+60022ad0 l     F .text.code	00000008 __delay_veneer
+60022ad8 l     F .text.code	00000008 __strcmp_veneer
 60022ae0 l     F .text.code	00000008 __calloc_veneer
-60022ae8 l     F .text.code	00000008 __usb_init_serialnumber_veneer
-60022af0 l     F .text.code	00000008 __memmove_veneer
-60022af8 l     F .text.code	00000008 __printf_veneer
-60022b00 l     F .text.code	00000008 __strcmp_veneer
-60022b08 l     F .text.code	00000008 __main_veneer
-60022b10 l     F .text.code	00000008 __strstr_veneer
-60022b18 l     F .text.code	00000008 __free_veneer
+60022ae8 l     F .text.code	00000008 __memset_veneer
+60022af0 l     F .text.code	00000008 __strlen_veneer
+60022af8 l     F .text.code	00000008 __memcpy_veneer
+60022b00 l     F .text.code	00000008 __sm_set_pool_veneer
+60022b08 l     F .text.code	00000008 __strstr_veneer
+60022b10 l     F .text.code	00000008 __set_arm_clock_veneer
+60022b18 l     F .text.code	00000008 __rand_veneer
 60022b20 l     F .text.code	00000008 __puts_veneer
-60022b28 l     F .text.code	00000008 __putchar_veneer
+60022b28 l     F .text.code	00000008 __free_veneer
 60022b30 l     F .text.code	00000008 __pwm_init_veneer
-60022b38 l     F .text.code	00000008 ____libc_init_array_veneer
-60022b40 l     F .text.code	00000008 __memcpy_veneer
-60022b48 l     F .text.code	00000008 ____aeabi_uldivmod_veneer
-60022b50 l     F .text.code	00000008 __sm_set_pool_veneer
-60022b58 l     F .text.code	00000008 __strlen_veneer
-60022b60 l     F .text.code	00000008 __snprintf_veneer
-60022b68 l     F .text.code	00000008 __delay_veneer
-60022b70 l     F .text.code	00000008 __memset_veneer
+60022b38 l     F .text.code	00000008 ____aeabi_uldivmod_veneer
+60022b40 l     F .text.code	00000008 __printf_veneer
+60022b48 l     F .text.code	00000008 ____libc_init_array_veneer
+60022b50 l     F .text.code	00000008 __memmove_veneer
+60022b58 l     F .text.code	00000008 __putchar_veneer
+60022b60 l     F .text.code	00000008 __main_veneer
+60022b68 l     F .text.code	00000008 __snprintf_veneer
+60022b70 l     F .text.code	00000008 __usb_init_serialnumber_veneer
 60012abc g     F .text.code	00000150 mbedtls_rsa_rsaes_oaep_encrypt
 6002846c g     O .text.progmem	000006f6 mbedtls_test_ca_key_rsa
 60007b24 g     F .text.code	00000018 mbedtls_cipher_reset
 6001c8d4 g     F .text.code	0000006e mbedtls_ssl_config_free
-0000ec20 g     F .text.itcm	00000014 putchar
-0000036c g     F .text.itcm	000000f0 setupOLEDdisplay()
-0000d5fc g     F .text.itcm	0000000c usb_serial_available
+0000e8e4 g     F .text.itcm	00000014 putchar
+00000280 g     F .text.itcm	00000088 setupOLEDdisplay()
+0000d2e0 g     F .text.itcm	0000000c usb_serial_available
 6001e814 g     F .text.code	000001c0 mbedtls_ssl_fetch_input
 6002cde0 g     O .text.progmem	00000030 mbedtls_md5_info
-00001440 g     F .text.itcm	0000009c EthernetClass::socketStatus(unsigned char)
-00014c98 g     F .text.itcm	00000024 _isatty_r
+00001124 g     F .text.itcm	0000009c EthernetClass::socketStatus(unsigned char)
+00014898 g     F .text.itcm	00000024 _isatty_r
 6000f908 g     F .text.code	000003a0 mbedtls_pem_read_buffer
-000039e4 g     F .text.itcm	00000014 _fnet_eth_release
+000036c8 g     F .text.itcm	00000014 _fnet_eth_release
 6001056c g     F .text.code	00000228 mbedtls_pkcs12_derivation
-0000ec34 g     F .text.itcm	00000068 _puts_r
-20009878 g     O .bss	00000001 ENABLE_OLED
-00001184  w    F .text.itcm	00000004 EthernetUDP::localPort()
+0000e8f8 g     F .text.itcm	00000068 _puts_r
+20009478 g     O .bss	00000001 ENABLE_OLED
+00000e68  w    F .text.itcm	00000004 EthernetUDP::localPort()
 6001c49c g     F .text.code	0000000a mbedtls_ssl_conf_min_version
-00000db4  w    F .text.itcm	0000000c IntervalTimer::~IntervalTimer()
-00005bf0 g     F .text.itcm	00000052 _fnet_netif_is_connected
-0000db1c g     F .text.itcm	00000004 operator new[](unsigned int)
+00000a98  w    F .text.itcm	0000000c IntervalTimer::~IntervalTimer()
+000058d4 g     F .text.itcm	00000052 _fnet_netif_is_connected
+0000d7e0 g     F .text.itcm	00000004 operator new[](unsigned int)
 600222fc g     F .text.code	00000002 startup_default_late_hook
 6000823c g     F .text.code	0000000a mbedtls_des_free
-00014cbc g     F .text.itcm	0000002c _lseek_r
-0000db48  w    F .text.itcm	000000f0 yield
+000148bc g     F .text.itcm	0000002c _lseek_r
+0000d80c  w    F .text.itcm	000000f0 yield
 6001c14c g     F .text.code	0000000a mbedtls_ssl_conf_ciphersuites
 60012148 g     F .text.code	000000f0 mbedtls_rsa_export_raw
-000042cc g     F .text.itcm	0000000e _fnet_ip4_will_fragment
+00003fb0 g     F .text.itcm	0000000e _fnet_ip4_will_fragment
 60003be8 g     F .text.code	0000005e mbedtls_mpi_grow
 600168f0 g     F .text.code	00001170 mbedtls_internal_sha512_process
 6000e39c g     F .text.code	00000014 mbedtls_md_starts
-2000986c g     O .bss	00000004 usb_timer1_callback
+2000946c g     O .bss	00000004 usb_timer1_callback
 6002cd50 g     O .text.progmem	00000030 mbedtls_sha256_info
 6001e084 g     F .text.code	00000018 mbedtls_ssl_md_alg_from_hash
-20005a1c g     O .data	0000000c colors
-000010f8 g     F .text.itcm	00000020 EthernetClass::linkStatus()
-0000a7cc g     F .text.itcm	0000001e Adafruit_GFX::fillScreen(unsigned short)
+2000574c g     O .data	0000000c colors
+00000ddc g     F .text.itcm	00000020 EthernetClass::linkStatus()
+0000a4b0 g     F .text.itcm	0000001e Adafruit_GFX::fillScreen(unsigned short)
 60002c20 g     F .text.code	0000004a mbedtls_asn1_get_bitstring_null
 6000ade0 g     F .text.code	00000020 mbedtls_ecp_point_init
-00007078 g     F .text.itcm	00000018 _fnet_mutex_lock
+00006d5c g     F .text.itcm	00000018 _fnet_mutex_lock
 6002fac8 g     O .text.progmem	00000018 usb_string_manufacturer_name_default
-0000a79c g     F .text.itcm	00000012 Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)
-0000169c g     F .text.itcm	000000a4 EthernetClass::socketBeginMulticast(unsigned char, IPAddress, unsigned short)
+0000a480 g     F .text.itcm	00000012 Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)
+00001380 g     F .text.itcm	000000a4 EthernetClass::socketBeginMulticast(unsigned char, IPAddress, unsigned short)
 600223e4 g     F .text.code	000003bc configure_external_ram
 600135ec g     F .text.code	0000006e mbedtls_rsa_free
-0000221c g     F .text.itcm	00000048 fnet_service_poll
-00000230  w    F .text.itcm	0000001a Print::println(Printable const&)
+00001f00 g     F .text.itcm	00000048 fnet_service_poll
+000001f8  w    F .text.itcm	0000001a Print::println(Printable const&)
 60008248 g     F .text.code	0000000a mbedtls_des3_init
 60008508 g     F .text.code	000000b8 mbedtls_des_crypt_cbc
-00006d78 g     F .text.itcm	0000003a _fnet_socket_buffer_append_record
-00005744 g     F .text.itcm	0000001c _fnet_heap_init
-000062b8 g     F .text.itcm	00000084 _fnet_socket_conflict
+00006a5c g     F .text.itcm	0000003a _fnet_socket_buffer_append_record
+00005428 g     F .text.itcm	0000001c _fnet_heap_init
+00005f9c g     F .text.itcm	00000084 _fnet_socket_conflict
 60002fcc g     F .text.code	00000024 mbedtls_asn1_write_tag
-0000a2d0 g     F .text.itcm	00000052 Adafruit_NeoPixel::setBrightness(unsigned char)
+00009fb4 g     F .text.itcm	00000052 Adafruit_NeoPixel::setBrightness(unsigned char)
 60009b48 g     F .text.code	0000000a mbedtls_ecdh_init
-0000ebf8 g     F .text.itcm	00000028 printf
+0000e8bc g     F .text.itcm	00000028 printf
 6000d274 g     F .text.code	0000000a mbedtls_gcm_init
 60002a34 g     F .text.code	0000009e mbedtls_asn1_get_len
-00014d14 g     F .text.itcm	00000054 _wcrtomb_r
+00014914 g     F .text.itcm	00000054 _wcrtomb_r
 6000b3cc g     F .text.code	00000034 mbedtls_ecp_point_cmp
 6001396c g     F .text.code	000002e0 mbedtls_rsa_self_test
-00003eec g     F .text.itcm	0000011c _fnet_icmp4_error
+00003bd0 g     F .text.itcm	0000011c _fnet_icmp4_error
 600159ac g     F .text.code	000008a2 mbedtls_internal_sha256_process
 6001c4c8 g     F .text.code	0000000e mbedtls_ssl_conf_extended_master_secret
 6001dd9c g     F .text.code	00000118 mbedtls_ssl_write_certificate
 60010a4c g     F .text.code	000001f4 mbedtls_pkcs5_pbes2
-0000da24 g     F .text.itcm	00000020 Print::println()
-00014848 g     F .text.itcm	00000020 __sseek
-00013a04 g     F .text.itcm	0000000a __sinit
-00009b10 g     F .text.itcm	00000044 Artnet::Artnet()
-00009514 g     F .text.itcm	00000050 _fnet_timer_poll
-00014a5c g     F .text.itcm	000000ac __swbuf_r
+0000d708 g     F .text.itcm	00000020 Print::println()
+000144a8 g     F .text.itcm	00000020 __sseek
+0001365c g     F .text.itcm	0000000a __sinit
+000097f4 g     F .text.itcm	00000044 Artnet::Artnet()
+000091f8 g     F .text.itcm	00000050 _fnet_timer_poll
+0001465c g     F .text.itcm	000000ac __swbuf_r
 6002d460 g     O .text.progmem	00000030 mbedtls_eckey_info
 6001f610 g     F .text.code	000001f4 mbedtls_ssl_read
 6001ce60 g     F .text.code	00000004 mbedtls_ssl_session_reset
 6001c0ec g     F .text.code	00000006 mbedtls_ssl_conf_read_timeout
 60009454 g     F .text.code	0000005a mbedtls_dhm_read_params
 600019c4 g     F .text.code	000004b0 mbedtls_internal_aes_encrypt
-20008ab0 g     O .bss	00000004 EthernetClass::stack_heap_size
-20009524 g     O .bss	00000068 oled
+200086b0 g     O .bss	00000004 EthernetClass::stack_heap_size
+20009124 g     O .bss	00000068 oled
 60026d28 g     O .text.progmem	000006ab mbedtls_test_cli_key_rsa
-00003a30 g     F .text.itcm	00000098 _fnet_eth_output_ip4
+00003714 g     F .text.itcm	00000098 _fnet_eth_output_ip4
 60004034 g     F .text.code	0000004a mbedtls_mpi_write_binary
-0000ebf4 g     F .text.itcm	00000002 __malloc_unlock
+0000e8b8 g     F .text.itcm	00000002 __malloc_unlock
 6000aeb4 g     F .text.code	00000020 mbedtls_ecp_keypair_free
 20000b18 g     O .data	00000058 vtable for Adafruit_SSD1306
-000059c4 g     F .text.itcm	00000018 fnet_netif_set_ip4_dns
+000056a8 g     F .text.itcm	00000018 fnet_netif_set_ip4_dns
 60022a60 g     F .text.code	00000058 analog_init
 60018064 g     F .text.code	0000001c mbedtls_ssl_ciphersuite_uses_ec
 6000bd18 g     F .text.code	00000070 mbedtls_ecp_muladd
 60013c4c g     F .text.code	000001fc mbedtls_rsa_deduce_primes
-00002c5c g     F .text.itcm	00000034 fnet_dhcp_cln_get_by_netif
-000110e8 g     F .text.itcm	0000004a _vdprintf_r
-00004418 g     F .text.itcm	00000068 _fnet_ip4_addr_is_broadcast
+00002940 g     F .text.itcm	00000034 fnet_dhcp_cln_get_by_netif
+000040fc g     F .text.itcm	00000068 _fnet_ip4_addr_is_broadcast
 6001c574 g     F .text.code	0000000e mbedtls_ssl_conf_renegotiation_period
 60015770 g     F .text.code	00000070 mbedtls_sha1_ret
-00005760 g     F .text.itcm	00000010 _fnet_free
+00005444 g     F .text.itcm	00000010 _fnet_free
 60002d68 g     F .text.code	000000da mbedtls_asn1_get_alg
 60029bb0 g     O .text.progmem	0000033d mbedtls_test_cli_crt_ec
 60009ddc g     F .text.code	000001b8 mbedtls_ecdsa_sign
 60029ac0 g     O .text.progmem	000000e9 mbedtls_test_cli_key_ec
 600046ac g     F .text.code	00000030 mbedtls_mpi_sub_int
 6001c54c g     F .text.code	0000000e mbedtls_ssl_conf_renegotiation
-20005330 g     O .data	00000004 F_CPU_ACTUAL
+20005060 g     O .data	00000004 F_CPU_ACTUAL
 60003298 g     F .text.code	0000005a mbedtls_asn1_write_ia5_string
-000022e4 g     F .text.itcm	0000000c fnet_service_mutex_unlock
-20009960 g     O .bss	000000ac mbedtls_cipher_supported
-0000ea8c g     F .text.itcm	000000c6 memmove
+00001fc8 g     F .text.itcm	0000000c fnet_service_mutex_unlock
+20009560 g     O .bss	000000ac mbedtls_cipher_supported
+0000e750 g     F .text.itcm	000000c6 memmove
 6001c420 g     F .text.code	0000000a mbedtls_ssl_set_hs_own_cert
 60002afc g     F .text.code	00000054 mbedtls_asn1_get_bool
-00004230 g     F .text.itcm	00000058 _fnet_ip4_init
-00005afc g     F .text.itcm	000000bc _fnet_netif_init
-0000f0f0 g     F .text.itcm	0000009c snprintf
+00003f14 g     F .text.itcm	00000058 _fnet_ip4_init
+000057e0 g     F .text.itcm	000000bc _fnet_netif_init
+0000edb4 g     F .text.itcm	0000009c snprintf
 60001660 g     F .text.code	0000000c mbedtls_aes_free
-00014180 g     F .text.itcm	0000004c _Balloc
-00014d9c g       .ARM.exidx	00000000 __exidx_end
+00013de0 g     F .text.itcm	0000004c _Balloc
+0001499c g       .ARM.exidx	00000000 __exidx_end
 600158fc g     F .text.code	00000008 mbedtls_sha256_init
 6001c110 g     F .text.code	00000008 mbedtls_ssl_conf_session_tickets_cb
-2000987c g     O .bss	00000001 EventResponder::runningFromYield
+2000947c g     O .bss	00000001 EventResponder::runningFromYield
 600273d8 g     O .text.progmem	00000517 mbedtls_test_cli_crt_rsa
 60017d90 g     F .text.code	0000004e mbedtls_sha512_ret
-000022bc g     F .text.itcm	0000001c _fnet_service_init
+00001fa0 g     F .text.itcm	0000001c _fnet_service_init
 60009658 g     F .text.code	000000cc mbedtls_dhm_make_public
 60028468 g     O .text.progmem	00000004 mbedtls_test_ca_key_rsa_len
-0000c6b4 g     F .text.itcm	00000060 tempmonGetTemp
+0000c398 g     F .text.itcm	00000060 tempmonGetTemp
 6000aed4 g     F .text.code	0000002e mbedtls_ecp_copy
 6000ddfc g     F .text.code	0000004a mbedtls_hmac_drbg_seed_buf
 200010d4 g     O .data	00000008 fnet_fec_eth_api
 6000f8fc g     F .text.code	0000000a mbedtls_pem_init
 60003c48 g     F .text.code	0000007c mbedtls_mpi_shrink
-0000d9f8 g     F .text.itcm	0000002c Print::write(unsigned char const*, unsigned int)
+0000d6dc g     F .text.itcm	0000002c Print::write(unsigned char const*, unsigned int)
 60007f64 g     F .text.code	00000080 mbedtls_cipher_auth_encrypt
-0000e3f4 g     F .text.itcm	0000000c __errno
-0000a20c g     F .text.itcm	0000002c Adafruit_NeoPixel::Adafruit_NeoPixel(unsigned short, short, unsigned short)
-2000987f g     O .bss	00000001 _fnet_is_enabled
+0000e0b8 g     F .text.itcm	0000000c __errno
+00009ef0 g     F .text.itcm	0000002c Adafruit_NeoPixel::Adafruit_NeoPixel(unsigned short, short, unsigned short)
+2000947f g     O .bss	00000001 _fnet_is_enabled
 60001000 g     O .text.headers	00000020 ImageVectorTable
-000013ac g     F .text.itcm	00000094 EthernetUDP::parsePacket()
+00001090 g     F .text.itcm	00000094 EthernetUDP::parsePacket()
 6000f5d0 g     F .text.code	00000044 mbedtls_oid_get_extended_key_usage
 60015768 g     F .text.code	00000004 mbedtls_sha1_finish
 6001c56c g     F .text.code	00000006 mbedtls_ssl_conf_renegotiation_enforced
-000059ac g     F .text.itcm	00000018 fnet_netif_set_ip4_gateway
-20008ad0 g     O .bss	00000004 EventResponder::firstInterrupt
-0000d018 g     F .text.itcm	00000004 usb_transfer_status
-0000047c g     F .text.itcm	00000030 initStrips()
-0000dfc0 g     F .text.itcm	00000090 sm_set_pool
+00005690 g     F .text.itcm	00000018 fnet_netif_set_ip4_gateway
+200086d0 g     O .bss	00000004 EventResponder::firstInterrupt
+0000ccfc g     F .text.itcm	00000004 usb_transfer_status
+00000328 g     F .text.itcm	00000030 initStrips()
+0000dc84 g     F .text.itcm	00000090 sm_set_pool
 60020d10 g     F .text.code	000006d8 mbedtls_x509_crt_info
-00003ac8 g     F .text.itcm	00000044 _fnet_eth_multicast_leave_ip4
+000037ac g     F .text.itcm	00000044 _fnet_eth_multicast_leave_ip4
 60012da8 g     F .text.code	000001b0 mbedtls_rsa_rsaes_oaep_decrypt
 60012f58 g     F .text.code	0000004c mbedtls_rsa_pkcs1_decrypt
 6000feb4 g     F .text.code	00000010 mbedtls_pk_can_do
-0000a694 g     F .text.itcm	000000e4 Adafruit_GFX::writeLine(short, short, short, short, unsigned short)
+0000a378 g     F .text.itcm	000000e4 Adafruit_GFX::writeLine(short, short, short, short, unsigned short)
 6001657c g     F .text.code	00000004 mbedtls_sha256
 60013534 g     F .text.code	00000034 mbedtls_rsa_rsassa_pss_verify
 60008a64 g     F .text.code	000000b8 mbedtls_des3_crypt_cbc
 6001231c g     F .text.code	00000068 mbedtls_rsa_check_privkey
-0000a3e4 g     F .text.itcm	00000002 TwoWire::end()
+0000a0c8 g     F .text.itcm	00000002 TwoWire::end()
 60010128 g     F .text.code	0000000a mbedtls_pk_get_type
-0000020c  w    F .text.itcm	00000024 Print::println(__FlashStringHelper const*)
-0000ba0c g     F .text.itcm	00000138 Adafruit_SSD1306::drawFastVLineInternal(short, short, short, unsigned short)
-0000db38  w    F .text.itcm	00000008 usb_serial_class::write(unsigned char const*, unsigned int)
+0000b6f0 g     F .text.itcm	00000138 Adafruit_SSD1306::drawFastVLineInternal(short, short, short, unsigned short)
+0000d7fc  w    F .text.itcm	00000008 usb_serial_class::write(unsigned char const*, unsigned int)
 6001c090 g     F .text.code	0000000e mbedtls_ssl_conf_endpoint
 60026d24 g     O .text.progmem	00000004 mbedtls_test_cli_key_rsa_len
-00014c70 g     F .text.itcm	00000028 _fstat_r
+00014870 g     F .text.itcm	00000028 _fstat_r
 20000d18 g     O .data	00000370 digital_pin_to_info_PGM
 600047e4 g     F .text.code	000001da mbedtls_mpi_read_string
-00003378 g     F .text.itcm	00000016 _fnet_arp_release
+0000305c g     F .text.itcm	00000016 _fnet_arp_release
 60003370 g     F .text.code	0000005a mbedtls_asn1_write_octet_string
-20009a2c g     O .bss	00000004 errno
+2000962c g     O .bss	00000004 errno
 6002f524 g     O .text.progmem	0000004c TwoWire::i2c3_hardware
-00014d98 g       .text.itcm	00000000 _etext
-0000a238 g     F .text.itcm	0000004e Adafruit_NeoPixel::setPixelColor(unsigned short, unsigned char, unsigned char, unsigned char)
-200088dc g       .bss	00000000 _sbss
+00014998 g       .text.itcm	00000000 _etext
+00009f1c g     F .text.itcm	0000004e Adafruit_NeoPixel::setPixelColor(unsigned short, unsigned char, unsigned char, unsigned char)
+200084dc g       .bss	00000000 _sbss
 6000eed8 g     F .text.code	00000008 mbedtls_md5_update_ret
-20009958 g     O .bss	00000004 fnet_netif_list
+20009558 g     O .bss	00000004 fnet_netif_list
 6000e3d8 g     F .text.code	0000001c mbedtls_md
 6000af04 g     F .text.code	00000006 mbedtls_ecp_group_copy
-00009f2c g     F .text.itcm	00000022 Adafruit_NeoPixel::begin()
+00009c10 g     F .text.itcm	00000022 Adafruit_NeoPixel::begin()
 600142d0 g     F .text.code	00000038 mbedtls_sha1_starts_ret
-0000b45c g     F .text.itcm	000000fc Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char)
+0000b140 g     F .text.itcm	000000fc Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char)
 60009ae0 g     F .text.code	00000004 mbedtls_ecdh_gen_public
-0000a924 g     F .text.itcm	000000a0 Adafruit_GFX::drawLine(short, short, short, short, unsigned short)
-00006ed4 g     F .text.itcm	00000020 fnet_socket_addr_is_multicast
+0000a608 g     F .text.itcm	000000a0 Adafruit_GFX::drawLine(short, short, short, short, unsigned short)
+00006bb8 g     F .text.itcm	00000020 fnet_socket_addr_is_multicast
 6001c584 g     F .text.code	0000003a mbedtls_ssl_check_pending
 60002ad4 g     F .text.code	00000028 mbedtls_asn1_get_tag
 6000a040 g     F .text.code	00000150 mbedtls_ecdsa_verify
@@ -1065,16 +1060,16 @@ SYMBOL TABLE:
 60006ccc g     F .text.code	000003dc mbedtls_camellia_self_test
 600025c0 g     F .text.code	00000004 mbedtls_aes_encrypt
 6001649c g     F .text.code	00000004 mbedtls_sha256_finish
-0000083c g     F .text.itcm	00000180 assignMAC(unsigned char*)
+00000608 g     F .text.itcm	00000108 assignMAC(unsigned char*)
 6002fb88 g       *ABS*	00000000 _stextload
 60017f4c g     F .text.code	0000007c mbedtls_ssl_list_ciphersuites
-000004ac g     F .text.itcm	0000000c loop
+00000358 g     F .text.itcm	0000000c loop
 60004124 g     F .text.code	00000080 mbedtls_mpi_shift_r
 60008f40 g     F .text.code	0000001e mbedtls_des3_set2key_enc
 60006414 g     F .text.code	0000000a mbedtls_camellia_init
 6001679c g     F .text.code	0000000a mbedtls_sha512_clone
-0000ced0 g     F .text.itcm	00000064 usb_config_rx
-000038bc g     F .text.itcm	00000090 _fnet_eth_input
+0000cbb4 g     F .text.itcm	00000064 usb_config_rx
+000035a0 g     F .text.itcm	00000090 _fnet_eth_input
 6001c34c g     F .text.code	0000003e mbedtls_ssl_conf_dh_param_ctx
 6001cca4 g     F .text.code	000000c0 mbedtls_ssl_setup
 6001cff8 g     F .text.code	00000034 mbedtls_ssl_reset_checksum
@@ -1083,235 +1078,235 @@ SYMBOL TABLE:
 60005d6c g     F .text.code	000001cc mbedtls_mpi_gen_prime
 6000ad68 g     F .text.code	00000028 mbedtls_ecp_curve_info_from_grp_id
 60003ebc g     F .text.code	00000022 mbedtls_mpi_get_bit
-00004c00 g     F .text.itcm	00000066 _fnet_ip4_getsockopt
+000048e4 g     F .text.itcm	00000066 _fnet_ip4_getsockopt
 60003fc8 g     F .text.code	0000006c mbedtls_mpi_read_binary
 600213e8 g     F .text.code	00000094 mbedtls_x509_crt_verify_info
-00009fd4 g     F .text.itcm	000001f8 Adafruit_NeoPixel::show()
-0000d83c g     F .text.itcm	00000036 IPAddress::printTo(Print&) const
+00009cb8 g     F .text.itcm	000001f8 Adafruit_NeoPixel::show()
+0000d520 g     F .text.itcm	00000036 IPAddress::printTo(Print&) const
 6001c250 g     F .text.code	00000078 mbedtls_ssl_set_hs_psk
 600164a4 g     F .text.code	000000d8 mbedtls_sha256_ret
 6002147c g     F .text.code	00000012 mbedtls_x509_crt_check_key_usage
 600031d8 g     F .text.code	00000062 mbedtls_asn1_write_int
 600142b0 g     F .text.code	00000008 mbedtls_sha1_init
-0000aa60 g     F .text.itcm	00000034 Adafruit_GFX::Adafruit_GFX(short, short)
+0000a744 g     F .text.itcm	00000034 Adafruit_GFX::Adafruit_GFX(short, short)
 20200010 g     O .bss.dma	00000004 EthernetClass::socket_addr
 6002a328 g     O .text.progmem	00000004 mbedtls_test_ca_key_ec_len
-200062c0 g     O NonCacheable	0000261c fnet_fec0_buf
-0000a53c g     F .text.itcm	000000e0 TwoWire::endTransmission(unsigned char)
+20005ec0 g     O NonCacheable	0000261c fnet_fec0_buf
+0000a220 g     F .text.itcm	000000e0 TwoWire::endTransmission(unsigned char)
 60014194 g     F .text.code	0000011c mbedtls_rsa_validate_crt
 60007964 g     F .text.code	00000028 mbedtls_cipher_info_from_values
-0000b208 g     F .text.itcm	00000018 Adafruit_SSD1306::~Adafruit_SSD1306()
+0000aeec g     F .text.itcm	00000018 Adafruit_SSD1306::~Adafruit_SSD1306()
 60002b50 g     F .text.code	0000006a mbedtls_asn1_get_int
 6001cea8 g     F .text.code	000000a8 mbedtls_ssl_free
 6002081c g     F .text.code	0000004c mbedtls_x509_get_serial
-20008acc g     O .bss	00000004 EventResponder::lastInterrupt
+200086cc g     O .bss	00000004 EventResponder::lastInterrupt
 60025f7c g     O .text.progmem	00000da7 mbedtls_test_cas_pem
-0000bec8 g     F .text.itcm	00000134 memcpy
+0000bbac g     F .text.itcm	00000134 memcpy
 6001caa4 g     F .text.code	0000008e mbedtls_ssl_handshake_free
 6001572c g     F .text.code	00000034 mbedtls_sha1_starts
 6001576c g     F .text.code	00000004 mbedtls_sha1_process
 6001c310 g     F .text.code	0000003c mbedtls_ssl_conf_dh_param_bin
-00000da8 g     F .text.itcm	0000000c EthernetClass::timer_get_ms()
+00000a8c g     F .text.itcm	0000000c EthernetClass::timer_get_ms()
 60007914 g     F .text.code	0000002c mbedtls_cipher_info_from_string
 60003750 g     F .text.code	000000d0 mbedtls_base64_self_test
-00013908 g     F .text.itcm	0000000c _cleanup_r
-0000fb78 g     F .text.itcm	00001570 _svfprintf_r
+00013560 g     F .text.itcm	0000000c _cleanup_r
+0000f838 g     F .text.itcm	00001570 _svfprintf_r
 6001c0d0 g     F .text.code	00000006 mbedtls_ssl_conf_dbg
-20009854 g     O .bss	00000004 systick_millis_count
+20009454 g     O .bss	00000004 systick_millis_count
 6000df30 g     F .text.code	000000b8 mbedtls_hmac_drbg_random_with_add
-20005c64 g     O .data	00000024 fnet_udp_prot_if
-0000a500 g     F .text.itcm	0000003c TwoWire::wait_idle()
-000057ac g     F .text.itcm	00000004 _fnet_malloc_max_netbuf
-0000e060 g     F .text.itcm	00000000 .hidden __aeabi_uldivmod
-0000b558 g     F .text.itcm	00000494 Adafruit_SSD1306::begin(unsigned char, unsigned char, bool, bool)
-0000340c g     F .text.itcm	0000014c _fnet_arp_input
-0000ec9c g     F .text.itcm	00000010 puts
-20009889 g     O .bss	00000001 usb_configuration
-00001b1c g     F .text.itcm	00000080 fnet_cpu_isr_install
-0000df70 g     F .text.itcm	00000050 sm_align_pool
+20005994 g     O .data	00000024 fnet_udp_prot_if
+0000a1e4 g     F .text.itcm	0000003c TwoWire::wait_idle()
+00005490 g     F .text.itcm	00000004 _fnet_malloc_max_netbuf
+0000dd24 g     F .text.itcm	00000000 .hidden __aeabi_uldivmod
+0000b23c g     F .text.itcm	00000494 Adafruit_SSD1306::begin(unsigned char, unsigned char, bool, bool)
+000030f0 g     F .text.itcm	0000014c _fnet_arp_input
+20009489 g     O .bss	00000001 usb_configuration
+0000e960 g     F .text.itcm	00000010 puts
+00001800 g     F .text.itcm	00000080 fnet_cpu_isr_install
+0000dc34 g     F .text.itcm	00000050 sm_align_pool
 60000000 g     O .text.headers	00000200 FlexSPI_NOR_Config
 0000007c g     F .text.itcm	0000012c onDmxFrame(unsigned short, unsigned short, unsigned char, unsigned char*)
-0000318c g     F .text.itcm	00000054 fnet_link_init
+00002e70 g     F .text.itcm	00000054 fnet_link_init
 6001c688 g     F .text.code	0000004c mbedtls_ssl_get_max_frag_len
-2000995c g     O .bss	00000004 fnet_netif_default
+2000955c g     O .bss	00000004 fnet_netif_default
 20001094 g     O .data	00000006 fnet_eth_null_addr
 6002fac8  w    O .text.progmem	00000018 usb_string_manufacturer_name
 60029fe4 g     O .text.progmem	0000032d mbedtls_test_srv_crt_ec
-00009bb0 g     F .text.itcm	000002f4 Artnet::read()
-00005770 g     F .text.itcm	00000010 _fnet_malloc
+00009894 g     F .text.itcm	000002f4 Artnet::read()
+00005454 g     F .text.itcm	00000010 _fnet_malloc
 600085c0 g     F .text.code	000004a4 mbedtls_des3_crypt_ecb
-00002264 g     F .text.itcm	00000040 fnet_service_register
-0000e46c g     F .text.itcm	00000010 malloc
-0000b220 g     F .text.itcm	0000009e Adafruit_SSD1306::ssd1306_command1(unsigned char)
+00001f48 g     F .text.itcm	00000040 fnet_service_register
+0000e130 g     F .text.itcm	00000010 malloc
+0000af04 g     F .text.itcm	0000009e Adafruit_SSD1306::ssd1306_command1(unsigned char)
 600074c8 g     F .text.code	0000006a mbedtls_ccm_star_auth_decrypt
 6002f570 g     O .text.progmem	0000004c TwoWire::i2c1_hardware
-000057bc g     F .text.itcm	00000028 _fnet_netif_drain
-0000c694  w    F .text.itcm	0000000a _fstat
-00005ccc g     F .text.itcm	00000034 fnet_netif_get_by_scope_id
-0000a33c  w    F .text.itcm	0000001e TwoWire::read()
+000054a0 g     F .text.itcm	00000028 _fnet_netif_drain
+0000c378  w    F .text.itcm	0000000a _fstat
+000059b0 g     F .text.itcm	00000034 fnet_netif_get_by_scope_id
+0000a020  w    F .text.itcm	0000001e TwoWire::read()
 20200008 g     O .bss.dma	00000004 EthernetClass::socket_buf_len
 200002a8 g     O .data	000000c8 __mprec_tens
 60022920 g     F .text.code	000000ec usb_init
 60025f78 g     O .text.progmem	00000004 mbedtls_test_cas_pem_len
 6000adb8 g     F .text.code	00000028 mbedtls_ecp_curve_info_from_name
 6001c740 g     F .text.code	00000008 mbedtls_ssl_config_init
-000071f4 g     F .text.itcm	00000010 fnet_memset_zero
-0000664c g     F .text.itcm	0000005c fnet_socket_close
-0000a7ec g     F .text.itcm	00000002 Adafruit_GFX::invertDisplay(bool)
+00006ed8 g     F .text.itcm	00000010 fnet_memset_zero
+00006330 g     F .text.itcm	0000005c fnet_socket_close
+0000a4d0 g     F .text.itcm	00000002 Adafruit_GFX::invertDisplay(bool)
 600018a4 g     F .text.code	00000120 mbedtls_aes_setkey_dec
 6000ae50 g     F .text.code	00000062 mbedtls_ecp_group_free
 6001d490 g     F .text.code	00000034 mbedtls_ssl_update_handshake_status
 6001c490 g     F .text.code	0000000a mbedtls_ssl_conf_max_version
-20008b38 g     O .bss	00000004 __malloc_top_pad
-000057e4 g     F .text.itcm	00000024 fnet_netif_get_by_number
-2000958c g     O .bss	00000004 previousDataLength
+20008738 g     O .bss	00000004 __malloc_top_pad
+000054c8 g     F .text.itcm	00000024 fnet_netif_get_by_number
+2000918c g     O .bss	00000004 previousDataLength
 6001385c g     F .text.code	0000010e mbedtls_rsa_copy
-00007278 g     F .text.itcm	0000001a fnet_strcpy
-0000a20c g     F .text.itcm	0000002c Adafruit_NeoPixel::Adafruit_NeoPixel(unsigned short, short, unsigned short)
-20009a0c g     O .bss	00000004 systick_safe_read
-20008ac0 g     O .bss	00000004 EthernetServer::tls_socket_ptr
-00004390 g     F .text.itcm	00000018 _fnet_ip4_release
-0000a3e8 g     F .text.itcm	00000118 TwoWire::force_clock()
-00005a28 g     F .text.itcm	00000016 fnet_netif_get_ip4_addr_type
+00006f5c g     F .text.itcm	0000001a fnet_strcpy
+00009ef0 g     F .text.itcm	0000002c Adafruit_NeoPixel::Adafruit_NeoPixel(unsigned short, short, unsigned short)
+2000960c g     O .bss	00000004 systick_safe_read
+200086c0 g     O .bss	00000004 EthernetServer::tls_socket_ptr
+00004074 g     F .text.itcm	00000018 _fnet_ip4_release
+0000a0cc g     F .text.itcm	00000118 TwoWire::force_clock()
+0000570c g     F .text.itcm	00000016 fnet_netif_get_ip4_addr_type
 600129bc g     F .text.code	00000100 mbedtls_rsa_rsaes_pkcs1_v15_encrypt
 aaaaaabf g       *ABS*	00000000 _flexram_bank_config
 60016580 g     F .text.code	00000204 mbedtls_sha256_self_test
-20005328 g     O .data	00000000 .hidden __dso_handle
-00005780 g     F .text.itcm	00000020 _fnet_malloc_zero
-00009f50 g     F .text.itcm	00000034 Adafruit_NeoPixel::updateLength(unsigned short)
-00013fdc g     F .text.itcm	0000001c _localeconv_r
+20005058 g     O .data	00000000 .hidden __dso_handle
+00005464 g     F .text.itcm	00000020 _fnet_malloc_zero
+00009c34 g     F .text.itcm	00000034 Adafruit_NeoPixel::updateLength(unsigned short)
+00013c34 g     F .text.itcm	0000001c _localeconv_r
 60007464 g     F .text.code	00000036 mbedtls_ccm_encrypt_and_tag
 6000f384 g     F .text.code	00000044 mbedtls_oid_get_attr_short_name
-00006878 g     F .text.itcm	00000110 fnet_socket_setopt
-00009b54 g     F .text.itcm	00000040 Artnet::begin(unsigned char*, unsigned char*)
+0000655c g     F .text.itcm	00000110 fnet_socket_setopt
+00009838 g     F .text.itcm	00000040 Artnet::begin(unsigned char*, unsigned char*)
 6001c448 g     F .text.code	00000040 mbedtls_ssl_conf_alpn_protocols
-000142fc g     F .text.itcm	00000012 __i2b
-00013c84 g     F .text.itcm	00000304 __sfvwrite_r
+00013f5c g     F .text.itcm	00000012 __i2b
+000138dc g     F .text.itcm	00000304 __sfvwrite_r
 60002e44 g     F .text.code	00000032 mbedtls_asn1_get_alg_null
 600068c8 g     F .text.code	000000c0 mbedtls_camellia_setkey_dec
 20000000 g       .data	00000000 _sdata
 6002fb30 g     O .text.progmem	0000004b usb_config_descriptor_480
-0000e090 g     F .text.itcm	000002e2 .hidden __udivmoddi4
+0000dd54 g     F .text.itcm	000002e2 .hidden __udivmoddi4
 60020598 g     F .text.code	00000284 mbedtls_x509_get_time
 60016408 g     F .text.code	0000008c mbedtls_sha256_starts
-0000f0cc g     F .text.itcm	00000024 _sbrk_r
+0000ed90 g     F .text.itcm	00000024 _sbrk_r
 600278f0 g     O .text.progmem	00000004 mbedtls_test_srv_key_rsa_len
-00006b9c g     F .text.itcm	000000c8 fnet_socket
+00006880 g     F .text.itcm	000000c8 fnet_socket
 60016494 g     F .text.code	00000006 mbedtls_sha256_update
 600222f4 g     F .text.code	00000002 startup_default_early_hook
 60003f6c g     F .text.code	0000004e mbedtls_mpi_bitlen
-00001180  w    F .text.itcm	00000004 EthernetUDP::remotePort()
+00000e64  w    F .text.itcm	00000004 EthernetUDP::remotePort()
 6000a36c g     F .text.code	00000004 mbedtls_ecdsa_free
-000070e0 g     F .text.itcm	00000102 fnet_memcpy
-0000b0c0 g     F .text.itcm	000000e8 Adafruit_SSD1306::drawPixel(short, short, unsigned short)
-2000987b g     O .bss	00000001 EthernetClass::link_status
+00006dc4 g     F .text.itcm	00000102 fnet_memcpy
+0000ada4 g     F .text.itcm	000000e8 Adafruit_SSD1306::drawPixel(short, short, unsigned short)
+2000947b g     O .bss	00000001 EthernetClass::link_status
 60001428 g     F .text.code	0000022c ResetHandler
-0000d67c g     F .text.itcm	00000020 usb_serial_getchar
+0000d360 g     F .text.itcm	00000020 usb_serial_getchar
 600122d0 g     F .text.code	0000004c mbedtls_rsa_check_pubkey
-00004d40 g     F .text.itcm	0000004c _fnet_isr_handler
-20009a20 g     O .bss	00000008 usb_cdc_line_coding
+00004a24 g     F .text.itcm	0000004c _fnet_isr_handler
+20009620 g     O .bss	00000008 usb_cdc_line_coding
 6002ccf0 g     O .text.progmem	00000030 mbedtls_sha512_info
-00005888 g     F .text.itcm	00000030 fnet_netif_is_initialized
-000022f0 g     F .text.itcm	00000024 _fnet_dhcp_add_option
+0000556c g     F .text.itcm	00000030 fnet_netif_is_initialized
+00001fd4 g     F .text.itcm	00000024 _fnet_dhcp_add_option
 6002a498 g     O .text.progmem	00000004 mbedtls_test_ca_crt_ec_len
-0000c43c g     F .text.itcm	0000000a digitalWrite
-00001740 g     F .text.itcm	0000008c EthernetClass::socketRecv(unsigned char, unsigned char*, short)
-0000bc14 g     F .text.itcm	000002b4 Adafruit_SSD1306::display()
-20008ad4 g     O .bss	00000004 EventResponder::lastYield
+0000c120 g     F .text.itcm	0000000a digitalWrite
+00001424 g     F .text.itcm	0000008c EthernetClass::socketRecv(unsigned char, unsigned char*, short)
+0000b8f8 g     F .text.itcm	000002b4 Adafruit_SSD1306::display()
+200086d4 g     O .bss	00000004 EventResponder::lastYield
 60016790 g     F .text.code	0000000a mbedtls_sha512_free
-20009858 g     O .bss	00000006 teensyMAC
-00014ce8 g     F .text.itcm	0000002c _read_r
+20009458 g     O .bss	00000006 teensyMAC
+000148e8 g     F .text.itcm	0000002c _read_r
 6000efe4 g     F .text.code	00000006 mbedtls_md5_update
 6001fc68 g     F .text.code	00000114 mbedtls_ssl_parse_finished
 6000f548 g     F .text.code	00000044 mbedtls_oid_get_md_alg
-00007250 g     F .text.itcm	00000028 fnet_strnlen
-00006f08 g     F .text.itcm	00000016 fnet_socket_addr_is_unspecified
+00006f34 g     F .text.itcm	00000028 fnet_strnlen
+00006bec g     F .text.itcm	00000016 fnet_socket_addr_is_unspecified
 6000be6c g     F .text.code	000000c8 mbedtls_ecp_check_pub_priv
 600046dc g     F .text.code	00000106 mbedtls_mpi_mul_mpi
-00014b2c g     F .text.itcm	00000084 _fclose_r
-000031e0 g     F .text.itcm	00000020 fnet_tls_socket_close
-20009a10 g     O .bss	00000010 extmem_smalloc_pool
-20005c40 g     O .data	00000024 fnet_tcp_prot_if
-20008b30 g     O .bss	00000004 __malloc_max_sbrked_mem
-00004978 g     F .text.itcm	00000280 _fnet_ip4_output
-0000570c g     F .text.itcm	00000036 _fnet_netbuf_queue_del
+0001472c g     F .text.itcm	00000084 _fclose_r
+00002ec4 g     F .text.itcm	00000020 fnet_tls_socket_close
+20009610 g     O .bss	00000010 extmem_smalloc_pool
+20005970 g     O .data	00000024 fnet_tcp_prot_if
+20008730 g     O .bss	00000004 __malloc_max_sbrked_mem
+0000465c g     F .text.itcm	00000280 _fnet_ip4_output
+000053f0 g     F .text.itcm	00000036 _fnet_netbuf_queue_del
 6000af0c g     F .text.code	0000002a mbedtls_ecp_set_zero
 2000108c g     O .data	00000006 fnet_eth_broadcast
-0000c448 g     F .text.itcm	00000080 pinMode
+0000c12c g     F .text.itcm	00000080 pinMode
 60009920 g     F .text.code	0000005c mbedtls_dhm_free
-000070a8 g     F .text.itcm	0000001c _fnet_stack_mutex_lock
+00006d8c g     F .text.itcm	0000001c _fnet_stack_mutex_lock
 60007fe4 g     F .text.code	00000088 mbedtls_cipher_auth_decrypt
-0000135c g     F .text.itcm	00000050 EthernetUDP::beginMulticast(IPAddress, unsigned short)
-00004f20 g     F .text.itcm	00000014 fnet_isr_init
-00001800 g     F .text.itcm	0000001c EthernetClass::socketPeek(unsigned char)
+00001040 g     F .text.itcm	00000050 EthernetUDP::beginMulticast(IPAddress, unsigned short)
+00004c04 g     F .text.itcm	00000014 fnet_isr_init
+000014e4 g     F .text.itcm	0000001c EthernetClass::socketPeek(unsigned char)
 6001d56c g     F .text.code	000005b8 mbedtls_ssl_write_record
 6001fbb8 g     F .text.code	000000b0 mbedtls_ssl_parse_change_cipher_spec
 60003bb0 g     F .text.code	0000000e mbedtls_mpi_init
 60008b1c g     F .text.code	00000368 mbedtls_des_setkey
-6004d400 g     O .text.csf	00000c00 hab_csf
+6004cc00 g     O .text.csf	00000c00 hab_csf
 60010794 g     F .text.code	000001b4 mbedtls_pkcs12_pbe
 60003f30 g     F .text.code	0000003c mbedtls_mpi_lsb
-00006988 g     F .text.itcm	000001bc fnet_socket_getopt
+0000666c g     F .text.itcm	000001bc fnet_socket_getopt
 20280000 g       .text.csf	00000000 _heap_end
 6000f510 g     F .text.code	00000038 mbedtls_oid_get_oid_by_sig_alg
 20200014 g     O .bss.dma	00000004 EthernetClass::socket_buf_index
-000050cc g     F .text.itcm	00000098 _fnet_netbuf_new
+00004db0 g     F .text.itcm	00000098 _fnet_netbuf_new
 60007994 g     F .text.code	00000020 mbedtls_cipher_free
-00014d94 g       .ARM.exidx	00000000 __exidx_start
+00014994 g       .ARM.exidx	00000000 __exidx_start
 70000000 g       .bss.extram	00000000 _extram_end
-000057a0 g     F .text.itcm	0000000c _fnet_malloc_max
-000059f4 g     F .text.itcm	0000000c _fnet_netif_get_default
+00005484 g     F .text.itcm	0000000c _fnet_malloc_max
+000056d8 g     F .text.itcm	0000000c _fnet_netif_get_default
 60012070 g     F .text.code	000000d8 mbedtls_rsa_export
 600116f4 g     F .text.code	00000248 mbedtls_pk_parse_key
-0000c6a0  w    F .text.itcm	00000004 _isatty
-00001190 g     F .text.itcm	00000018 EthernetUDP::write(unsigned char)
-20008ac8 g     O .bss	00000004 EventResponder::firstYield
+0000c384  w    F .text.itcm	00000004 _isatty
+00000e74 g     F .text.itcm	00000018 EthernetUDP::write(unsigned char)
+200086c8 g     O .bss	00000004 EventResponder::firstYield
 6000f274 g     F .text.code	000000cc mbedtls_oid_get_numeric_string
 6000de48 g     F .text.code	00000076 mbedtls_hmac_drbg_reseed
 20000cf4 g     O .data	00000004 _global_impure_ptr
-0000542c g     F .text.itcm	00000044 _fnet_netbuf_free_chain
+00005110 g     F .text.itcm	00000044 _fnet_netbuf_free_chain
 6001e074 g     F .text.code	0000000e mbedtls_ssl_pk_alg_from_sig
-0000a7b0 g     F .text.itcm	00000018 Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)
+0000a494 g     F .text.itcm	00000018 Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)
 60012c4c g     F .text.code	0000015c mbedtls_rsa_rsaes_pkcs1_v15_decrypt
-0000ecec g     F .text.itcm	000003de _realloc_r
-0000e400 g     F .text.itcm	00000050 __libc_init_array
-0000a330  w    F .text.itcm	0000000c TwoWire::available()
+0000e9b0 g     F .text.itcm	000003de _realloc_r
+0000e0c4 g     F .text.itcm	00000050 __libc_init_array
+0000a014  w    F .text.itcm	0000000c TwoWire::available()
 6000fdfc g     F .text.code	0000001e mbedtls_pk_free
 60017de4 g     F .text.code	00000168 mbedtls_sha512_self_test
 600122cc g     F .text.code	00000004 mbedtls_rsa_get_len
-0000555c g     F .text.itcm	0000015e _fnet_netbuf_cut_center
+00005240 g     F .text.itcm	0000015e _fnet_netbuf_cut_center
 60010114 g     F .text.code	00000014 mbedtls_pk_get_name
-00001294 g     F .text.itcm	0000000a EthernetUDP::endPacket(unsigned int)
+00000f78 g     F .text.itcm	0000000a EthernetUDP::endPacket(unsigned int)
 60002000 g     F .text.code	000004dc mbedtls_internal_aes_decrypt
-0000598c g     F .text.itcm	0000001e fnet_netif_set_ip4_addr
-00014c48 g     F .text.itcm	00000026 _fputwc_r
+00005670 g     F .text.itcm	0000001e fnet_netif_set_ip4_addr
+00014848 g     F .text.itcm	00000026 _fputwc_r
 600045dc g     F .text.code	0000004e mbedtls_mpi_add_mpi
 20000280 g     O .data	00000028 __mprec_bigtens
-00005a5c g     F .text.itcm	00000030 _fnet_netif_get_hw_addr
-00004288 g     F .text.itcm	00000044 _fnet_ip4_route
+00005740 g     F .text.itcm	00000030 _fnet_netif_get_hw_addr
+00003f6c g     F .text.itcm	00000044 _fnet_ip4_route
 60017de0 g     F .text.code	00000004 mbedtls_sha512
 60021528 g     F .text.code	00000410 mbedtls_x509_crt_verify_with_profile
-0000db20  w    F .text.itcm	00000004 usb_serial_class::clear()
+0000d7e4  w    F .text.itcm	00000004 usb_serial_class::clear()
 6001c51c g     F .text.code	0000000e mbedtls_ssl_conf_truncated_hmac
-0000c658 g     F .text.itcm	00000030 _sbrk
-60044924 g       *ABS*	00000000 _sdataload
-00014590 g     F .text.itcm	00000042 __mcmp
+0000c33c g     F .text.itcm	00000030 _sbrk
+60044524 g       *ABS*	00000000 _sdataload
+000141f0 g     F .text.itcm	00000042 __mcmp
 6001c16c g     F .text.code	00000006 mbedtls_ssl_conf_ca_chain
 6000eff0 g     F .text.code	00000004 mbedtls_md5_process
-00004318 g     F .text.itcm	00000034 _fnet_ip4_input
+00003ffc g     F .text.itcm	00000034 _fnet_ip4_input
 60003190 g     F .text.code	00000048 mbedtls_asn1_write_bool
-20005494 g     O .data	00000004 __brkval
-20009888 g     O .bss	00000001 usb_cdc_line_rtsdtr
+200051c4 g     O .data	00000004 __brkval
+20009488 g     O .bss	00000001 usb_cdc_line_rtsdtr
 6000dd58 g     F .text.code	00000004 mbedtls_hmac_drbg_set_entropy_len
-20005c1c g     O .data	00000024 fnet_raw_prot_if
+2000594c g     O .data	00000024 fnet_raw_prot_if
 6000dd54 g     F .text.code	00000004 mbedtls_hmac_drbg_set_prediction_resistance
 60022ab8 g     F .text.code	00000000 _init
 6000f40c g     F .text.code	00000044 mbedtls_oid_get_oid_by_pk_alg
-0000d3c0 g     F .text.itcm	00000002 usb_serial_reset
+0000d0a4 g     F .text.itcm	00000002 usb_serial_reset
 60006988 g     F .text.code	00000190 mbedtls_camellia_crypt_ecb
 60010050 g     F .text.code	0000002c mbedtls_pk_decrypt
 6000900c g     F .text.code	00000020 mbedtls_des3_set3key_dec
-00004e68 g     F .text.itcm	00000010 fnet_isr_lock
+00004b4c g     F .text.itcm	00000010 fnet_isr_lock
 6000d280 g     F .text.code	0000015e mbedtls_gcm_setkey
 60022120 g     F .text.code	00000100 mbedtls_x509_crt_parse
 60028454 g     O .text.progmem	00000004 mbedtls_test_ca_pwd_rsa_len
@@ -1319,16 +1314,16 @@ aaaaaabf g       *ABS*	00000000 _flexram_bank_config
 6000be20 g     F .text.code	0000001a mbedtls_ecp_gen_keypair
 6001c084 g     F .text.code	0000000a mbedtls_ssl_init
 60003018 g     F .text.code	00000078 mbedtls_asn1_write_mpi
-000012a0 g     F .text.itcm	00000018 EthernetUDP::write(unsigned char const*, unsigned int)
+00000f84 g     F .text.itcm	00000018 EthernetUDP::write(unsigned char const*, unsigned int)
 6001e05c g     F .text.code	00000018 mbedtls_ssl_sig_from_pk_alg
 20000a68 g     O .data	00000058 vtable for EthernetUDP
-00001118 g     F .text.itcm	0000001c EthernetClass::localIP()
+00000dfc g     F .text.itcm	0000001c EthernetClass::localIP()
 6000462c g     F .text.code	0000004e mbedtls_mpi_sub_mpi
 2000109c g     O .data	00000038 fnet_fec_api
 6001c5cc g     F .text.code	00000014 mbedtls_ssl_get_verify_result
 6001c174 g     F .text.code	00000004 mbedtls_ssl_conf_own_cert
 6001c440 g     F .text.code	00000006 mbedtls_ssl_conf_sni
-00001098 g     F .text.itcm	00000034 EthernetClass::begin(unsigned char*, IPAddress, IPAddress)
+00000d7c g     F .text.itcm	00000034 EthernetClass::begin(unsigned char*, IPAddress, IPAddress)
 6000e394 g     F .text.code	00000006 mbedtls_md_get_name
 6002fae4 g     O .text.progmem	0000004b usb_config_descriptor_12
 60021a3c g     F .text.code	000006e4 mbedtls_x509_crt_parse_der
@@ -1336,225 +1331,225 @@ aaaaaabf g       *ABS*	00000000 _flexram_bank_config
 20000b98 g     O .data	00000024 vtable for TwoWire
 6001336c g     F .text.code	000001c8 mbedtls_rsa_rsassa_pss_verify_ext
 6001c398 g     F .text.code	00000004 mbedtls_ssl_conf_sig_hashes
-0000633c g     F .text.itcm	000000f8 _fnet_socket_lookup
-20009a60 g       .bss	00000000 _ebss
+00006020 g     F .text.itcm	000000f8 _fnet_socket_lookup
+20009660 g       .bss	00000000 _ebss
 60009724 g     F .text.code	000001fc mbedtls_dhm_calc_secret
-0000a778 g     F .text.itcm	0000000e Adafruit_GFX::writePixel(short, short, unsigned short)
-00004d8c g     F .text.itcm	00000044 _fnet_isr_vector_init
+0000a45c g     F .text.itcm	0000000e Adafruit_GFX::writePixel(short, short, unsigned short)
+00004a70 g     F .text.itcm	00000044 _fnet_isr_vector_init
 60009c48 g     F .text.code	0000004c mbedtls_ecdh_get_params
-00006290 g     F .text.itcm	00000028 _fnet_socket_list_del
-0000aebc g     F .text.itcm	00000134 Adafruit_GFX::write(unsigned char)
+00005f74 g     F .text.itcm	00000028 _fnet_socket_list_del
+0000aba0 g     F .text.itcm	00000134 Adafruit_GFX::write(unsigned char)
 60002bbc g     F .text.code	00000062 mbedtls_asn1_get_bitstring
 6001dcd8 g     F .text.code	0000009c mbedtls_ssl_write
-00005808 g     F .text.itcm	00000030 _fnet_netif_get_by_sockaddr
-200095dc g     O .bss	00000060 strips
+000054ec g     F .text.itcm	00000030 _fnet_netif_get_by_sockaddr
+200091dc g     O .bss	00000060 strips
 600033cc g     F .text.code	000000b4 mbedtls_asn1_store_named_data
-00004f78 g     F .text.itcm	0000007c _fnet_mempool_free
+00004c5c g     F .text.itcm	0000007c _fnet_mempool_free
 600200b0 g     F .text.code	00000004 mbedtls_x509_time_is_past
 6000f614 g     F .text.code	00000044 mbedtls_oid_get_oid_by_md
 6000d3e0 g     F .text.code	0000018a mbedtls_gcm_starts
-000058b8 g     F .text.itcm	000000d4 _fnet_netif_set_ip4_addr
-00009508 g     F .text.itcm	0000000c fnet_timer_get_ms
-00014260 g     F .text.itcm	00000040 __hi0bits
+0000559c g     F .text.itcm	000000d4 _fnet_netif_set_ip4_addr
+000091ec g     F .text.itcm	0000000c fnet_timer_get_ms
+00013ec0 g     F .text.itcm	00000040 __hi0bits
 60028458 g     O .text.progmem	0000000d mbedtls_test_ca_pwd_rsa
-00002f00 g     F .text.itcm	00000096 _fnet_dns_get_rr_name
+00002be4 g     F .text.itcm	00000096 _fnet_dns_get_rr_name
 60012c0c g     F .text.code	00000040 mbedtls_rsa_pkcs1_encrypt
 60012fa4 g     F .text.code	000000f0 mbedtls_rsa_rsassa_pkcs1_v15_sign
 6000f340 g     F .text.code	00000044 mbedtls_oid_get_x509_ext_type
-0000e378 g     F .text.itcm	00000010 calloc
+0000e03c g     F .text.itcm	00000010 calloc
 6000b4d8 g     F .text.code	00000074 mbedtls_ecp_point_read_binary
-0000bb44 g     F .text.itcm	00000068 Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)
+0000b828 g     F .text.itcm	00000068 Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)
 20203080 g       .bss.dma	00000000 _heap_start
-00000dc0 g     F .text.itcm	00000070 EthernetClass::link_callback(void*, fnet_bool_t, void*)
+00000aa4 g     F .text.itcm	00000070 EthernetClass::link_callback(void*, fnet_bool_t, void*)
 6001c5f0 g     F .text.code	00000048 mbedtls_ssl_get_version
-00006e5c g     F .text.itcm	00000078 _fnet_socket_buffer_read_address
-000072fc g     F .text.itcm	00000024 fnet_rand
-00005d80 g     F .text.itcm	0000003c _fnet_prot_release
-0000024c g     F .text.itcm	00000026 initDebugLeds()
-00001338 g     F .text.itcm	00000024 EthernetUDP::peek()
+00006b40 g     F .text.itcm	00000078 _fnet_socket_buffer_read_address
+00006fe0 g     F .text.itcm	00000024 fnet_rand
+00005a64 g     F .text.itcm	0000003c _fnet_prot_release
+00000214 g     F .text.itcm	00000026 initDebugLeds()
+0000101c g     F .text.itcm	00000024 EthernetUDP::peek()
 60007404 g     F .text.code	0000004a mbedtls_ccm_setkey
 6000fca8 g     F .text.code	00000026 mbedtls_pem_free
 6000323c g     F .text.code	0000005a mbedtls_asn1_write_printable_string
 6001c6d4 g     F .text.code	0000000a mbedtls_ssl_get_peer_cert
-00003844 g     F .text.itcm	0000002e _fnet_checksum_pseudo_netbuf_start
+00003528 g     F .text.itcm	0000002e _fnet_checksum_pseudo_netbuf_start
 6002f4d8 g     O .text.progmem	0000004c TwoWire::i2c4_hardware
-00009f84 g     F .text.itcm	00000050 Adafruit_NeoPixel::updateType(unsigned short)
+00009c68 g     F .text.itcm	00000050 Adafruit_NeoPixel::updateType(unsigned short)
 60001ef8 g     F .text.code	00000094 mbedtls_aes_crypt_cfb8
 60003e84 g     F .text.code	00000038 mbedtls_mpi_lset
 6000e638 g     F .text.code	0000000a mbedtls_md5_free
-000147a4 g     F .text.itcm	00000042 _putc_r
+00014404 g     F .text.itcm	00000042 _putc_r
 6000fcd0 g     F .text.code	00000108 mbedtls_pem_write_buffer
 6001c0c0 g     F .text.code	00000006 mbedtls_ssl_conf_verify
 00000003 g       *ABS*	00000000 _itcm_block_count
 6001804c g     F .text.code	00000016 mbedtls_ssl_get_ciphersuite_sig_alg
 60007e68 g     F .text.code	0000003c mbedtls_cipher_write_tag
-00006864 g     F .text.itcm	00000012 fnet_socket_recv
+00006548 g     F .text.itcm	00000012 fnet_socket_recv
 600208c4 g     F .text.code	000000c4 mbedtls_x509_sig_alg_gets
-200098a0 g     O .bss	00000020 endpoint0_transfer_data
+200094a0 g     O .bss	00000020 endpoint0_transfer_data
 60019de8 g     F .text.code	00000008 mbedtls_ssl_conf_dtls_cookies
-0000dc88 g     F .text.itcm	000002b8 pwm_init
-00003558 g     F .text.itcm	000000a4 _fnet_arp_send_request
-00001218 g     F .text.itcm	00000060 EthernetUDP::beginPacket(char const*, unsigned short)
+0000d94c g     F .text.itcm	000002b8 pwm_init
+0000323c g     F .text.itcm	000000a4 _fnet_arp_send_request
+00000efc g     F .text.itcm	00000060 EthernetUDP::beginPacket(char const*, unsigned short)
 6000f58c g     F .text.code	00000044 mbedtls_oid_get_md_hmac
-000011cc g     F .text.itcm	0000004c EthernetUDP::begin(unsigned short)
+00000eb0 g     F .text.itcm	0000004c EthernetUDP::begin(unsigned short)
 6000b400 g     F .text.code	0000002e mbedtls_ecp_point_read_string
-00005ca8 g     F .text.itcm	00000010 _fnet_netif_signal_ip4_addr_conflict
+0000598c g     F .text.itcm	00000010 _fnet_netif_signal_ip4_addr_conflict
 600123c0 g     F .text.code	0000008c mbedtls_rsa_public
 6000a32c g     F .text.code	0000003c mbedtls_ecdsa_from_keypair
-00003b0c g     F .text.itcm	00000044 _fnet_eth_multicast_join_ip4
+000037f0 g     F .text.itcm	00000044 _fnet_eth_multicast_join_ip4
 6001e260 g     F .text.code	00000134 mbedtls_ssl_write_finished
-0000a788 g     F .text.itcm	00000012 Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)
+0000a46c g     F .text.itcm	00000012 Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)
 6000be3c g     F .text.code	0000002e mbedtls_ecp_gen_key
 6000ff20 g     F .text.code	000000c8 mbedtls_pk_verify_ext
 600073fc g     F .text.code	00000008 mbedtls_ccm_init
 600227a0 g     F .text.code	00000064 usb_pll_start
-00014440 g     F .text.itcm	000000a0 __pow5mult
-20008b50 g     O .bss	00000360 artnet
+000140a0 g     F .text.itcm	000000a0 __pow5mult
+20008750 g     O .bss	00000360 artnet
 60004e08 g     F .text.code	0000002e mbedtls_mpi_div_int
-00004f34 g     F .text.itcm	0000003a _fnet_mempool_init
+00004c18 g     F .text.itcm	0000003a _fnet_mempool_init
 60013f94 g     F .text.code	00000200 mbedtls_rsa_validate_params
 6001e9d4 g     F .text.code	000000dc mbedtls_ssl_dtls_replay_check
 60027fa0 g     O .text.progmem	00000004 mbedtls_test_srv_crt_rsa_len
-20009864 g     O .bss	00000001 universesReceived
+20009464 g     O .bss	00000001 universesReceived
 60007450 g     F .text.code	00000014 mbedtls_ccm_free
-00006244 g     F .text.itcm	00000014 _fnet_socket_init
-000035fc g     F .text.itcm	0000009c _fnet_arp_resolve
+00005f28 g     F .text.itcm	00000014 _fnet_socket_init
+000032e0 g     F .text.itcm	0000009c _fnet_arp_resolve
 60007a0c g     F .text.code	00000048 mbedtls_cipher_setkey
-0000210c g     F .text.itcm	00000094 fnet_fec_multicast_join
+00001df0 g     F .text.itcm	00000094 fnet_fec_multicast_join
 60017d8c g     F .text.code	00000004 mbedtls_sha512_process
-0000409c g     F .text.itcm	0000004c _fnet_ip_queue_append
+00003d80 g     F .text.itcm	0000004c _fnet_ip_queue_append
 00000000  w      *UND*	00000000 __deregister_frame_info
 6001ca4c g     F .text.code	0000001c mbedtls_ssl_sig_hash_set_add
-200098c0 g     O .bss	00000020 endpoint0_transfer_ack
-20009a28 g     O .bss	00000004 usb_cdc_line_rtsdtr_millis
+20009628 g     O .bss	00000004 usb_cdc_line_rtsdtr_millis
+200094c0 g     O .bss	00000020 endpoint0_transfer_ack
 6000fea4 g     F .text.code	00000010 mbedtls_pk_get_bitlen
-0000cfcc g     F .text.itcm	00000028 usb_transmit
+0000ccb0 g     F .text.itcm	00000028 usb_transmit
 6002a32c g     O .text.progmem	0000016a mbedtls_test_ca_key_ec
+000001d4  w    F .text.itcm	00000024 Print::println(char const*)
 60018020 g     F .text.code	0000002c mbedtls_ssl_get_ciphersuite_sig_pk_alg
-000056f4 g     F .text.itcm	00000016 _fnet_netbuf_queue_add
-000051f0 g     F .text.itcm	00000034 _fnet_netbuf_free
-0000d81c g     F .text.itcm	00000020 systick_isr
-00006f20 g     F .text.itcm	0000000c fnet_socket_addr_are_equal
+000053d8 g     F .text.itcm	00000016 _fnet_netbuf_queue_add
+00004ed4 g     F .text.itcm	00000034 _fnet_netbuf_free
+0000d500 g     F .text.itcm	00000020 systick_isr
+00006c04 g     F .text.itcm	0000000c fnet_socket_addr_are_equal
 600049c0 g     F .text.code	0000001c mbedtls_mpi_mul_int
 6001ca38 g     F .text.code	00000014 mbedtls_ssl_sig_hash_set_find
 60005120 g     F .text.code	0000039a mbedtls_mpi_exp_mod
-0000704c g     F .text.itcm	0000000e fnet_poll
-00005a00 g     F .text.itcm	00000014 fnet_netif_get_ip4_addr
+00006d30 g     F .text.itcm	0000000e fnet_poll
+000056e4 g     F .text.itcm	00000014 fnet_netif_get_ip4_addr
 6001c394 g     F .text.code	00000004 mbedtls_ssl_conf_curves
 60003d84 g     F .text.code	0000007e mbedtls_mpi_safe_cond_assign
-00006f60 g     F .text.itcm	000000ec fnet_init
-00003ba8 g     F .text.itcm	0000003a _fnet_eth_is_connected
-20005338 g     O .data	00000010 Serial
+00006c44 g     F .text.itcm	000000ec fnet_init
+0000388c g     F .text.itcm	0000003a _fnet_eth_is_connected
+20005068 g     O .data	00000010 Serial
 6000166c g     F .text.code	00000238 mbedtls_aes_setkey_enc
 600162d4 g     F .text.code	00000132 mbedtls_sha256_finish_ret
-00006490 g     F .text.itcm	0000003c _fnet_socket_copy
+00006174 g     F .text.itcm	0000003c _fnet_socket_copy
 60007b74 g     F .text.code	000001f4 mbedtls_cipher_update
 6000ad24 g     F .text.code	00000008 mbedtls_ecp_curve_list
 6000e2c4 g     F .text.code	0000000a mbedtls_md_init
 600094b0 g     F .text.code	00000138 mbedtls_dhm_make_params
-00005cb8 g     F .text.itcm	00000014 fnet_netif_get_scope_id
-0000434c g     F .text.itcm	00000044 _fnet_ip4_drain
-0000db40  w    F .text.itcm	00000006 usb_serial_class::write(unsigned char)
+0000599c g     F .text.itcm	00000014 fnet_netif_get_scope_id
+00004030 g     F .text.itcm	00000044 _fnet_ip4_drain
+0000d804  w    F .text.itcm	00000006 usb_serial_class::write(unsigned char)
 60018090 g     F .text.code	00000038 mbedtls_ssl_get_ciphersuite_name
 600222f4  w    F .text.code	00000002 startup_early_hook
 6000f69c g     F .text.code	00000050 mbedtls_oid_get_pkcs12_pbe_alg
 6000e650 g     F .text.code	00000030 mbedtls_md5_starts_ret
 6000eee0 g     F .text.code	000000d8 mbedtls_md5_finish_ret
-0000d5b8 g     F .text.itcm	00000044 usb_serial_peekchar
+0000d29c g     F .text.itcm	00000044 usb_serial_peekchar
 60011b5c g     F .text.code	00000010 mbedtls_platform_zeroize
 600157e4 g     F .text.code	00000118 mbedtls_sha1_self_test
 6000bd88 g     F .text.code	00000098 mbedtls_ecp_gen_keypair_base
 600041a4 g     F .text.code	000000c0 mbedtls_mpi_cmp_abs
 6000fec4 g     F .text.code	0000005c mbedtls_pk_verify
-00013a10 g     F .text.itcm	00000002 __sfp_lock_acquire
-000140e0 g     F .text.itcm	00000000 memchr
-00005dbc g     F .text.itcm	00000044 _fnet_prot_find
+00013668 g     F .text.itcm	00000002 __sfp_lock_acquire
+00013d40 g     F .text.itcm	00000000 memchr
+00005aa0 g     F .text.itcm	00000044 _fnet_prot_find
 60012384 g     F .text.code	0000003c mbedtls_rsa_check_pub_priv
-0000bffc g     F .text.itcm	000002c4 set_arm_clock
+0000bce0 g     F .text.itcm	000002c4 set_arm_clock
 60005f38 g     F .text.code	00000444 mbedtls_mpi_self_test
-20009850 g     O .bss	00000004 systick_cycle_count
-20005cd8 g     O .data	00000016 usb_string_serial_number_default
-00013ab4 g     F .text.itcm	000001d0 _free_r
-00005a8c g     F .text.itcm	00000020 fnet_netif_get_hw_addr
+20009450 g     O .bss	00000004 systick_cycle_count
+20005a08 g     O .data	00000016 usb_string_serial_number_default
+0001370c g     F .text.itcm	000001d0 _free_r
+00005770 g     F .text.itcm	00000020 fnet_netif_get_hw_addr
 6002a49c g     O .text.progmem	00000373 mbedtls_test_ca_crt_ec
-000018fc g     F .text.itcm	00000084 EthernetClass::socketSendUDP(unsigned char, unsigned int)
-0000e450 g     F .text.itcm	0000001c __locale_mb_cur_max
+000015e0 g     F .text.itcm	00000084 EthernetClass::socketSendUDP(unsigned char, unsigned int)
+0000e114 g     F .text.itcm	0000001c __locale_mb_cur_max
 6001e124 g     F .text.code	00000026 mbedtls_ssl_check_sig_hash
-00001b10 g     F .text.itcm	0000000c fnet_cpu_isr
+000017f4 g     F .text.itcm	0000000c fnet_cpu_isr
 600032f4 g     F .text.code	0000007a mbedtls_asn1_write_bitstring
 6000ae30 g     F .text.code	00000020 mbedtls_ecp_point_free
 6001db80 g     F .text.code	00000034 mbedtls_ssl_send_alert_message
 60017d80 g     F .text.code	00000006 mbedtls_sha512_update
-0000db30  w    F .text.itcm	00000004 usb_serial_class::flush()
-00002b70 g     F .text.itcm	000000dc fnet_dhcp_cln_init
+0000d7f4  w    F .text.itcm	00000004 usb_serial_class::flush()
+00002854 g     F .text.itcm	000000dc fnet_dhcp_cln_init
 6001c9e4 g     F .text.code	00000034 mbedtls_ssl_set_session
-20005488 g     O .data	00000008 EthernetClass::_fnet_poll
-00000da0 g     F .text.itcm	00000004 EthernetClass::teensy_mutex_init(void**)
+200051b8 g     O .data	00000008 EthernetClass::_fnet_poll
+00000a84 g     F .text.itcm	00000004 EthernetClass::teensy_mutex_init(void**)
 600079b4 g     F .text.code	00000058 mbedtls_cipher_setup
 60004444 g     F .text.code	00000030 mbedtls_mpi_cmp_int
-20005a0c g     O .data	00000004 __malloc_sbrk_base
-0000db28  w    F .text.itcm	00000004 usb_serial_class::read()
+2000573c g     O .data	00000004 __malloc_sbrk_base
+0000d7ec  w    F .text.itcm	00000004 usb_serial_class::read()
 600214e8 g     F .text.code	00000040 mbedtls_x509_crt_is_revoked
-000052d8 g     F .text.itcm	00000154 _fnet_netbuf_copy
+00004fbc g     F .text.itcm	00000154 _fnet_netbuf_copy
 600167a8 g     F .text.code	00000148 mbedtls_sha512_starts_ret
-0000f954 g     F .text.itcm	0000021e strstr
-00005070 g     F .text.itcm	0000005a _fnet_mempool_malloc_max
+0000f614 g     F .text.itcm	0000021e strstr
+00004d54 g     F .text.itcm	0000005a _fnet_mempool_malloc_max
 6000b654 g     F .text.code	000001b0 mbedtls_ecp_check_pubkey
-000064cc g     F .text.itcm	00000180 fnet_socket_connect
-000072a4 g     F .text.itcm	00000058 fnet_strtok_r
+000061b0 g     F .text.itcm	00000180 fnet_socket_connect
+00006f88 g     F .text.itcm	00000058 fnet_strtok_r
 60029abc g     O .text.progmem	00000004 mbedtls_test_cli_key_ec_len
-0000a8c0 g     F .text.itcm	00000064 Adafruit_GFX::fillRect(short, short, short, short, unsigned short)
-0000ecac g     F .text.itcm	00000040 rand
+0000a5a4 g     F .text.itcm	00000064 Adafruit_GFX::fillRect(short, short, short, short, unsigned short)
+0000e970 g     F .text.itcm	00000040 rand
 60010948 g     F .text.code	00000104 mbedtls_pkcs5_pbkdf2_hmac
-0000c6a4  w    F .text.itcm	00000006 _lseek
-0000c6ac  w    F .text.itcm	00000004 __cxa_pure_virtual
+0000c388  w    F .text.itcm	00000006 _lseek
+0000c390  w    F .text.itcm	00000004 __cxa_pure_virtual
 6001cf7c g     F .text.code	0000007c mbedtls_ssl_handshake_wrapup
-00006f38 g     F .text.itcm	00000026 _fnet_socket_addr_route
-000144e0 g     F .text.itcm	000000ae __lshift
+00006c1c g     F .text.itcm	00000026 _fnet_socket_addr_route
+00014140 g     F .text.itcm	000000ae __lshift
 60021964 g     F .text.code	000000d8 mbedtls_x509_crt_free
-0000cf9c g     F .text.itcm	0000002e usb_prepare_transfer
-0000c4c8 g     F .text.itcm	00000190 unused_interrupt_vector
+0000cc80 g     F .text.itcm	0000002e usb_prepare_transfer
+0000c1ac g     F .text.itcm	00000190 unused_interrupt_vector
 60004ebc g     F .text.code	0000003c mbedtls_mpi_mod_int
-00014870 g     F .text.itcm	00000100 __ssprint_r
-20009868 g     O .bss	00000004 usb_timer0_callback
+000144d0 g     F .text.itcm	00000100 __ssprint_r
+20009468 g     O .bss	00000004 usb_timer0_callback
 60022804 g     F .text.code	0000011c tempmon_init
-00000d00 g     F .text.itcm	00000006 DNSClient::begin(IPAddress const&)
+000009e4 g     F .text.itcm	00000006 DNSClient::begin(IPAddress const&)
 6002959c g     O .text.progmem	00000004 mbedtls_test_ca_crt_rsa_len
-00014970 g     F .text.itcm	0000005e _vasnprintf_r
-0000e050  w    F .text.itcm	00000002 serialEvent()
+0000dd14  w    F .text.itcm	00000002 serialEvent()
 20000bbc g     O .data	0000000c vtable for IPAddress
-00006270 g     F .text.itcm	00000020 _fnet_socket_list_add
-00012944 g     F .text.itcm	000000a4 __register_exitproc
-00003874 g     F .text.itcm	0000002e _fnet_checksum_pseudo_netbuf_end
+00005f54 g     F .text.itcm	00000020 _fnet_socket_list_add
+0001259c g     F .text.itcm	000000a4 __register_exitproc
+00003558 g     F .text.itcm	0000002e _fnet_checksum_pseudo_netbuf_end
 6000f658 g     F .text.code	00000044 mbedtls_oid_get_cipher_alg
 60009c20 g     F .text.code	00000028 mbedtls_ecdh_read_params
-000043a8 g     F .text.itcm	0000005c _fnet_ip4_multicast_join
+0000408c g     F .text.itcm	0000005c _fnet_ip4_multicast_join
 60013094 g     F .text.code	000001ac mbedtls_rsa_rsassa_pss_sign
 6001c4d8 g     F .text.code	0000000e mbedtls_ssl_conf_cert_req_ca_list
 60003cc4 g     F .text.code	0000008a mbedtls_mpi_copy
 6001c5e0 g     F .text.code	00000010 mbedtls_ssl_get_ciphersuite
-0000d608 g     F .text.itcm	00000074 usb_serial_flush_input
-20008aa4 g     O .bss	00000004 EthernetClass::socket_ptr
-20008ac4 g     O .bss	00000004 EthernetServer::_tls
+0000d2ec g     F .text.itcm	00000074 usb_serial_flush_input
+200086a4 g     O .bss	00000004 EthernetClass::socket_ptr
+200086c4 g     O .bss	00000004 EthernetServer::_tls
 6001e790 g     F .text.code	00000084 mbedtls_ssl_handle_message_type
-00014310 g     F .text.itcm	00000130 __multiply
-0000d69c g     F .text.itcm	0000002c usb_serial_putchar
+00013f70 g     F .text.itcm	00000130 __multiply
+0000d380 g     F .text.itcm	0000002c usb_serial_putchar
 6001c38c g     F .text.code	00000006 mbedtls_ssl_conf_dhm_min_bitlen
-00001188 g     F .text.itcm	00000006 EthernetUDP::available()
+00000e6c g     F .text.itcm	00000006 EthernetUDP::available()
 00000025 g       *ABS*	00000000 _teensy_model_identifier
-20008b08 g     O .bss	00000028 __malloc_current_mallinfo
+20008708 g     O .bss	00000028 __malloc_current_mallinfo
 60008fec g     F .text.code	0000001e mbedtls_des3_set3key_enc
-000146e8 g     F .text.itcm	000000ba __d2b
+00014348 g     F .text.itcm	000000ba __d2b
 6000a368 g     F .text.code	00000004 mbedtls_ecdsa_init
 20001088 g     O .data	00000004 fnet_dhcp_magic_cookie
 60010c40 g     F .text.code	00000118 mbedtls_pkcs5_self_test
-0000a7c8 g     F .text.itcm	00000002 Adafruit_GFX::endWrite()
+0000a4ac g     F .text.itcm	00000002 Adafruit_GFX::endWrite()
 60009f94 g     F .text.code	000000ac mbedtls_ecdsa_sign_det
-20008ad8 g     O .bss	00000020 HardwareSerial::s_serials_with_serial_events
+200086d8 g     O .bss	00000020 HardwareSerial::s_serials_with_serial_events
 6001c0a0 g     F .text.code	0000000e mbedtls_ssl_conf_transport
 60022a0c g     F .text.code	00000054 _reboot_Teensyduino_
-00009b10 g     F .text.itcm	00000044 Artnet::Artnet()
-0000d8dc g     F .text.itcm	000000c0 IntervalTimer::beginCycles(void (*)(), unsigned long)
+000097f4 g     F .text.itcm	00000044 Artnet::Artnet()
+0000d5c0 g     F .text.itcm	000000c0 IntervalTimer::beginCycles(void (*)(), unsigned long)
 6001ebcc g     F .text.code	000009e0 mbedtls_ssl_read_record_layer
 60008e84 g     F .text.code	0000000a mbedtls_des_setkey_enc
 600222f8 g     F .text.code	00000002 startup_default_middle_hook
@@ -1566,123 +1561,123 @@ aaaaaabf g       *ABS*	00000000 _flexram_bank_config
 60014308 g     F .text.code	000012b2 mbedtls_internal_sha1_process
 60009ce8 g     F .text.code	00000030 mbedtls_ecdh_read_public
 6001c2d0 g     F .text.code	00000040 mbedtls_ssl_conf_dh_param
-0000c87c g     F .text.itcm	00000654 usb_isr
-0000e3e8 g     F .text.itcm	0000000c __cxa_atexit
+0000c560 g     F .text.itcm	00000654 usb_isr
+0000e0ac g     F .text.itcm	0000000c __cxa_atexit
 60009630 g     F .text.code	00000028 mbedtls_dhm_read_public
-00000668 g     F .text.itcm	000001d4 inititateArtnet(unsigned char*, unsigned char*)
-000012b8 g     F .text.itcm	00000038 EthernetUDP::read()
+000004a4 g     F .text.itcm	00000164 inititateArtnet(unsigned char*, unsigned char*)
+00000f9c g     F .text.itcm	00000038 EthernetUDP::read()
 60002ee0 g     F .text.code	000000ec mbedtls_asn1_write_len
-00014b08 g     F .text.itcm	00000024 _close_r
+00014708 g     F .text.itcm	00000024 _close_r
 6001c5c0 g     F .text.code	0000000c mbedtls_ssl_get_bytes_avail
 6000e4e0 g     F .text.code	00000028 mbedtls_md_hmac_update
-0000b000 g     F .text.itcm	00000022 Adafruit_GFX::setFont(GFXfont const*)
+0000ace4 g     F .text.itcm	00000022 Adafruit_GFX::setFont(GFXfont const*)
 6000b5b0 g     F .text.code	00000058 mbedtls_ecp_tls_read_group
-00003824 g     F .text.itcm	0000001e _fnet_checksum_netbuf
-00001170  w    F .text.itcm	00000010 EthernetUDP::remoteIP()
+00003508 g     F .text.itcm	0000001e _fnet_checksum_netbuf
+00000e54  w    F .text.itcm	00000010 EthernetUDP::remoteIP()
 60004080 g     F .text.code	000000a4 mbedtls_mpi_shift_l
-00005a40 g     F .text.itcm	0000001a fnet_netif_set_ip4_addr_type
-00007090 g     F .text.itcm	00000018 _fnet_mutex_unlock
-0000ab74 g     F .text.itcm	0000001a Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)
+00005724 g     F .text.itcm	0000001a fnet_netif_set_ip4_addr_type
+00006d74 g     F .text.itcm	00000018 _fnet_mutex_unlock
+0000a858 g     F .text.itcm	0000001a Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)
 60004360 g     F .text.code	000000e2 mbedtls_mpi_cmp_mpi
-0000b2c0 g     F .text.itcm	0000019c Adafruit_SSD1306::invertDisplay(bool)
+0000afa4 g     F .text.itcm	0000019c Adafruit_SSD1306::invertDisplay(bool)
 6001ca18 g     F .text.code	00000020 mbedtls_ssl_get_session
-0000ea28 g     F .text.itcm	00000062 memcmp
+0000e6ec g     F .text.itcm	00000062 memcmp
 20000b70  w    O .data	00000028 vtable for usb_serial_class
-00005184 g     F .text.itcm	0000006a _fnet_netbuf_to_buf
+00004e68 g     F .text.itcm	0000006a _fnet_netbuf_to_buf
 6001ca68 g     F .text.code	00000006 mbedtls_ssl_sig_hash_set_const_hash
 6000d65c g     F .text.code	0000011c mbedtls_gcm_finish
 6000cfe0 g     F .text.code	00000110 mbedtls_ecp_group_load
-000036b4 g     F .text.itcm	0000002a _fnet_arp_drain
-00003b7c g     F .text.itcm	0000002a _fnet_eth_phy_write
+00003398 g     F .text.itcm	0000002a _fnet_arp_drain
+00003860 g     F .text.itcm	0000002a _fnet_eth_phy_write
 600025c8 g     F .text.code	0000046c mbedtls_aes_self_test
 600030d0 g     F .text.code	0000005a mbedtls_asn1_write_oid
 6000b430 g     F .text.code	000000a8 mbedtls_ecp_point_write_binary
-200095d8 g     O .bss	00000004 scale_cpu_cycles_to_microseconds
+200091d8 g     O .bss	00000004 scale_cpu_cycles_to_microseconds
 6001e0fc g     F .text.code	00000026 mbedtls_ssl_check_curve
 6000997c g     F .text.code	00000100 mbedtls_dhm_parse_dhm
-0001287c g     F .text.itcm	000000c8 __swsetup_r
+000124d4 g     F .text.itcm	000000c8 __swsetup_r
 60013568 g     F .text.code	00000084 mbedtls_rsa_pkcs1_verify
 6000f4d8 g     F .text.code	00000020 mbedtls_oid_get_sig_alg
 6001c178 g     F .text.code	000000d8 mbedtls_ssl_conf_psk
 60004474 g     F .text.code	000000d8 mbedtls_mpi_add_abs
-0000e374  w    F .text.itcm	00000002 .hidden __aeabi_ldiv0
+0000e038  w    F .text.itcm	00000002 .hidden __aeabi_ldiv0
 60009b9c g     F .text.code	00000084 mbedtls_ecdh_make_params
-00006b44 g     F .text.itcm	00000026 _fnet_socket_buffer_release
+00006828 g     F .text.itcm	00000026 _fnet_socket_buffer_release
 20000ac0 g     O .data	00000058 vtable for Adafruit_GFX
-00000e38 g     F .text.itcm	00000218 EthernetClass::begin(unsigned char*, IPAddress, IPAddress, IPAddress, IPAddress)
-0000a86c g     F .text.itcm	00000054 Adafruit_GFX::drawFastHLine(short, short, short, unsigned short)
+00000b1c g     F .text.itcm	00000218 EthernetClass::begin(unsigned char*, IPAddress, IPAddress, IPAddress, IPAddress)
+0000a550 g     F .text.itcm	00000054 Adafruit_GFX::drawFastHLine(short, short, short, unsigned short)
 60018080 g     F .text.code	0000000e mbedtls_ssl_ciphersuite_uses_psk
-20005aa8 g     O .data	00000034 fnet_fec0_if
+200057d8 g     O .data	00000034 fnet_fec0_if
 60009ae4 g     F .text.code	00000064 mbedtls_ecdh_compute_shared
 6000a2f8 g     F .text.code	00000032 mbedtls_ecdsa_genkey
 60011eb0 g     F .text.code	00000074 mbedtls_rsa_import_raw
 60029ef0 g     O .text.progmem	00000004 mbedtls_test_srv_key_ec_len
 6000749c g     F .text.code	0000002c mbedtls_ccm_star_encrypt_and_tag
-20005604 g     O .data	00000408 __malloc_av_
-20008aac g     O .bss	00000004 EthernetClass::stack_heap_ptr
+20005334 g     O .data	00000408 __malloc_av_
+200086ac g     O .bss	00000004 EthernetClass::stack_heap_ptr
 60004e38 g     F .text.code	00000082 mbedtls_mpi_mod_mpi
 6000e61c g     F .text.code	00000014 mbedtls_md_process
 60020988 g     F .text.code	00000028 mbedtls_x509_key_size_helper
-000147e8 g     F .text.itcm	00000022 __sread
+00014448 g     F .text.itcm	00000022 __sread
 6000e304 g     F .text.code	00000048 mbedtls_md_setup
-20005a3c g     O .data	00000004 fixedIP
+2000576c g     O .data	00000004 fixedIP
 6001e394 g     F .text.code	0000004c mbedtls_ssl_recv_flight_completed
 6000a190 g     F .text.code	000000aa mbedtls_ecdsa_write_signature
 60021938 g     F .text.code	00000020 mbedtls_x509_crt_verify
 6001e1dc g     F .text.code	00000014 mbedtls_ssl_write_version
 60029bac g     O .text.progmem	00000004 mbedtls_test_cli_crt_ec_len
-0000d730 g     F .text.itcm	000000a4 usb_serial_flush_output
-0000ebf0 g     F .text.itcm	00000002 __malloc_lock
+0000d414 g     F .text.itcm	000000a4 usb_serial_flush_output
+0000e8b4 g     F .text.itcm	00000002 __malloc_lock
 6001193c g     F .text.code	000000f4 mbedtls_pk_parse_subpubkey
-000056bc g     F .text.itcm	00000038 _fnet_netbuf_concat
+000053a0 g     F .text.itcm	00000038 _fnet_netbuf_concat
 60007ea4 g     F .text.code	00000068 mbedtls_cipher_check_tag
 6001e224 g     F .text.code	0000003a mbedtls_ssl_send_flight_completed
 20001174 g     O .data	00000004 mbedtls_test_cli_crt_len
-00009b94 g     F .text.itcm	0000001a Artnet::setBroadcast(unsigned char*)
+00009878 g     F .text.itcm	0000001a Artnet::setBroadcast(unsigned char*)
 6000dffc g     F .text.code	00000018 mbedtls_hmac_drbg_free
-20006000 g     O .data	000002c0 _VectorsRam
-20005cf2 g     O .data	00000001 sendFrame
-00006778 g     F .text.itcm	00000012 fnet_socket_send
-0000a288 g     F .text.itcm	00000048 Adafruit_NeoPixel::fill(unsigned long, unsigned short, unsigned short)
-000138dc g     F .text.itcm	0000002c _fflush_r
-00005d24 g     F .text.itcm	0000005c _fnet_prot_init
-0000e388 g     F .text.itcm	0000005e _calloc_r
+20005c00 g     O .data	000002c0 _VectorsRam
+20005a22 g     O .data	00000001 sendFrame
+0000645c g     F .text.itcm	00000012 fnet_socket_send
+00009f6c g     F .text.itcm	00000048 Adafruit_NeoPixel::fill(unsigned long, unsigned short, unsigned short)
+00013534 g     F .text.itcm	0000002c _fflush_r
+00005a08 g     F .text.itcm	0000005c _fnet_prot_init
+0000e04c g     F .text.itcm	0000005e _calloc_r
 60007f0c g     F .text.code	00000058 mbedtls_cipher_crypt
 6001c0c8 g     F .text.code	00000006 mbedtls_ssl_conf_rng
 6001007c g     F .text.code	0000002c mbedtls_pk_encrypt
 600057d8 g     F .text.code	00000214 mbedtls_mpi_gcd
-00000a88 g     F .text.itcm	00000230 SPIClass::begin()
-00005c7c g     F .text.itcm	0000002c _fnet_netif_release_all
-00005164 g     F .text.itcm	00000020 _fnet_netbuf_from_buf
-000038b0 g     F .text.itcm	0000000c fnet_error_set
-20005cf3 g     O .data	00000001 yield_active_check_flags
+0000076c g     F .text.itcm	00000230 SPIClass::begin()
+00005960 g     F .text.itcm	0000002c _fnet_netif_release_all
+00004e48 g     F .text.itcm	00000020 _fnet_netbuf_from_buf
+00003594 g     F .text.itcm	0000000c fnet_error_set
+20005a23 g     O .data	00000001 yield_active_check_flags
 6000e3c4 g     F .text.code	00000014 mbedtls_md_finish
-2000988a g     O .bss	00000001 usb_high_speed
-00007294 g     F .text.itcm	0000000e fnet_tolower
+2000948a g     O .bss	00000001 usb_high_speed
+00006f78 g     F .text.itcm	0000000e fnet_tolower
 6001c144 g     F .text.code	00000008 mbedtls_ssl_conf_session_cache
 60015910 g     F .text.code	0000000a mbedtls_sha256_clone
 6000bc50 g     F .text.code	0000004c mbedtls_ecp_mul
-00006434 g     F .text.itcm	0000005c _fnet_socket_get_uniqueport
+00006118 g     F .text.itcm	0000005c _fnet_socket_get_uniqueport
 6000dd60 g     F .text.code	0000009a mbedtls_hmac_drbg_update
 6000902c g     F .text.code	0000037c mbedtls_des_self_test
 6001c120 g     F .text.code	0000000e mbedtls_ssl_conf_dtls_anti_replay
-0000eb54 g     F .text.itcm	0000009a memset
+0000e818 g     F .text.itcm	0000009a memset
 6000e200 g     F .text.code	00000008 mbedtls_md_list
-000039fc g     F .text.itcm	00000032 _fnet_eth_change_addr_notify
+000036e0 g     F .text.itcm	00000032 _fnet_eth_change_addr_notify
 6000ffe8 g     F .text.code	00000068 mbedtls_pk_sign
 6001c138 g     F .text.code	0000000a mbedtls_ssl_conf_handshake_timeout
-0000db0c g     F .text.itcm	00000010 main
-0000a814 g     F .text.itcm	00000058 Adafruit_GFX::drawFastVLine(short, short, short, unsigned short)
-200098e0 g     O .bss	00000078 fnet_ip4_multicast_list
-00001524 g     F .text.itcm	00000178 EthernetClass::socketBegin(unsigned char, unsigned short)
-00002020 g     F .text.itcm	000000ec fnet_fec_output
+0000d7d0 g     F .text.itcm	00000010 main
+0000a4f8 g     F .text.itcm	00000058 Adafruit_GFX::drawFastVLine(short, short, short, unsigned short)
+200094e0 g     O .bss	00000078 fnet_ip4_multicast_list
+00001208 g     F .text.itcm	00000178 EthernetClass::socketBegin(unsigned char, unsigned short)
+00001d04 g     F .text.itcm	000000ec fnet_fec_output
 60006be0 g     F .text.code	00000082 mbedtls_camellia_crypt_cfb128
 20001170 g     O .data	00000004 mbedtls_test_ca_crt_len
-20008b34 g     O .bss	00000004 __malloc_max_total_mem
+20008734 g     O .bss	00000004 __malloc_max_total_mem
 6001e0b0 g     F .text.code	0000004c mbedtls_ssl_set_calc_verify_md
 600278f4 g     O .text.progmem	000006ab mbedtls_test_srv_key_rsa
-000039c0 g     F .text.itcm	00000024 _fnet_eth_init
-000039f8 g     F .text.itcm	00000004 _fnet_eth_drain
+000036a4 g     F .text.itcm	00000024 _fnet_eth_init
+000036dc g     F .text.itcm	00000004 _fnet_eth_drain
 20200020 g     O .bss.dma	0000004b usb_descriptor_buffer
 6001244c g     F .text.code	00000570 mbedtls_rsa_private
 60017fc8 g     F .text.code	0000002c mbedtls_ssl_ciphersuite_from_string
@@ -1692,59 +1687,59 @@ aaaaaabf g       *ABS*	00000000 _flexram_bank_config
 60009c94 g     F .text.code	00000054 mbedtls_ecdh_make_public
 60017af8 g     F .text.code	00000282 mbedtls_sha512_finish_ret
 6001c94c g     F .text.code	00000028 mbedtls_ssl_session_free
-000017cc g     F .text.itcm	00000034 EthernetClass::socketRecvAvailable(unsigned char)
+000014b0 g     F .text.itcm	00000034 EthernetClass::socketRecvAvailable(unsigned char)
 6000e38c g     F .text.code	00000006 mbedtls_md_get_type
-00014868 g     F .text.itcm	00000008 __sclose
+000144c8 g     F .text.itcm	00000008 __sclose
 6001c52c g     F .text.code	0000000e mbedtls_ssl_conf_cbc_record_splitting
-0000d01c g     F .text.itcm	00000058 usb_init_serialnumber
-0000a7c8 g     F .text.itcm	00000002 Adafruit_GFX::startWrite()
+0000cd00 g     F .text.itcm	00000058 usb_init_serialnumber
+0000a4ac g     F .text.itcm	00000002 Adafruit_GFX::startWrite()
 6000f4f8 g     F .text.code	00000018 mbedtls_oid_get_sig_alg_desc
 6000d778 g     F .text.code	0000004e mbedtls_gcm_crypt_and_tag
 60015904 g     F .text.code	0000000a mbedtls_sha256_free
 60006420 g     F .text.code	0000000c mbedtls_camellia_free
 60022b84 g       .text.code	00000000 __init_array_end
-00012b10 g     F .text.itcm	00000c84 _dtoa_r
-0000e48c g     F .text.itcm	00000570 _malloc_r
-2000987d g     O .bss	00000001 HardwareSerial::s_count_serials_with_serial_events
+00012768 g     F .text.itcm	00000c84 _dtoa_r
+0000e150 g     F .text.itcm	00000570 _malloc_r
+2000947d g     O .bss	00000001 HardwareSerial::s_count_serials_with_serial_events
 6001d02c g     F .text.code	00000464 mbedtls_ssl_derive_keys
-00012834 g     F .text.itcm	0000001a __ascii_wctomb
-00006048 g     F .text.itcm	00000188 _fnet_raw_input
-20005334 g     O .data	00000002 SSD1306_ADDRESSES
+0001248c g     F .text.itcm	0000001a __ascii_wctomb
+00005d2c g     F .text.itcm	00000188 _fnet_raw_input
+20005064 g     O .data	00000002 SSD1306_ADDRESSES
 6000d7c8 g     F .text.code	00000070 mbedtls_gcm_auth_decrypt
 60020868 g     F .text.code	0000005c mbedtls_x509_get_ext
 20000be0  w    O .data	00000010 SPIClass::beginTransaction(SPISettings)::clk_sel
 6000ae0c g     F .text.code	00000024 mbedtls_ecp_keypair_init
 6000e508 g     F .text.code	0000006c mbedtls_md_hmac_finish
 60001654 g     F .text.code	0000000a mbedtls_aes_init
-20005a40 g     O .data	0000005c fnet_cpu_eth0_if
-0000c38c g     F .text.itcm	00000064 micros
-000042dc g     F .text.itcm	0000003a _fnet_ip4_set_socket_addr
+20005770 g     O .data	0000005c fnet_cpu_eth0_if
+0000c070 g     F .text.itcm	00000064 micros
+00003fc0 g     F .text.itcm	0000003a _fnet_ip4_set_socket_addr
 6000798c g     F .text.code	00000008 mbedtls_cipher_init
 6000fdd8 g     F .text.code	00000018 mbedtls_pk_info_from_type
-00006ef4 g     F .text.itcm	00000012 _fnet_socket_addr_is_broadcast
+00006bd8 g     F .text.itcm	00000012 _fnet_socket_addr_is_broadcast
 600180c8 g     F .text.code	0000000c mbedtls_ssl_get_ciphersuite_id
-00004c68 g     F .text.itcm	000000d6 _fnet_ip4_setsockopt
-00001168  w    F .text.itcm	00000006 EthernetUDP::read(char*, unsigned int)
+0000494c g     F .text.itcm	000000d6 _fnet_ip4_setsockopt
+00000e4c  w    F .text.itcm	00000006 EthernetUDP::read(char*, unsigned int)
 600201b0 g     F .text.code	0000010c mbedtls_x509_get_name
 600164a0 g     F .text.code	00000004 mbedtls_sha256_process
-0000a61c g     F .text.itcm	00000078 TwoWire::setClock(unsigned long)
-00013a18 g     F .text.itcm	0000009c _malloc_trim_r
+0000a300 g     F .text.itcm	00000078 TwoWire::setClock(unsigned long)
+00013670 g     F .text.itcm	0000009c _malloc_trim_r
 6002fae0 g     O .text.progmem	00000004 string0
-0000d6c8 g     F .text.itcm	00000018 usb_serial_write
+0000d3ac g     F .text.itcm	00000018 usb_serial_write
 6001ca70 g     F .text.code	00000032 mbedtls_ssl_transform_free
-00005554 g     F .text.itcm	00000008 _fnet_netbuf_trim
+00005238 g     F .text.itcm	00000008 _fnet_netbuf_trim
 600222fc  w    F .text.code	00000002 startup_late_hook
 6001c4b8 g     F .text.code	0000000e mbedtls_ssl_conf_encrypt_then_mac
 600122c0 g     F .text.code	0000000a mbedtls_rsa_set_padding
-000094ec g     F .text.itcm	0000001c _fnet_timer_release
+000091d0 g     F .text.itcm	0000001c _fnet_timer_release
 6001f5ac g     F .text.code	00000062 mbedtls_ssl_read_record
 6002d430 g     O .text.progmem	00000030 mbedtls_eckeydh_info
 6000e630 g     F .text.code	00000008 mbedtls_md5_init
 60007940 g     F .text.code	00000024 mbedtls_cipher_info_from_type
 6001c2c8 g     F .text.code	00000006 mbedtls_ssl_conf_psk_cb
-0000db2c  w    F .text.itcm	00000004 usb_serial_class::available()
-0000f2c8 g     F .text.itcm	000002dc strcmp
-0000b208 g     F .text.itcm	00000018 Adafruit_SSD1306::~Adafruit_SSD1306()
+0000d7f0  w    F .text.itcm	00000004 usb_serial_class::available()
+0000ef88 g     F .text.itcm	000002dc strcmp
+0000aeec g     F .text.itcm	00000018 Adafruit_SSD1306::~Adafruit_SSD1306()
 6002fb86 g     O .text.progmem	00000001 _serialEvent_default
 6002d3d0 g     O .text.progmem	00000030 mbedtls_rsa_alt_info
 600078e0 g     F .text.code	00000034 mbedtls_cipher_list
@@ -1752,89 +1747,88 @@ aaaaaabf g       *ABS*	00000000 _flexram_bank_config
 6000e644 g     F .text.code	0000000a mbedtls_md5_clone
 6001deb4 g     F .text.code	00000022 mbedtls_ssl_write_change_cipher_spec
 6001e47c g     F .text.code	00000314 mbedtls_ssl_prepare_handshake_record
-0000a324 g     F .text.itcm	0000000a Adafruit_NeoPixel::clear()
-00009564 g     F .text.itcm	00000012 fnet_timer_poll
+0000a008 g     F .text.itcm	0000000a Adafruit_NeoPixel::clear()
+00009248 g     F .text.itcm	00000012 fnet_timer_poll
 20000000 g     O .data	00000280 endpoint_queue_head
 6002fab0  w    O .text.progmem	00000016 usb_string_product_name
-00006e10 g     F .text.itcm	0000004a _fnet_socket_buffer_read_record
+00006af4 g     F .text.itcm	0000004a _fnet_socket_buffer_read_record
 60017af0 g     F .text.code	00000008 mbedtls_sha512_update_ret
-0000c2c0 g     F .text.itcm	000000cc delay
-20005c8c g     O .data	00000004 mbedtls_test_cli_crt
-00002c4c g     F .text.itcm	0000000e fnet_dhcp_cln_release
+0000bfa4 g     F .text.itcm	000000cc delay
+200059bc g     O .data	00000004 mbedtls_test_cli_crt
+00002930 g     F .text.itcm	0000000e fnet_dhcp_cln_release
 6000e34c g     F .text.code	00000006 mbedtls_md_init_ctx
-00004dd0 g     F .text.itcm	0000003c fnet_event_init
+00004ab4 g     F .text.itcm	0000003c fnet_event_init
 6000e208 g     F .text.code	000000a4 mbedtls_md_info_from_string
-00014d90 g     F .fini	00000000 _fini
+00014990 g     F .fini	00000000 _fini
 600202dc g     F .text.code	000001ec mbedtls_x509_get_rsassa_pss_params
-00006c64 g     F .text.itcm	00000114 fnet_socket_bind
-000040e8 g     F .text.itcm	00000034 _fnet_ip_queue_read
-0000181c g     F .text.itcm	00000068 EthernetClass::socketBufferData(unsigned char, unsigned short, unsigned char const*, unsigned short)
-0000a378 g     F .text.itcm	00000030 TwoWire::write(unsigned char)
+00006948 g     F .text.itcm	00000114 fnet_socket_bind
+00003dcc g     F .text.itcm	00000034 _fnet_ip_queue_read
+00001500 g     F .text.itcm	00000068 EthernetClass::socketBufferData(unsigned char, unsigned short, unsigned char const*, unsigned short)
+0000a05c g     F .text.itcm	00000030 TwoWire::write(unsigned char)
 60015638 g     F .text.code	00000008 mbedtls_sha1_update_ret
 60001020 g     O .text.headers	0000000c BootData
 6001e038 g     F .text.code	00000022 mbedtls_ssl_sig_from_pk
 60017d88 g     F .text.code	00000004 mbedtls_sha512_finish
 60002e78 g     F .text.code	00000028 mbedtls_asn1_find_named_data
-00000e30 g     F .text.itcm	00000002 EthernetClass::teensy_mutex_lock(void**)
+00000b14 g     F .text.itcm	00000002 EthernetClass::teensy_mutex_lock(void**)
 60011e40 g     F .text.code	0000006e mbedtls_rsa_import
-000066a8 g     F .text.itcm	000000d0 fnet_socket_sendto
-0000f18c g     F .text.itcm	0000004c sprintf
-0000da54 g     F .text.itcm	0000001e Print::printf(char const*, ...)
+0000638c g     F .text.itcm	000000d0 fnet_socket_sendto
+0000ee50 g     F .text.itcm	0000004c sprintf
 600200b4 g     F .text.code	00000004 mbedtls_x509_time_is_future
-0000daf4 g     F .text.itcm	00000016 Print::print(long)
-0000c6b0 g     F .text.itcm	00000004 Panic_Temp_isr
+0000d7b8 g     F .text.itcm	00000016 Print::print(long)
+0000c394 g     F .text.itcm	00000004 Panic_Temp_isr
 2020000c g     O .bss.dma	00000004 EthernetClass::socket_port
-00005bb8 g     F .text.itcm	00000020 fnet_netif_init
+0000589c g     F .text.itcm	00000020 fnet_netif_init
 6000467c g     F .text.code	00000030 mbedtls_mpi_add_int
-00009578 g     F .text.itcm	00000040 _fnet_timer_new
-00000554 g     F .text.itcm	00000114 initLEDTest()
-00003be4 g     F .text.itcm	000000fc _fnet_eth_phy_init
+0000925c g     F .text.itcm	00000040 _fnet_timer_new
+00000400 g     F .text.itcm	000000a4 initLEDTest()
+000038c8 g     F .text.itcm	000000fc _fnet_eth_phy_init
 60002ec0 g     F .text.code	00000020 mbedtls_asn1_free_named_data_list
 6000e014 g     F .text.code	000001ec mbedtls_hmac_drbg_self_test
-00012850 g     F .text.itcm	0000002c _write_r
-20005c88 g     O .data	00000004 mbedtls_test_ca_crt
+000124a8 g     F .text.itcm	0000002c _write_r
+200059b8 g     O .data	00000004 mbedtls_test_ca_crt
 60006b18 g     F .text.code	000000c8 mbedtls_camellia_crypt_cbc
-0000a9c4 g     F .text.itcm	0000009c Adafruit_GFX::drawRect(short, short, short, short, unsigned short)
+0000a6a8 g     F .text.itcm	0000009c Adafruit_GFX::drawRect(short, short, short, short, unsigned short)
 600100ec g     F .text.code	00000028 mbedtls_pk_debug
 6000f058 g     F .text.code	000000b0 mbedtls_md5_self_test
 60015640 g     F .text.code	000000ec mbedtls_sha1_finish_ret
 6002cd80 g     O .text.progmem	00000030 mbedtls_sha224_info
 60007534 g     F .text.code	0000001a mbedtls_ccm_auth_decrypt
-000038a4 g     F .text.itcm	0000000c fnet_error_get
-2000987a g     O .bss	00000001 EthernetClass::socket_num
+00003588 g     F .text.itcm	0000000c fnet_error_get
+2000947a g     O .bss	00000001 EthernetClass::socket_num
 60029ef4 g     O .text.progmem	000000e9 mbedtls_test_srv_key_ec
-20005a14 g     O .data	00000004 _impure_ptr
+20005744 g     O .data	00000004 _impure_ptr
 6000b3b8 g     F .text.code	00000012 mbedtls_ecp_is_zero
-0000394c g     F .text.itcm	00000074 _fnet_eth_output
-00013794 g     F .text.itcm	00000148 __sflush_r
-20005348 g     O .data	00000140 Wire
+00003630 g     F .text.itcm	00000074 _fnet_eth_output
+000133ec g     F .text.itcm	00000148 __sflush_r
+20005078 g     O .data	00000140 Wire
 60011f24 g     F .text.code	0000014c mbedtls_rsa_complete
-00007320 g     F .text.itcm	00000010 fnet_srand
-0000d99c g     F .text.itcm	0000005c IntervalTimer::end()
-00003b50 g     F .text.itcm	0000002a _fnet_eth_phy_read
+00007004 g     F .text.itcm	00000010 fnet_srand
+0000d680 g     F .text.itcm	0000005c IntervalTimer::end()
+00003834 g     F .text.itcm	0000002a _fnet_eth_phy_read
 60009b54 g     F .text.code	00000048 mbedtls_ecdh_free
-00006db4 g     F .text.itcm	0000005c _fnet_socket_buffer_append_address
+00006a98 g     F .text.itcm	0000005c _fnet_socket_buffer_append_address
 6002a314 g     O .text.progmem	00000004 mbedtls_test_ca_pwd_ec_len
 600095e8 g     F .text.code	00000048 mbedtls_dhm_set_group
 60022b78 g       .text.code	00000000 __preinit_array_end
 60006c64 g     F .text.code	00000066 mbedtls_camellia_crypt_ctr
 6000f3c8 g     F .text.code	00000044 mbedtls_oid_get_pk_alg
-0000b1a8 g     F .text.itcm	00000060 Adafruit_SSD1306::Adafruit_SSD1306(unsigned char, unsigned char, TwoWire*, signed char, unsigned long, unsigned long)
+0000ae8c g     F .text.itcm	00000060 Adafruit_SSD1306::Adafruit_SSD1306(unsigned char, unsigned char, TwoWire*, signed char, unsigned long, unsigned long)
 6001c438 g     F .text.code	00000008 mbedtls_ssl_set_hs_authmode
 600200b8 g     F .text.code	000000f8 mbedtls_x509_self_test
 20200004 g     O .bss.dma	00000004 EthernetClass::socket_buf_receive
 6001fed0 g     F .text.code	00000124 mbedtls_x509_dn_gets
-0000e9fc g     F .text.itcm	0000002a __ascii_mbtowc
+0000e6c0 g     F .text.itcm	0000002a __ascii_mbtowc
 600202bc g     F .text.code	0000000e mbedtls_x509_get_alg_null
 6000b608 g     F .text.code	0000004c mbedtls_ecp_tls_write_group
-00000e34 g     F .text.itcm	00000002 EthernetClass::teensy_mutex_release(void**)
+00000b18 g     F .text.itcm	00000002 EthernetClass::teensy_mutex_release(void**)
 600059ec g     F .text.code	000002fc mbedtls_mpi_inv_mod
 6001c42c g     F .text.code	0000000c mbedtls_ssl_set_hs_ca_chain
 60012238 g     F .text.code	00000088 mbedtls_rsa_export_crt
-0000a35c  w    F .text.itcm	00000018 TwoWire::peek()
-0000a374  w    F .text.itcm	00000002 TwoWire::flush()
-000009bc g     F .text.itcm	000000cc setup
-20004e70 g     O .data	0000006c usb_descriptor_list
+0000a040  w    F .text.itcm	00000018 TwoWire::peek()
+0000a058  w    F .text.itcm	00000002 TwoWire::flush()
+00000710 g     F .text.itcm	0000005c setup
+20004ba0 g     O .data	0000006c usb_descriptor_list
 6000dec0 g     F .text.code	00000070 mbedtls_hmac_drbg_seed
 600142c4 g     F .text.code	0000000a mbedtls_sha1_clone
 6000eff4 g     F .text.code	00000060 mbedtls_md5_ret
@@ -1844,264 +1838,263 @@ aaaaaabf g       *ABS*	00000000 _flexram_bank_config
 60003fbc g     F .text.code	0000000c mbedtls_mpi_size
 6001c130 g     F .text.code	00000006 mbedtls_ssl_conf_dtls_badmac_limit
 60008254 g     F .text.code	0000000c mbedtls_des3_free
-00001164  w    F .text.itcm	00000002 Print::flush()
-000095b8 g     F .text.itcm	0000002c _fnet_timer_free
+00000e48  w    F .text.itcm	00000002 Print::flush()
+0000929c g     F .text.itcm	0000002c _fnet_timer_free
 60007b3c g     F .text.code	00000038 mbedtls_cipher_update_ad
 600024dc g     F .text.code	0000001c mbedtls_aes_crypt_ecb
-00001988 g     F .text.itcm	00000004 fnet_htonl
+0000166c g     F .text.itcm	00000004 fnet_htonl
 600142b8 g     F .text.code	0000000a mbedtls_sha1_free
-0000ab90 g     F .text.itcm	0000032c Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)
+0000a874 g     F .text.itcm	0000032c Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)
 60001f8c g     F .text.code	00000074 mbedtls_aes_crypt_ctr
 60002d1c g     F .text.code	0000004a mbedtls_asn1_get_mpi
 60003ee0 g     F .text.code	00000050 mbedtls_mpi_set_bit
 600035d8 g     F .text.code	00000178 mbedtls_base64_decode
 6001e1f0 g     F .text.code	00000034 mbedtls_ssl_read_version
-20008ab4 g     O .bss	00000008 EthernetClass::_dnsServerAddress
-00004ecc g     F .text.itcm	00000054 fnet_event_raise
+200086b4 g     O .bss	00000008 EthernetClass::_dnsServerAddress
+00004bb0 g     F .text.itcm	00000054 fnet_event_raise
 6002cdb0 g     O .text.progmem	00000030 mbedtls_sha1_info
 60002ff0 g     F .text.code	00000028 mbedtls_asn1_write_raw_buffer
 600181ec g     F .text.code	00001950 mbedtls_ssl_handshake_client_step
-00005aac g     F .text.itcm	0000004e _fnet_netif_set_hw_addr
+00005790 g     F .text.itcm	0000004e _fnet_netif_set_hw_addr
 6000d850 g     F .text.code	000004dc mbedtls_gcm_self_test
 60013e48 g     F .text.code	000000ce mbedtls_rsa_deduce_private_exponent
 60005ce8 g     F .text.code	00000082 mbedtls_mpi_is_prime
-00013ff8 g     F .text.itcm	0000005e __swhatbuf_r
+00013c50 g     F .text.itcm	0000005e __swhatbuf_r
 20068000 g       .text.csf	00000000 _estack
 60021958 g     F .text.code	0000000a mbedtls_x509_crt_init
-0000d6e0 g     F .text.itcm	00000050 usb_serial_write_buffer_free
+0000d3c4 g     F .text.itcm	00000050 usb_serial_write_buffer_free
 60013284 g     F .text.code	000000e8 mbedtls_rsa_rsassa_pkcs1_v15_verify
 6000ad90 g     F .text.code	00000028 mbedtls_ecp_curve_info_from_tls_id
 600157e0 g     F .text.code	00000004 mbedtls_sha1
-00001980 g     F .text.itcm	00000006 fnet_htons
+00001664 g     F .text.itcm	00000006 fnet_htons
 6001df08 g     F .text.code	00000130 mbedtls_ssl_psk_derive_premaster
 6000a260 g     F .text.code	00000098 mbedtls_ecdsa_read_signature
 6001c488 g     F .text.code	00000006 mbedtls_ssl_get_alpn_protocol
-0000d3c4 g     F .text.itcm	00000108 usb_serial_configure
-0000a3a8 g     F .text.itcm	0000003a TwoWire::write(unsigned char const*, unsigned int)
+0000d0a8 g     F .text.itcm	00000108 usb_serial_configure
+0000a08c g     F .text.itcm	0000003a TwoWire::write(unsigned char const*, unsigned int)
 60002c6c g     F .text.code	000000b0 mbedtls_asn1_get_sequence_of
 600295a0 g     O .text.progmem	0000051b mbedtls_test_ca_crt_rsa
 6000827c g     F .text.code	0000002c mbedtls_des_key_check_key_parity
-0000da44  w    F .text.itcm	0000000e _write
+0000d728  w    F .text.itcm	0000000e _write
 60008234 g     F .text.code	00000008 mbedtls_des_init
 60010564 g     F .text.code	00000008 mbedtls_pkcs12_pbe_sha1_rc4_128
-200062c0 g       .data	00000000 _edata
-00006258 g     F .text.itcm	00000018 _fnet_socket_set_error
-00006f2c g     F .text.itcm	0000000a _fnet_socket_addr_copy
-20009881 g     O .bss	00000001 external_psram_size
+20005ec0 g       .data	00000000 _edata
+00005f3c g     F .text.itcm	00000018 _fnet_socket_set_error
+00006c10 g     F .text.itcm	0000000a _fnet_socket_addr_copy
+20009481 g     O .bss	00000001 external_psram_size
 6000d56c g     F .text.code	000000ee mbedtls_gcm_update
-00005838 g     F .text.itcm	00000050 _fnet_netif_release
+0000551c g     F .text.itcm	00000050 _fnet_netif_release
 6000f450 g     F .text.code	00000044 mbedtls_oid_get_ec_grp
 6000b54c g     F .text.code	00000034 mbedtls_ecp_tls_read_point
-00005c44 g     F .text.itcm	00000018 fnet_netif_is_connected
+00005928 g     F .text.itcm	00000018 fnet_netif_is_connected
 6000e354 g     F .text.code	00000030 mbedtls_md_clone
 6000a23c g     F .text.code	00000022 mbedtls_ecdsa_write_signature_det
 6000d838 g     F .text.code	00000016 mbedtls_gcm_free
-00014bb0 g     F .text.itcm	00000098 __fputwc
-0000db34  w    F .text.itcm	00000004 usb_serial_class::availableForWrite()
+000147b0 g     F .text.itcm	00000098 __fputwc
+0000d7f8  w    F .text.itcm	00000004 usb_serial_class::availableForWrite()
 60019df0 g     F .text.code	00000048 mbedtls_ssl_set_client_transport_id
 6001e3e0 g     F .text.code	0000009c mbedtls_ssl_resend
 6001c0b0 g     F .text.code	0000000e mbedtls_ssl_conf_authmode
 6000ae00 g     F .text.code	0000000c mbedtls_ecp_group_init
-00004098 g     F .text.itcm	00000004 fnet_inet_aton
+00003d7c g     F .text.itcm	00000004 fnet_inet_aton
 6001c714 g     F .text.code	0000002c mbedtls_ssl_handshake
 6000ad2c g     F .text.code	0000003c mbedtls_ecp_grp_id_list
-000070c4 g     F .text.itcm	0000001c _fnet_stack_mutex_unlock
-0000dc38 g     F .text.itcm	0000004e ultoa
+00006da8 g     F .text.itcm	0000001c _fnet_stack_mutex_unlock
+0000d8fc g     F .text.itcm	0000004e ultoa
 6001c4e8 g     F .text.code	00000034 mbedtls_ssl_conf_max_frag_len
-000033cc g     F .text.itcm	00000040 fnet_arp_get_mac
+000030b0 g     F .text.itcm	00000040 fnet_arp_get_mac
 6001c55c g     F .text.code	0000000e mbedtls_ssl_conf_legacy_renegotiation
 6001c0f4 g     F .text.code	0000001c mbedtls_ssl_set_timer_cb
 60022220 g     F .text.code	000000d4 TwoWire::begin()
-0000bbac g     F .text.itcm	00000066 Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)
-00003318 g     F .text.itcm	00000060 _fnet_arp_init
-0000705c g     F .text.itcm	0000001c _fnet_mutex_init
+0000b890 g     F .text.itcm	00000066 Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)
+00002ffc g     F .text.itcm	00000060 _fnet_arp_init
+00006d40 g     F .text.itcm	0000001c _fnet_mutex_init
 600162cc g     F .text.code	00000008 mbedtls_sha256_update_ret
 6000e574 g     F .text.code	00000038 mbedtls_md_hmac_reset
-20005cf0 g     O .data	00000001 OLED_SCREEN_ADDRESS
+20005a20 g     O .data	00000001 OLED_SCREEN_ADDRESS
 60016788 g     F .text.code	00000008 mbedtls_sha512_init
 600202cc g     F .text.code	0000000e mbedtls_x509_get_alg
-0001480c g     F .text.itcm	0000003c __swrite
-00007204 g     F .text.itcm	00000032 fnet_memcmp
-000022a4 g     F .text.itcm	00000018 fnet_service_unregister
-0000d7d4 g     F .text.itcm	00000044 EventResponder::runFromInterrupt()
-20005a10 g     O .data	00000004 __malloc_trim_threshold
-0000db24  w    F .text.itcm	00000004 usb_serial_class::peek()
+0001446c g     F .text.itcm	0000003c __swrite
+00006ee8 g     F .text.itcm	00000032 fnet_memcmp
+00001f88 g     F .text.itcm	00000018 fnet_service_unregister
+0000d4b8 g     F .text.itcm	00000044 EventResponder::runFromInterrupt()
+20005740 g     O .data	00000004 __malloc_trim_threshold
+0000d7e8  w    F .text.itcm	00000004 usb_serial_class::peek()
 60017d7c g     F .text.code	00000004 mbedtls_sha512_starts
-00004e78 g     F .text.itcm	00000054 fnet_isr_unlock
+00004b5c g     F .text.itcm	00000054 fnet_isr_unlock
 60021490 g     F .text.code	00000058 mbedtls_x509_crt_check_extended_key_usage
 6001e09c g     F .text.code	00000014 mbedtls_ssl_hash_from_md_alg
 60008f60 g     F .text.code	00000020 mbedtls_des3_set2key_dec
 60013f18 g     F .text.code	0000007c mbedtls_rsa_deduce_crt
-00005c5c g     F .text.itcm	00000020 fnet_netif_set_callback_on_ip4_addr_conflict
+00005940 g     F .text.itcm	00000020 fnet_netif_set_callback_on_ip4_addr_conflict
 6001c39c g     F .text.code	00000084 mbedtls_ssl_set_hostname
 6000e3b0 g     F .text.code	00000014 mbedtls_md_update
-00013f88 g     F .text.itcm	00000052 _fwalk_reent
-00000274 g     F .text.itcm	000000f8 getDisplayAddr()
-000145d4 g     F .text.itcm	00000114 __mdiff
+00013be0 g     F .text.itcm	00000052 _fwalk_reent
+0000023c g     F .text.itcm	00000044 getDisplayAddr()
+00014234 g     F .text.itcm	00000114 __mdiff
 6001dbbc g     F .text.code	00000058 mbedtls_ssl_renegotiate
-0000411c g     F .text.itcm	00000040 _fnet_ip_setsockopt
-000014dc g     F .text.itcm	00000048 EthernetClass::socketClose(unsigned char)
+00003e00 g     F .text.itcm	00000040 _fnet_ip_setsockopt
+000011c0 g     F .text.itcm	00000048 EthernetClass::socketClose(unsigned char)
 6001c638 g     F .text.code	00000050 mbedtls_ssl_get_record_expansion
 6000e384 g     F .text.code	00000006 mbedtls_md_get_size
-000012f0 g     F .text.itcm	00000046 EthernetUDP::read(unsigned char*, unsigned int)
+00000fd4 g     F .text.itcm	00000046 EthernetUDP::read(unsigned char*, unsigned int)
 6001fe40 g     F .text.code	00000090 mbedtls_ssl_get_key_exchange_md_tls1_2
 6002a318 g     O .text.progmem	0000000d mbedtls_test_ca_pwd_ec
-00005d00 g     F .text.itcm	00000024 _fnet_netif_get_by_scope_id
+000059e4 g     F .text.itcm	00000024 _fnet_netif_get_by_scope_id
 6000bf34 g     F .text.code	00000334 mbedtls_ecp_self_test
-0000b9ec g     F .text.itcm	0000001e Adafruit_SSD1306::clearDisplay()
-0000b1a8 g     F .text.itcm	00000060 Adafruit_SSD1306::Adafruit_SSD1306(unsigned char, unsigned char, TwoWire*, signed char, unsigned long, unsigned long)
+0000b6d0 g     F .text.itcm	0000001e Adafruit_SSD1306::clearDisplay()
+0000ae8c g     F .text.itcm	00000060 Adafruit_SSD1306::Adafruit_SSD1306(unsigned char, unsigned char, TwoWire*, signed char, unsigned long, unsigned long)
 6000efec g     F .text.code	00000004 mbedtls_md5_finish
-000011a8 g     F .text.itcm	00000002 EthernetUDP::flush()
+00000e8c g     F .text.itcm	00000002 EthernetUDP::flush()
 60020508 g     F .text.code	00000090 mbedtls_x509_get_sig_alg
-00013a14 g     F .text.itcm	00000002 __sfp_lock_release
+0001366c g     F .text.itcm	00000002 __sfp_lock_release
 6000642c g     F .text.code	0000049c mbedtls_camellia_setkey_enc
-00005bd8 g     F .text.itcm	0000000c _fnet_netif_join_ip4_multicast
+000058bc g     F .text.itcm	0000000c _fnet_netif_join_ip4_multicast
 60003bc0 g     F .text.code	00000026 mbedtls_mpi_free
-20005cd4 g     O .data	00000004 stripsEnabled
-00004ff4 g     F .text.itcm	0000007c _fnet_mempool_malloc
-000010cc g     F .text.itcm	0000002c EthernetClass::begin(unsigned char*, IPAddress)
+20005a04 g     O .data	00000004 stripsEnabled
+00004cd8 g     F .text.itcm	0000007c _fnet_mempool_malloc
+00000db0 g     F .text.itcm	0000002c EthernetClass::begin(unsigned char*, IPAddress)
 6002f4a8 g     O .text.progmem	00000010 mbedtls_x509_crt_profile_default
 6000e5ac g     F .text.code	00000070 mbedtls_md_hmac
 60003090 g     F .text.code	00000040 mbedtls_asn1_write_null
 20000bf0 g     O .data	00000101 _ctype_
 6002f4c8 g     O .text.progmem	00000010 mbedtls_x509_crt_profile_next
-00005e00 g     F .text.itcm	00000038 _fnet_prot_drain
-000071e4 g     F .text.itcm	0000000e fnet_memset
-00000cb8 g     F .text.itcm	00000048 DNSClient::fnet_dns_callback(fnet_dns_resolved_addr_t const*, unsigned long, char const*, void*)
-00000da4 g     F .text.itcm	00000002 EthernetClass::teensy_mutex_unlock(void**)
-0000c688  w    F .text.itcm	00000004 _read
+00005ae4 g     F .text.itcm	00000038 _fnet_prot_drain
+00006ec8 g     F .text.itcm	0000000e fnet_memset
+0000099c g     F .text.itcm	00000048 DNSClient::fnet_dns_callback(fnet_dns_resolved_addr_t const*, unsigned long, char const*, void*)
+00000a88 g     F .text.itcm	00000002 EthernetClass::teensy_mutex_unlock(void**)
+0000c36c  w    F .text.itcm	00000004 _read
 60022b78 g       .text.code	00000000 __init_array_start
-0000e374  w    F .text.itcm	00000002 .hidden __aeabi_idiv0
+0000e038  w    F .text.itcm	00000002 .hidden __aeabi_idiv0
 60019e38 g     F .text.code	00001b18 mbedtls_ssl_handshake_server_step
 60011a30 g     F .text.code	0000012c mbedtls_pk_parse_public_key
 6000dfe8 g     F .text.code	00000012 mbedtls_hmac_drbg_random
 600082d0 g     F .text.code	00000238 mbedtls_des_crypt_ecb
 6001c748 g     F .text.code	0000018c mbedtls_ssl_config_defaults
-2000532c g     O .data	00000004 F_BUS_ACTUAL
-00003698 g     F .text.itcm	0000001a fnet_arp_send_request
+2000505c g     O .data	00000004 F_BUS_ACTUAL
+0000337c g     F .text.itcm	0000001a fnet_arp_send_request
 60009d18 g     F .text.code	0000006c mbedtls_ecdh_calc_secret
 60007550 g     F .text.code	00000188 mbedtls_ccm_self_test
 6000fe4c g     F .text.code	00000058 mbedtls_pk_setup_rsa_alt
 6000944c g     F .text.code	00000008 mbedtls_dhm_init
-20008abc g     O .bss	00000004 EthernetServer::server_port
-00002d08 g     F .text.itcm	000001f8 fnet_dns_init
+200086bc g     O .bss	00000004 EthernetServer::server_port
+000029ec g     F .text.itcm	000001f8 fnet_dns_init
 600024f8 g     F .text.code	000000c8 mbedtls_aes_crypt_cbc
-00001278 g     F .text.itcm	00000010 EthernetUDP::beginPacket(IPAddress, unsigned short)
+00000f5c g     F .text.itcm	00000010 EthernetUDP::beginPacket(IPAddress, unsigned short)
 6000dd4c g     F .text.code	00000008 mbedtls_hmac_drbg_init
 6000dd5c g     F .text.code	00000004 mbedtls_hmac_drbg_set_reseed_interval
-00004f70 g     F .text.itcm	00000006 _fnet_mempool_release
+00004c54 g     F .text.itcm	00000006 _fnet_mempool_release
 60003e04 g     F .text.code	00000080 mbedtls_mpi_safe_cond_swap
 6001d4c4 g     F .text.code	000000a8 mbedtls_ssl_flush_output
 6000f494 g     F .text.code	00000044 mbedtls_oid_get_oid_by_ec_grp
-00014058 g     F .text.itcm	00000088 __smakebuf_r
+00013cb0 g     F .text.itcm	00000088 __smakebuf_r
 00000000 g       .text.itcm	00000000 _stext
-000021a0 g     F .text.itcm	0000007c fnet_fec_multicast_leave
-20005490 g     O .data	00000004 IntervalTimer::nvic_priorites
-0000f5c0 g     F .text.itcm	000000dc strlen
-000022d8 g     F .text.itcm	0000000c fnet_service_mutex_lock
+00001e84 g     F .text.itcm	0000007c fnet_fec_multicast_leave
+200051c0 g     O .data	00000004 IntervalTimer::nvic_priorites
+0000f280 g     F .text.itcm	000000dc strlen
+00001fbc g     F .text.itcm	0000000c fnet_service_mutex_lock
 60007d68 g     F .text.code	00000100 mbedtls_cipher_finish
-0000aa94 g     F .text.itcm	000000e0 Adafruit_GFX::drawBitmap(short, short, unsigned char*, short, short, unsigned short)
-00005470 g     F .text.itcm	000000e4 _fnet_netbuf_pullup
+0000a778 g     F .text.itcm	000000e0 Adafruit_GFX::drawBitmap(short, short, unsigned char*, short, short, unsigned short)
+00005154 g     F .text.itcm	000000e4 _fnet_netbuf_pullup
 6000e3f4 g     F .text.code	000000ec mbedtls_md_hmac_starts
-000094d0 g     F .text.itcm	0000001c _fnet_timer_init
-0000678c g     F .text.itcm	000000d8 fnet_socket_recvfrom
-000059dc g     F .text.itcm	00000018 fnet_netif_get_default
-00000db4  w    F .text.itcm	0000000c IntervalTimer::~IntervalTimer()
+000091b4 g     F .text.itcm	0000001c _fnet_timer_init
+00006470 g     F .text.itcm	000000d8 fnet_socket_recvfrom
+000056c0 g     F .text.itcm	00000018 fnet_netif_get_default
+00000a98  w    F .text.itcm	0000000c IntervalTimer::~IntervalTimer()
 6001ded8 g     F .text.code	00000030 mbedtls_ssl_optimize_checksum
 6002fab0 g     O .text.progmem	00000016 usb_string_product_name_default
-00011134 g     F .text.itcm	00000018 vdprintf
 60007a54 g     F .text.code	0000008c mbedtls_cipher_set_padding_mode
 60011e24 g     F .text.code	0000001a mbedtls_rsa_init
-00014a48 g     F .text.itcm	00000014 __sprint_r
-0000a1cc g     F .text.itcm	0000003e Adafruit_NeoPixel::setPin(short)
+00014648 g     F .text.itcm	00000014 __sprint_r
+00009eb0 g     F .text.itcm	0000003e Adafruit_NeoPixel::setPin(short)
 60013240 g     F .text.code	00000044 mbedtls_rsa_pkcs1_sign
-0000f1d8 g     F .text.itcm	000000ce strchr
-0000045c g     F .text.itcm	00000020 clearLEDs()
+0000ee9c g     F .text.itcm	000000ce strchr
+00000308 g     F .text.itcm	00000020 clearLEDs()
 6000fe1c g     F .text.code	00000030 mbedtls_pk_setup
-20005adc g     O .data	00000024 fnet_icmp4_prot_if
+2000580c g     O .data	00000024 fnet_icmp4_prot_if
 600222f8  w    F .text.code	00000002 startup_middle_hook
 60009a7c g     F .text.code	00000064 mbedtls_dhm_self_test
 60022300 g     F .text.code	000000e4 configure_cache
-00002c90 g     F .text.itcm	00000010 fnet_dhcp_cln_set_response_timeout
-00001288 g     F .text.itcm	0000000c EthernetUDP::endPacket()
-00003390 g     F .text.itcm	0000003c _fnet_arp_lookup
-20008b44 g     O .bss	00000004 _fnet_timer_api
-20008aa8 g     O .bss	00000004 EthernetClass::socket_size
-00004bf8 g     F .text.itcm	00000006 _fnet_ip4_maximum_packet
-000057b0 g     F .text.itcm	0000000c _fnet_mem_release
-00007238 g     F .text.itcm	00000018 fnet_strlen
+00002974 g     F .text.itcm	00000010 fnet_dhcp_cln_set_response_timeout
+00000f6c g     F .text.itcm	0000000c EthernetUDP::endPacket()
+00003074 g     F .text.itcm	0000003c _fnet_arp_lookup
+20008744 g     O .bss	00000004 _fnet_timer_api
+200086a8 g     O .bss	00000004 EthernetClass::socket_size
+000048dc g     F .text.itcm	00000006 _fnet_ip4_maximum_packet
+00005494 g     F .text.itcm	0000000c _fnet_mem_release
+00006f1c g     F .text.itcm	00000018 fnet_strlen
 6000fdf0 g     F .text.code	0000000a mbedtls_pk_init
 00000000  w      *UND*	00000000 _Jv_RegisterClasses
 600204c8 g     F .text.code	00000040 mbedtls_x509_get_sig
 6000454c g     F .text.code	00000090 mbedtls_mpi_sub_abs
 600054bc g     F .text.code	00000044 mbedtls_mpi_fill_random
-00011150 g     F .text.itcm	00001678 _vfprintf_r
+00010da8 g     F .text.itcm	00001678 _vfprintf_r
 6001f804 g     F .text.code	000003b4 mbedtls_ssl_parse_certificate
 60022b78 g       .text.code	00000000 __preinit_array_start
-0000cff4 g     F .text.itcm	00000024 usb_receive
+0000ccd8 g     F .text.itcm	00000024 usb_receive
 60029fe0 g     O .text.progmem	00000004 mbedtls_test_srv_crt_ec_len
-00001050 g     F .text.itcm	00000048 EthernetClass::begin(unsigned char*, IPAddress, IPAddress, IPAddress)
+00000d34 g     F .text.itcm	00000048 EthernetClass::begin(unsigned char*, IPAddress, IPAddress, IPAddress)
 6000e2ac g     F .text.code	00000018 mbedtls_md_info_from_type
-00004404 g     F .text.itcm	00000012 _fnet_ip4_multicast_leave_entry
-00009f0c g     F .text.itcm	0000001e Adafruit_NeoPixel::~Adafruit_NeoPixel()
+000040e8 g     F .text.itcm	00000012 _fnet_ip4_multicast_leave_entry
+00009bf0 g     F .text.itcm	0000001e Adafruit_NeoPixel::~Adafruit_NeoPixel()
 6002d400 g     O .text.progmem	00000030 mbedtls_ecdsa_info
 600035c4 g     F .text.code	00000012 mbedtls_base64_encode
 6001c118 g     F .text.code	00000006 mbedtls_ssl_conf_export_keys_cb
 6001e14c g     F .text.code	00000090 mbedtls_ssl_check_cert_usage
 600082a8 g     F .text.code	00000028 mbedtls_des_key_check_weak
-000142a0 g     F .text.itcm	0000005a __lo0bits
-00009f0c g     F .text.itcm	0000001e Adafruit_NeoPixel::~Adafruit_NeoPixel()
+00013f00 g     F .text.itcm	0000005a __lo0bits
+00009bf0 g     F .text.itcm	0000001e Adafruit_NeoPixel::~Adafruit_NeoPixel()
 6000e2d0 g     F .text.code	00000034 mbedtls_md_free
 20200000 g     O .bss.dma	00000004 EthernetClass::socket_buf_transmit
-00005a14 g     F .text.itcm	00000014 fnet_netif_get_ip4_dns
-20005a18 g     O .data	00000004 broadcast
+000056f8 g     F .text.itcm	00000014 fnet_netif_get_ip4_dns
+20005748 g     O .data	00000004 broadcast
 600273d4 g     O .text.progmem	00000004 mbedtls_test_cli_crt_rsa_len
-00004e0c g     F .text.itcm	0000005c fnet_isr_unregister
-0004e000 g       *ABS*	00000000 _flashimagelen
-20005c98 g     O .data	00000006 querryMAC
+00004af0 g     F .text.itcm	0000005c fnet_isr_unregister
+0004d800 g       *ABS*	00000000 _flashimagelen
+200059c8 g     O .data	00000006 querryMAC
 60004f90 g     F .text.code	00000128 mbedtls_mpi_write_string
-0000aa60 g     F .text.itcm	00000034 Adafruit_GFX::Adafruit_GFX(short, short)
+0000a744 g     F .text.itcm	00000034 Adafruit_GFX::Adafruit_GFX(short, short)
 6001365c g     F .text.code	00000200 mbedtls_rsa_gen_key
-0000e054 g     F .text.itcm	0000000a __aeabi_atexit
+0000dd18 g     F .text.itcm	0000000a __aeabi_atexit
 60002ea0 g     F .text.code	00000020 mbedtls_asn1_free_named_data
 00000000  w      *UND*	00000000 __register_frame_info
-0000df40 g     F .text.itcm	00000030 rtc_get
-0000aff0 g     F .text.itcm	00000010 Adafruit_GFX::setTextSize(unsigned char)
+0000dc04 g     F .text.itcm	00000030 rtc_get
+0000acd4 g     F .text.itcm	00000010 Adafruit_GFX::setTextSize(unsigned char)
 6000bc14 g     F .text.code	0000003c mbedtls_ecp_check_privkey
 6002cd20 g     O .text.progmem	00000030 mbedtls_sha384_info
 60007ae0 g     F .text.code	00000044 mbedtls_cipher_set_iv
-000011ac g     F .text.itcm	00000020 EthernetUDP::stop()
+00000e90 g     F .text.itcm	00000020 EthernetUDP::stop()
 600100a8 g     F .text.code	00000044 mbedtls_pk_check_pair
 70000000 g       .bss.extram	00000000 _extram_start
-0000d818 g     F .text.itcm	00000004 pendablesrvreq_isr
+0000d4fc g     F .text.itcm	00000004 pendablesrvreq_isr
 6001c53c g     F .text.code	0000000e mbedtls_ssl_conf_session_tickets
 6001c4a8 g     F .text.code	0000000e mbedtls_ssl_conf_fallback
-00000d08 g     F .text.itcm	00000098 DNSClient::getHostByName(char const*, IPAddress&, unsigned short)
-00001884 g     F .text.itcm	00000078 EthernetClass::socketStartUDP(unsigned char, unsigned char*, unsigned short)
-00001160  w    F .text.itcm	00000004 Print::availableForWrite()
-20005498 g     O .data	0000016c __global_locale
-0000415c g     F .text.itcm	0000003a _fnet_ip_getsockopt
+000009ec g     F .text.itcm	00000098 DNSClient::getHostByName(char const*, IPAddress&, unsigned short)
+00001568 g     F .text.itcm	00000078 EthernetClass::socketStartUDP(unsigned char, unsigned char*, unsigned short)
+00000e44  w    F .text.itcm	00000004 Print::availableForWrite()
+200051c8 g     O .data	0000016c __global_locale
+00003e40 g     F .text.itcm	0000003a _fnet_ip_getsockopt
 60008e90 g     F .text.code	0000003e mbedtls_des_setkey_dec
 6001c6e0 g     F .text.code	00000034 mbedtls_ssl_handshake_step
 6000e680 g     F .text.code	000007dc mbedtls_internal_md5_process
-00006b6c g     F .text.itcm	00000030 _fnet_socket_release
+00006850 g     F .text.itcm	00000030 _fnet_socket_release
 60008260 g     F .text.code	0000001c mbedtls_des_key_set_parity
 6000312c g     F .text.code	00000064 mbedtls_asn1_write_algorithm_identifier
-0000d4cc g     F .text.itcm	000000ec usb_serial_read
+0000d1b0 g     F .text.itcm	000000ec usb_serial_read
 6002d490 g     O .text.progmem	00000030 mbedtls_rsa_info
-0000a7f0 g     F .text.itcm	00000022 Adafruit_GFX::setRotation(unsigned char)
-0000da74 g     F .text.itcm	0000007e Print::printNumber(unsigned long, unsigned char, unsigned char)
-00005be4 g     F .text.itcm	0000000c _fnet_netif_leave_ip4_multicast
-0000cf34 g     F .text.itcm	00000068 usb_config_tx
-0000c68c  w    F .text.itcm	00000006 _close
+0000a4d4 g     F .text.itcm	00000022 Adafruit_GFX::setRotation(unsigned char)
+0000d738 g     F .text.itcm	0000007e Print::printNumber(unsigned long, unsigned char, unsigned char)
+000058c8 g     F .text.itcm	0000000c _fnet_netif_leave_ip4_multicast
+0000cc18 g     F .text.itcm	00000068 usb_config_tx
+0000c370  w    F .text.itcm	00000006 _close
 60027fa4 g     O .text.progmem	000004ad mbedtls_test_srv_crt_rsa
 6000f054 g     F .text.code	00000004 mbedtls_md5
-0000e47c g     F .text.itcm	00000010 free
+0000e140 g     F .text.itcm	00000010 free
 60017ff4 g     F .text.code	0000002c mbedtls_ssl_ciphersuite_from_id
-000141e0 g     F .text.itcm	00000080 __multadd
+00013e40 g     F .text.itcm	00000080 __multadd
 6001c944 g     F .text.code	00000008 mbedtls_ssl_session_init
-000141cc g     F .text.itcm	00000012 _Bfree
-20005cd8  w    O .data	00000016 usb_string_serial_number
+00013e2c g     F .text.itcm	00000012 _Bfree
+20005a08  w    O .data	00000016 usb_string_serial_number
 6001591c g     F .text.code	00000090 mbedtls_sha256_starts_ret
 
 

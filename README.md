@@ -42,7 +42,50 @@ __Library Installation notes:__
     3. Remove the NativeEthernet library (if you have installed it in Arduino library directory previously) as it will be there in the Teensyduino IDE app.
     4. Install the Adafruit Neopixel library using Arduino's LIbrary Manager (or Teensyduino's Library Manager)  
 
-### 2. __Development environment:__ [platformio](https://platformio.org/) (in VSCode)
+### 2. __arduino-cli setup:__ [compile and upload]
+
+Install or upgrade the latest arduino-cli
+
+__Note:__ Install libraries (listed above) using cli, if you are using in an headless envirnment where this was never compiled.
+Since, in my test system (also my development system), the listed libraries were already installed (from the above steps), I didn;t need to use it using `arduino-cli`
+
+```shell
+arduino-cli config add board_manager.additional_urls https://www.pjrc.com/teensy/td_156/package_teensy_index.json
+arduino-cli config dump --verbose
+arduino-cli core search teensy
+arduino-cli core install teensy:avr
+arduino-cli board details -b teensy:avr:teensy41
+
+#COMPILE
+cd ARTNET_TEENSY41_ETH_NEOPIXEL
+arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --output-dir build/ -v
+
+#UPLOAD
+arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --output-dir build/ -u -p <port> -v
+```
+
+---
+    As the teensy sub-system comes with some built in libraries baked in,  but just make sure the latest ones, installed by the users are ebing used as the baked in libs may be old version (but sometimes can be a good idea to use the bake dones instead as they might be otimized). but for here, use the user installed libs form the user lib dir. 
+
+```shell
+Multiple libraries were found for "NativeEthernet.h"
+  Used: /Users/<user>/Documents/Arduino/libraries/NativeEthernet
+  Not used: /Users/<user>/Library/Arduino15/packages/teensy/hardware/avr/1.56.1/libraries/NativeEthernet
+Multiple libraries were found for "Adafruit_SSD1306.h"
+  Used: /Users/<user>/Documents/Arduino/libraries/Adafruit_SSD1306
+  Not used: /Users/<user>/Documents/Arduino/libraries/Adafruit_SSD1306_Wemos_Mini_OLED
+Multiple libraries were found for "Adafruit_I2CDevice.h"
+  Used: /Users/<user>/Documents/Arduino/libraries/Adafruit_BusIO
+  Not used: /Users/<user>/Documents/Arduino/libraries/arduino_789302
+Multiple libraries were found for "Adafruit_NeoPixel.h"
+  Used: /Users/<user>/Documents/Arduino/libraries/Adafruit_NeoPixel
+  Not used: /Users/<user>/Library/Arduino15/packages/teensy/hardware/avr/1.56.1/libraries/Adafruit_NeoPixel
+Multiple libraries were found for "Artnet.h"
+  Used: /Users/<user>/Documents/Arduino/libraries/Artnet
+  Not used: /Users/<user>/Library/Arduino15/packages/teensy/hardware/avr/1.56.1/libraries/Artnet
+```
+
+### 3. __Development environment:__ [platformio](https://platformio.org/) (in VSCode)
 
 ---
 PIO specific instractions: (from scratch)
