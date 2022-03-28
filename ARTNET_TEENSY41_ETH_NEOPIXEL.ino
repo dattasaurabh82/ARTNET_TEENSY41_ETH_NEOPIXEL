@@ -19,13 +19,10 @@
 // After that you can use Ethernet.linkStatus() to know the status of the link.
 // If no cable was inserted when "begin" was run, and you insert it later, a DHCP address will get assigned in non-blocking.
 
-
-
 // [Optional] Mainly to support from platformio, so that thsi cwhole code can be copy pasted in main.cpp [TBD]
 // Not needed from Teensy duino
 #include <stdint.h>
 #include <Arduino.h>
-
 
 // --------------------------------------------- //
 // ------- User Configurable Parameters -------- //
@@ -35,24 +32,21 @@
 
 // On board OLED display's parameters (for our SSD1306-128x32)
 // Note: If you are using another SSD1306 screen resolution, say 128x64, then change the screen height ...
-#define SCREEN_WIDTH  128
+#define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 
 // For neopixel on strips
-const int ledsPerStrip = 144;                   // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs ).
-const byte numLEDStripsPerStripSocket = 1;      // change for your setup ( e.g: I'm using 1 strip, to begin with )
+const int ledsPerStrip = 144;              // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs ).
+const byte numLEDStripsPerStripSocket = 1; // change for your setup ( e.g: I'm using 1 strip, to begin with )
 // Note: Max is 170, as in what DMX allows/universe for artnet
-const int numLeds = ((ledsPerStrip*numLEDStripsPerStripSocket) <= 170) ? ledsPerStrip * numLEDStripsPerStripSocket : 170;
+const int numLeds = ((ledsPerStrip * numLEDStripsPerStripSocket) <= 170) ? ledsPerStrip * numLEDStripsPerStripSocket : 170;
 
-const int channelsPerLed = 3;                   // (for RGB, GRB etc. it is 3 ) (for RGBW, GRBW etc. it would be 4)
+const int channelsPerLed = 3; // (for RGB, GRB etc. it is 3 ) (for RGBW, GRBW etc. it would be 4)
 
 // A fixed IP addres for your Teensy4.1 uC, as an Artnet node, on the network (Change it a/c to your Router settings)
-byte fixedIP[] = { 192, 168, 132, 150 };
+byte fixedIP[] = {192, 168, 132, 150};
 byte broadcast[] = {192, 168, 132, 255};
 // -------------------------------------------- //
-
-
-
 
 // ------------------------------------------------------------------------------------------------------------ //
 // Enable/disable Serial print functionalities
@@ -69,22 +63,19 @@ byte broadcast[] = {192, 168, 132, 255};
 #define logHex(x) x;
 #endif
 
-
-
 // ------------------------------------------------------------------------------------------------------------ //
 // On-board LEDs to show, according to our logic, if network interface was succeful or not
 // ------------------------------------------------------------------------------------------------------------ //
 #define NET_INIT_SUCCESS_LED_PIN 17
 #define NET_INIT_FAIL_LED_PIN 16
 
-void initDebugLeds() {
+void initDebugLeds()
+{
   pinMode(NET_INIT_SUCCESS_LED_PIN, OUTPUT);
   pinMode(NET_INIT_FAIL_LED_PIN, OUTPUT);
   digitalWrite(NET_INIT_SUCCESS_LED_PIN, LOW);
   digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
 }
-
-
 
 // --------------------------------------- //
 // ----------- LIBRARY IMPORTS ----------- //
@@ -102,37 +93,40 @@ void initDebugLeds() {
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-
-
 // ------------------------------------- //
 // ------ SSD1306 128x32 OLED DISP------ //
 // ------------------------------------- //
-#define OLED_RESET_PIN  4                // Reset pin # (or -1 if sharing Arduino reset pin)
+#define OLED_RESET_PIN 4 // Reset pin # (or -1 if sharing Arduino reset pin)
 //#define OLED_SCREEN_ADDRESS 0x3C       //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
-uint8_t OLED_SCREEN_ADDRESS = 0x3C;      //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
-uint8_t SSD1306_ADDRESSES[2] = { 0x3c, 0x3D };
+uint8_t OLED_SCREEN_ADDRESS = 0x3C; //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+uint8_t SSD1306_ADDRESSES[2] = {0x3c, 0x3D};
 
-uint8_t getDisplayAddr() {
-  uint8_t  error = 1;
-  uint8_t  address = 0x00;
-  uint8_t  foundAddr = 0x00;
+uint8_t getDisplayAddr()
+{
+  uint8_t error = 1;
+  uint8_t address = 0x00;
+  uint8_t foundAddr = 0x00;
   int nDevices = 0;
 
   // Buffer time to let the device initialize
   delay(100);
 
-  for (address = 1; address < 127; address++ ) {
+  for (address = 1; address < 127; address++)
+  {
     // The i2c_scanner uses the return value of
     // the Write.endTransmisstion to see if
     // a device did acknowledge to the address.
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
-    if (error == 0) {
+    if (error == 0)
+    {
       foundAddr = address;
       logln("Found a i2c slave!");
       nDevices++;
       break;
-    } else if (error == 4) {
+    }
+    else if (error == 4)
+    {
       log("Error code: ");
       logln(error);
       log(F("Unknown error at address 0x"));
@@ -142,66 +136,83 @@ uint8_t getDisplayAddr() {
     }
   }
 
-  if (nDevices == 0) {
+  if (nDevices == 0)
+  {
     logln("No I2C devices found\n");
-  } else {
-    log("i2C SLAVE'S ADDR: [ Hex: 0x"); logHex(foundAddr); log(", Binary: "); log(foundAddr); logln("]");
+  }
+  else
+  {
+    log("i2C SLAVE'S ADDR: [ Hex: 0x");
+    logHex(foundAddr);
+    log(", Binary: ");
+    log(foundAddr);
+    logln("]");
   }
   return foundAddr;
 }
 
-
-boolean validAddr(uint8_t _addr) {
+boolean validAddr(uint8_t _addr)
+{
   bool isValidAddr = false;
-  for (byte i = 0; i < sizeof(SSD1306_ADDRESSES); i++) {
-    if (_addr == SSD1306_ADDRESSES[i]) {
+  for (byte i = 0; i < sizeof(SSD1306_ADDRESSES); i++)
+  {
+    if (_addr == SSD1306_ADDRESSES[i])
+    {
       isValidAddr = true;
       log("ADDR ");
       logHex(_addr);
       logln(" found in LUT");
 
       break;
-    } else {
+    }
+    else
+    {
       isValidAddr = false;
     }
   }
   return isValidAddr;
 }
 
-
 Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET_PIN);
 boolean ENABLE_OLED = false;
 
-
-void setupOLEDdisplay() {
+void setupOLEDdisplay()
+{
   logln("---------------------------------------------------------");
   logln("OLED SCREEN INIT SECTION");
   logln("---------------------------------------------------------");
   Wire.begin();
   OLED_SCREEN_ADDRESS = getDisplayAddr();
   Wire.end();
-  if (validAddr(OLED_SCREEN_ADDRESS)) {
-    if (oled.begin(SSD1306_SWITCHCAPVCC, OLED_SCREEN_ADDRESS)) {
+  if (validAddr(OLED_SCREEN_ADDRESS))
+  {
+    if (oled.begin(SSD1306_SWITCHCAPVCC, OLED_SCREEN_ADDRESS))
+    {
       ENABLE_OLED = true;
       logln("\nOLED SSD1306 INITIATED: OK!\n");
-    } else {
+    }
+    else
+    {
       ENABLE_OLED = false;
       logln(F("\nOLED SSD1306 INITIATED: FAILED [x]\n"));
     }
-  } else {
+  }
+  else
+  {
     ENABLE_OLED = false;
     logln(F("\nOLED SSD1306 INITIATED: FAILED [x]\n"));
   }
-  if (ENABLE_OLED) {
+  if (ENABLE_OLED)
+  {
     // SETUP OLED
     // More details:   https://randomnerdtutorials.com/guide-for-oled-display-with-arduino/
-    oled.setFont();                                       // default font
+    oled.setFont(); // default font
     // oled was successfully initiated, so Clear the OLED buffer
     oled.clearDisplay();
     oled.display();
-    oled.setTextSize(1);                                  // Normal 1:1 pixel scale
-    oled.setTextColor(SSD1306_WHITE);                     // Draw white text
-    oled.setCursor(0, 0);                                 // Start at top-left corner
+    oled.setTextSize(1);              // Normal 1:1 pixel scale
+    oled.setTextColor(SSD1306_WHITE); // Draw white text
+    oled.setCursor(0, 0);             // Start at top-left corner
   }
 
   // .. for test:
@@ -218,18 +229,14 @@ void setupOLEDdisplay() {
 
 boolean stripsEnabled[totalLEDStrips] = {0, 0, 1, 1};
 
-const byte stripPins[totalLEDStrips] = { 24, 25, 15, 14 };
+const byte stripPins[totalLEDStrips] = {24, 25, 15, 14};
 
 Adafruit_NeoPixel strips[totalLEDStrips] = {
-  Adafruit_NeoPixel(ledsPerStrip, stripPins[0], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(ledsPerStrip, stripPins[1], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(ledsPerStrip, stripPins[2], NEO_GRB + NEO_KHZ800),
-  Adafruit_NeoPixel(ledsPerStrip, stripPins[3], NEO_GRB + NEO_KHZ800),
+    Adafruit_NeoPixel(ledsPerStrip, stripPins[0], NEO_GRB + NEO_KHZ800),
+    Adafruit_NeoPixel(ledsPerStrip, stripPins[1], NEO_GRB + NEO_KHZ800),
+    Adafruit_NeoPixel(ledsPerStrip, stripPins[2], NEO_GRB + NEO_KHZ800),
+    Adafruit_NeoPixel(ledsPerStrip, stripPins[3], NEO_GRB + NEO_KHZ800),
 };
-
-
-
-
 
 // Define colors.
 const uint32_t RED = 0x160000;
@@ -238,21 +245,23 @@ const uint32_t BLUE = 0x000016;
 #define totalTestColors 3
 uint32_t colors[totalTestColors] = {RED, GREEN, BLUE};
 
-
-
-void clearLEDs() {
-  for (byte i = 0; i < totalLEDStrips; i++) {
+void clearLEDs()
+{
+  for (byte i = 0; i < totalLEDStrips; i++)
+  {
     strips[i].clear();
     strips[i].show();
   }
 }
 
-void initLEDTest() {
+void initLEDTest()
+{
   logln("\n---------------------------------------------------------");
   logln("NEOPIXEL STRIP/S INIT SECTION");
   logln("---------------------------------------------------------");
 
-  if (ENABLE_OLED) {
+  if (ENABLE_OLED)
+  {
     oled.clearDisplay();
     oled.setCursor(0, 0);
     oled.println("Checking LEDs...");
@@ -260,13 +269,16 @@ void initLEDTest() {
   }
   delay(2000);
 
-  for (byte i = 0; i < totalLEDStrips; i++) {
-    if (stripsEnabled[i]) {
+  for (byte i = 0; i < totalLEDStrips; i++)
+  {
+    if (stripsEnabled[i])
+    {
       log("Testing Strip ");
       log(i + 1);
       log(" ... ");
 
-      for (byte c = 0; c < totalTestColors; c++) {
+      for (byte c = 0; c < totalTestColors; c++)
+      {
         strips[i].fill(colors[c]);
         strips[i].show();
         delay(500);
@@ -279,42 +291,43 @@ void initLEDTest() {
   }
 }
 
-void initStrips() {
-  for (byte i = 0; i < totalLEDStrips; i++) {
+void initStrips()
+{
+  for (byte i = 0; i < totalLEDStrips; i++)
+  {
     strips[i].begin();
   }
   clearLEDs();
 }
 
-
-
-
 // ------------------------------------------------ //
 // ------ ETHERNET SETTINGS+ ARTNET SETTINGS ------ //
 // ------------------------------------------------ //
-byte querryMAC[] = { 0xE5, 0x2A, 0xFC, 0x41, 0x13, 0x2D }; // Dummy random MAC addr used for retreiving Teensy 4.1's actual MAC addr
-byte teensyMAC[6] = {};                                    // Array to hold the actual MACaddr of Teensy 4.1 (To be used for starting Ethernet Interface later)
+byte querryMAC[] = {0xE5, 0x2A, 0xFC, 0x41, 0x13, 0x2D}; // Dummy random MAC addr used for retreiving Teensy 4.1's actual MAC addr
+byte teensyMAC[6] = {};                                  // Array to hold the actual MACaddr of Teensy 4.1 (To be used for starting Ethernet Interface later)
 //--
 Artnet artnet;
 const int startUniverse = 0;
-const int numberOfChannels = numLeds * channelsPerLed;     // Total number of channels you want to receive over DMX
+const int numberOfChannels = numLeds * channelsPerLed; // Total number of channels you want to receive over DMX
 // CHANGE FOR YOUR SETUP most software this is 1, some software send out artnet first universe as 0.
 const int maxUniverses = numberOfChannels / 512 + ((numberOfChannels % 512) ? 1 : 0); // Check if we got all universes...
 bool universesReceived[maxUniverses];
-//const int maxUniverses = 512; // Check if we got all universes...
-//bool universesReceived[maxUniverses];
+// const int maxUniverses = 512; // Check if we got all universes...
+// bool universesReceived[maxUniverses];
 bool sendFrame = 1;
 int previousDataLength = 0;
 //--
 
-void assignMAC(byte * _mac) {
+void assignMAC(byte *_mac)
+{
   logln("\n---------------------------------------------------------");
   logln("ETH + ARTNET INTERFACE INIT");
   logln("---------------------------------------------------------");
   logln("Getting new mac addr...");
 
   // oled screen text prompt
-  if (ENABLE_OLED) {
+  if (ENABLE_OLED)
+  {
     oled.clearDisplay();
     oled.setCursor(0, 0);
     oled.println("Trying to get new \n\nMAC ADDRESS ...");
@@ -322,9 +335,12 @@ void assignMAC(byte * _mac) {
   }
   delay(2000);
 
-  for (uint8_t by = 0; by < 2; by++) _mac[by] = (HW_OCOTP_MAC1 >> ((1 - by) * 8)) & 0xFF;
-  for (uint8_t by = 0; by < 4; by++) _mac[by + 2] = (HW_OCOTP_MAC0 >> ((3 - by) * 8)) & 0xFF;
-  for (int i = 0; i < 6; i++) {
+  for (uint8_t by = 0; by < 2; by++)
+    _mac[by] = (HW_OCOTP_MAC1 >> ((1 - by) * 8)) & 0xFF;
+  for (uint8_t by = 0; by < 4; by++)
+    _mac[by + 2] = (HW_OCOTP_MAC0 >> ((3 - by) * 8)) & 0xFF;
+  for (int i = 0; i < 6; i++)
+  {
     teensyMAC[i] = _mac[i];
   }
 
@@ -333,14 +349,17 @@ void assignMAC(byte * _mac) {
 #endif
 
   // display on OLED
-  if (ENABLE_OLED) {
+  if (ENABLE_OLED)
+  {
     oled.clearDisplay();
     oled.setCursor(0, 0);
     oled.println("MAC ADDR:");
 
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++)
+    {
       oled.print("0x");
-      if (teensyMAC[i] < 16) {
+      if (teensyMAC[i] < 16)
+      {
         oled.print(0);
       }
       oled.print(teensyMAC[i], HEX);
@@ -349,7 +368,6 @@ void assignMAC(byte * _mac) {
     oled.display();
   }
 }
-
 
 /*
   void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
@@ -375,14 +393,17 @@ void assignMAC(byte * _mac) {
   }
 */
 
-
-void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
+void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t *data)
+{
   sendFrame = 1;
 
   // Set brightness ofthe whole strip, for all the strips, if they are enabled
-  if (universe == 15) {
-    for (byte i = 0; i < totalLEDStrips; i++) {
-      if (stripsEnabled[i]) {
+  if (universe == 15)
+  {
+    for (byte i = 0; i < totalLEDStrips; i++)
+    {
+      if (stripsEnabled[i])
+      {
         strips[i].setBrightness(data[0]);
         strips[i].show();
       }
@@ -390,37 +411,49 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
   }
 
   // Store which universe has got in
-  if ((universe - startUniverse) < maxUniverses) {
+  if ((universe - startUniverse) < maxUniverses)
+  {
     universesReceived[universe - startUniverse] = 1;
   }
 
-  for (int i = 0 ; i < maxUniverses ; i++) {
-    if (universesReceived[i] == 0) {
+  for (int i = 0; i < maxUniverses; i++)
+  {
+    if (universesReceived[i] == 0)
+    {
       //      logln("Broke");
       sendFrame = 0;
       break;
     }
   }
 
-  for (int i = 0; i < length / channelsPerLed; i++) {
+  for (int i = 0; i < length / channelsPerLed; i++)
+  {
     int led = i + (universe - startUniverse) * (previousDataLength / channelsPerLed);
 
-    if (led < numLeds) {
-      if (channelsPerLed == 4) {
+    if (led < numLeds)
+    {
+      if (channelsPerLed == 4)
+      {
         // -- For RGBW or GRBW type strips -- //
-        for (byte s = 0; s < totalLEDStrips; s++) {
+        for (byte s = 0; s < totalLEDStrips; s++)
+        {
           // Go through all the led strips ..
-          if (stripsEnabled[s]) {
+          if (stripsEnabled[s])
+          {
             // that are enabled..
             // and set the ccolor to incoming data
             strips[s].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2], data[i * channelsPerLed + 3]);
           }
         }
-      } if (channelsPerLed == 3) {
+      }
+      if (channelsPerLed == 3)
+      {
         // -- For RGB or GRB type strips -- //
-        for (byte s = 0; s < totalLEDStrips; s++) {
+        for (byte s = 0; s < totalLEDStrips; s++)
+        {
           // Go through all the led strips ..
-          if (stripsEnabled[s]) {
+          if (stripsEnabled[s])
+          {
             // that are enabled..
             // and set the ccolor to incoming data
             strips[s].setPixelColor(led, data[i * channelsPerLed], data[i * channelsPerLed + 1], data[i * channelsPerLed + 2]);
@@ -431,10 +464,13 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
   }
   previousDataLength = length;
 
-  if (sendFrame) {
-    for (byte s = 0; s < totalLEDStrips; s++) {
+  if (sendFrame)
+  {
+    for (byte s = 0; s < totalLEDStrips; s++)
+    {
       // Go through all the led strips ..
-      if (stripsEnabled[s]) {
+      if (stripsEnabled[s])
+      {
         // that are enabled..
         strips[s].show();
       }
@@ -445,11 +481,13 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
 }
 * /
 
-void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
-  //void inititateArtnet() {
-  //  Begin art-net with the new MAC addr and the fixed IP
+    void inititateArtnet(byte _teensyMAC[], byte _fixedIP[])
+{
+  // void inititateArtnet() {
+  //   Begin art-net with the new MAC addr and the fixed IP
   logln("Trying to begin ARTNET with Fixed IP and the above MAC addr...");
-  if (ENABLE_OLED) {
+  if (ENABLE_OLED)
+  {
     oled.clearDisplay();
     oled.setCursor(0, 0);
     oled.println("Trying to begin \n\nARTNET ...");
@@ -469,13 +507,15 @@ void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
   //  Or else, notify and block.
   IPAddress currIP = Ethernet.localIP();
 
-  if (currIP[0] != 0 && currIP[1] != 0 && currIP[2] != 0 && currIP[3] != 0 && Ethernet.linkStatus() == 1) {
+  if (currIP[0] != 0 && currIP[1] != 0 && currIP[2] != 0 && currIP[3] != 0 && Ethernet.linkStatus() == 1)
+  {
     logln("\nARTNET INITIATED: OK!\n");
     // Show on on-board LEDs
     digitalWrite(NET_INIT_SUCCESS_LED_PIN, HIGH);
     digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
     // Draw IP addr on the oled display
-    if (ENABLE_OLED) {
+    if (ENABLE_OLED)
+    {
       oled.clearDisplay();
       oled.setCursor(0, 0);
       oled.println("ARTNET: OK");
@@ -483,13 +523,16 @@ void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
       oled.println(Ethernet.localIP());
       oled.display();
     }
-  } else {
+  }
+  else
+  {
     logln("\nARTNET INITIATED: FAILED [x]!\n");
     // show on on board LEDs
     digitalWrite(NET_INIT_SUCCESS_LED_PIN, LOW);
     digitalWrite(NET_INIT_FAIL_LED_PIN, HIGH);
     // Show failed result on OLED
-    if (ENABLE_OLED) {
+    if (ENABLE_OLED)
+    {
       oled.clearDisplay();
       oled.setCursor(0, 0);
       oled.println("ARTNET: FAAILED!");
@@ -498,27 +541,28 @@ void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
       oled.display();
     }
     // also if failed, do not proceed, show red on all strips & block...
-    for (byte i = 0; i < totalLEDStrips; i++) {
-      if (stripsEnabled[i]) {
+    for (byte i = 0; i < totalLEDStrips; i++)
+    {
+      if (stripsEnabled[i])
+      {
         strips[i].fill(RED);
         strips[i].show();
       }
     }
     // and block...
-    while (true) {
+    while (true)
+    {
       ;
     }
   }
 }
 
-
-
-
-
-void setup() {
+void setup()
+{
 #ifdef DEBUG
   Serial.begin(115200);
-  while (!Serial) {
+  while (!Serial)
+  {
     ; // wait for serial port to connect
   }
   logln(numLeds);
@@ -551,9 +595,7 @@ void setup() {
   artnet.setArtDmxCallback(onDmxFrame);
 }
 
-
-
-
-void loop() {
+void loop()
+{
   artnet.read();
 }
