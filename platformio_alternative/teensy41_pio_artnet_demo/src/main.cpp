@@ -38,19 +38,6 @@
     when "begin" was run, and you insert it later, a DHCP address will get assigned in non-blocking.
 */
 
-/*
-   TODO:
-   [*] create array of strips and not individual objects?
-   [*] dmx callack to all or 1 strip.
-   [-] check multiple dmx universe assignment to differebt strips
-      [-] Same universe to all strips.
-      [-] diff universes to diff strips.
-   [*] i2c OLED display setup
-   [-] Check dev support on platformio env1
-   [-] Check cmdline compile for teensy4.1 and setting macros while compiling...
-   [-] Check network once in a while (make it hot swappable)
-*/
-
 #include <Arduino.h>
 
 // --------------------------------------------- //
@@ -267,19 +254,13 @@ boolean stripsEnabled[totalLEDStrips] = {0, 0, 1, 1};
 
 const byte stripPins[totalLEDStrips] = {24, 25, 15, 14};
 
-// Adafruit_NeoPixel strips[totalLEDStrips] = {
-// Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB + NEO_KHZ800),
-//     Adafruit_NeoPixel(numLeds, stripPins[1], NEO_GRB + NEO_KHZ800),
-//     Adafruit_NeoPixel(numLeds, stripPins[2], NEO_GRB + NEO_KHZ800),
-//     Adafruit_NeoPixel(numLeds, stripPins[3], NEO_GRB + NEO_KHZ800),
-// };
-// #define NEO_GRB ((1 << 6) | (1 << 4) | (0 << 2) | (2)) ///< Transmit as G,R,B
-// #define NEO_KHZ800 0x0000 ///< 800 KHz data transmission
+#define NEO_GRB ((1 << 6) | (1 << 4) | (0 << 2) | (2)) ///< Transmit as G,R,B
+#define NEO_KHZ800 0x0000                              ///< 800 KHz data transmission
 Adafruit_NeoPixel strips[totalLEDStrips] = {
-    Adafruit_NeoPixel(numLeds, stripPins[0], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
-    Adafruit_NeoPixel(numLeds, stripPins[1], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
-    Adafruit_NeoPixel(numLeds, stripPins[2], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
-    Adafruit_NeoPixel(numLeds, stripPins[3], ((1 << 6) | (1 << 4) | (0 << 2) | (2)) + 0x0000),
+    Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB + NEO_KHZ800),
+    Adafruit_NeoPixel(numLeds, stripPins[1], NEO_GRB + NEO_KHZ800),
+    Adafruit_NeoPixel(numLeds, stripPins[2], NEO_GRB + NEO_KHZ800),
+    Adafruit_NeoPixel(numLeds, stripPins[3], NEO_GRB + NEO_KHZ800),
 };
 
 // Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(numLeds, stripPins[0], NEO_GRB);
