@@ -46,3 +46,11 @@ jobs:
           ./arduino-cli core install teensy:avr
           ./arduino-cli core upgrade
           ./arduino-cli core update-index
+      
+       # Install the libraries 
+      - name: arduino-cli install libraries [build dependencies]
+        run: |
+          ./arduino-cli lib install "Adafruit NeoPixel"
+          ./arduino-cli lib install "Adafruit SSD1306"
+          ./arduino-cli lib install --git-url https://github.com/vjmuzik/NativeEthernet
+          ./arduino-cli lib install --git-url https://github.com/natcl/Artnet
