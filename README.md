@@ -67,10 +67,10 @@ arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=e
 #UPLOAD
 arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --output-dir build/ --clean -u -p <port> -v
 
-#ENABLE/DISABLE serial debug:
-# we just have to set DEBUG=true/flase for that and we can change that MACRO during our compilation as such:
-#build.extra_flags=-DDEBUG=false
-#Disable Serial Debug
+# ENABLE/DISABLE serial debug:
+# We just have to set DEBUG=true/flase for that and we can change that MACRO during our compilation as such:
+# build.extra_flags=-DDEBUG=false
+# Disable Serial Debug
 arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --build-property build.extra_flags=-DDEBUG=false --output-dir build/ --clean -u -p <port> -v
 #Enable Serial Debug
 arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --build-property build.extra_flags=-DDEBUG=true --output-dir build/ --clean -u -p <port> -v
