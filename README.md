@@ -25,13 +25,12 @@ __Credits:__
 ![TeensyEthernetNeoPixel v59](https://user-images.githubusercontent.com/4619862/158967454-083e91c5-0bb7-464e-9c60-529dc53f1da3.png)
 ![TeensyArtnetController](https://user-images.githubusercontent.com/4619862/158972039-5d99bbad-d773-4283-83ec-335e74642918.jpeg)
 
----
-
 ## Development Environment Setup
 
 ### 1. __Development environment:__ [Teensyduino 1.56](https://www.pjrc.com/teensy/td_download.html) (as of Mar 2022)
 
-1. __Library Installation:__
+---
+__Library Installation notes:__
 
     1. Remove the compiled Artnet library from the Teensyduino IDE App. On my mac, I did it like this:
 
@@ -45,6 +44,7 @@ __Credits:__
 
 ### 2. __Development environment:__ [platformio](https://platformio.org/) (in VSCode)
 
+---
 PIO specific instractions: (from scratch)
 
 1. Add manually __Adafruit Busio lib__ from pio's library registry, to this project.
