@@ -1,5 +1,7 @@
 # ARTNET TEENSY41 ETH NEOPIXEL
 
+![build and release](https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL/actions/workflows/main.yml/badge.svg)
+
 __Platform:__ Teensy 4.1 @ 400MHz with Native Ethernet
 
 An ARTNET based multi single strip neopixel (WS2811) system; running on Teensy 4.1 (using NativeEthernet and Artnet) where it receives DMX universe 0 and sets them parallel to all 4 strips
