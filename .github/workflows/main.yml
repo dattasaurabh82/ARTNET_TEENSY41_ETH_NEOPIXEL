@@ -47,10 +47,27 @@ jobs:
           ./arduino-cli core upgrade
           ./arduino-cli core update-index
       
-       # Install the libraries 
+      # Install the libraries 
       - name: arduino-cli install libraries [build dependencies]
         run: |
           ./arduino-cli lib install "Adafruit NeoPixel"
           ./arduino-cli lib install "Adafruit SSD1306"
           ./arduino-cli lib install --git-url https://github.com/vjmuzik/NativeEthernet
           ./arduino-cli lib install --git-url https://github.com/natcl/Artnet
+        
+      # Clean compile the code in build directory
+      # Gotcha: The main Arduino ino file is named differently than the repo name. 
+      # So we had to do some renaming as the compiler follows traditional arduino paradigm,
+      # where the main ino file should have the same prefix name as the src root directory. 
+      - name: Compile main firmware binary [clean build in /build/ dir]
+        run: |
+          rm -rf build
+          FQBN_ARG="-b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us"
+          OUTPUT_ARG="--output-dir $(pwd)/build"
+          DEBUG_TRUE="--build-property build.extra_flags=-DDEBUG=true"
+          DEBUG_FALSE="--build-property build.extra_flags=-DDEBUG=false"
+          ./arduino-cli compile $FQBN_ARG $DEBUG_TRUE $OUTPUT_ARG --clean -v
+          cd build
+          ls -l
+          cd ..
+          
