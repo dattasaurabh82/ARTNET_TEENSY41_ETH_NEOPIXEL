@@ -60,10 +60,18 @@ arduino-cli board details -b teensy:avr:teensy41
 
 #COMPILE
 cd ARTNET_TEENSY41_ETH_NEOPIXEL
-arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --output-dir build/ -v
+arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --output-dir build/ --clean -v
 
 #UPLOAD
-arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --output-dir build/ -u -p <port> -v
+arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --output-dir build/ --clean -u -p <port> -v
+
+#ENABLE/disable serial debug:
+# we just have to set DEBUG=true/flase for that and we can change that MACRO during our compilation as such:
+#build.extra_flags=-DDEBUG=false
+#Disable Serial Debug
+arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --build-property build.extra_flags=-DDEBUG=false --output-dir build/ --clean -u -p <port> -v
+#Enable Serial Debug
+arduino-cli compile -b teensy:avr:teensy41:usb=serial,speed=600,opt=o2std,keys=en-us --build-property build.extra_flags=-DDEBUG=true --output-dir build/ --clean -u -p <port> -v
 ```
 
 _As the teensy sub-system comes with some built in libraries baked in,  but just make sure the latest ones, installed by the users are ebing used as the baked in libs may be old version (but sometimes can be a good idea to use the bake dones instead as they might be otimized). but for here, use the user installed libs form the user lib dir._
@@ -97,11 +105,11 @@ PIO specific instractions: (from scratch)
 4. In `main.cpp` try importing the following libs:
 
     ```c++
-    # include <Arduino.h>
-    # include <SPI.h>
-    # include <Wire.h>
-    # include <Adafruit_GFX.h>
-    # include <Adafruit_SSD1306.h>
+    #include <Arduino.h>
+    #include <SPI.h>
+    #include <Wire.h>
+    #include <Adafruit_GFX.h>
+    #include <Adafruit_SSD1306.h>
     ```
 
 5. It will highlight in red complaining it couldn't find the libraries in PATH.

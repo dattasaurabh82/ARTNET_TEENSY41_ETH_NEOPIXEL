@@ -13,7 +13,7 @@
       5. Adafruit : for the SSD1306 libray                                        [https://github.com/adafruit/Adafruit_SSD1306]
       6. Adafruit : for the graphics libray                                       [https://github.com/adafruit/Adafruit-GFX-Library]
 
-  PIO specific instractions: (from scratch)
+  PIO specific instructions: (from scratch)
   ------------------------------------------
     1. Add manually Adafruit Busio lib from pio's library registry, to this project
     2. Add manually Adafruit GFX lib from pio's library registry, to this project
