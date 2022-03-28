@@ -28,3 +28,21 @@ jobs:
           rm -rf arduino-cli.tar.gz
           sudo chmod u+x ./arduino-cli
           ./arduino-cli --help
+      
+      # 1. Create config file used by arduino-cli
+      # 2. Add our board donwload uri in there
+      # 3. Set a flag in that config file to download libs from git uris
+      # 4. Update the core-index(which downloads automatically and updates arduino-cli's dependencies)
+      # 5. Install our boards (i.e. uCs)
+      - name: arduino-cli install boards [build dependencies]
+        run: |
+          ./arduino-cli core update-index
+          ./arduino-cli config init
+          ./arduino-cli config add board_manager.additional_urls https://www.pjrc.com/teensy/td_156/package_teensy_index.json
+          ./arduino-cli config set library.enable_unsafe_install true
+          ./arduino-cli core update-index
+          ./arduino-cli config dump
+          ls -l
+          ./arduino-cli core install teensy:avr
+          ./arduino-cli core upgrade
+          ./arduino-cli core update-index
