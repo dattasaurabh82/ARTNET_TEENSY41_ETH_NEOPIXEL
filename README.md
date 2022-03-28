@@ -47,23 +47,46 @@ __Credits:__
 
 PIO specific instractions: (from scratch)
 
-    1. Add manually Adafruit Busio lib from pio's library registry, to this project
-    2. Add manually Adafruit GFX lib from pio's library registry, to this project
-    3. Add manually Adafruit SSD1306 pio's library registry, to this project
-    4. In main.cpp try importing the following libs:
+1. Add manually __Adafruit Busio lib__ from pio's library registry, to this project.
+2. Add manually __Adafruit GFX lib__ from pio's library registry, to this project.
+3. Add manually __Adafruit SSD1306__ pio's library registry, to this project.
+4. In `main.cpp` try importing the following libs:
 
     ```c++
-    #include <Arduino.h>
-    #include <SPI.h>
-    #include <Wire.h>
-    #include <Adafruit_GFX.h>
-    #include <Adafruit_SSD1306.h>
+    # include <Arduino.h>
+    # include <SPI.h>
+    # include <Wire.h>
+    # include <Adafruit_GFX.h>
+    # include <Adafruit_SSD1306.h>
     ```
 
-    5. It will highlight in red complaining it couldn't find the libariues in path.
-    6. In vscode, here a small light bulb will appear, asking "Fix the quickway", do that (for both the libraries)
-    7. Come back to main.cpp and compile, the errors would be gone.
-    8. In platformio.ini, in "lib_deps" section, add https://github.com/vjmuzik/NativeEthernet (although is baked in Teensy System, but it might not be the latest)
-    9. In platformio.ini, in "lib_deps" section, add https://github.com/natcl/Artnet, (May in pio lib registry, there is the Artnet library, but it's not latest [as of Mar 20222])
+5. It will highlight in red complaining it couldn't find the libraries in PATH.
+6. In vscode, here a small light bulb will appear, asking "Fix the quickway", do that (for both the libraries)
+7. Come back to `main.cpp` and compile, the ERRORS would be gone.
+8. In `platformio.ini`, in `lib_deps:` section, add <https://github.com/vjmuzik/NativeEthernet> (although is baked in Teensy System, but it might not be the latest)
+9. In `platformio.ini`, in `lib_deps:` section, add <https://github.com/natcl/Artnet>, (__Note:__ ** In pio lib registry, there is the Artnet library, but it's not latest [as of Mar 20222])
+
+---
+
+#### Minimal [platformio.ini](https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL/blob/main/platformio_alternative/teensy41_pio_artnet_demo/platformio.ini)
+
+```yaml
+[env:teensy41]
+platform = teensy
+board = teensy41
+framework = arduino
+monitor_speed = 115200
+lib_deps = 
+ SPI
+ Wire
+ https://github.com/vjmuzik/NativeEthernet
+ https://github.com/natcl/Artnet
+ adafruit/Adafruit NeoPixel@^1.10.4
+ adafruit/Adafruit BusIO@^1.11.3
+ adafruit/Adafruit GFX Library@^1.10.14
+ adafruit/Adafruit SSD1306@^2.5.1
+```
+
+---
 
 __License:__  (MIT)[]
