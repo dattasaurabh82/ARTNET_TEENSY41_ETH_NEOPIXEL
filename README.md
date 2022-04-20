@@ -17,7 +17,7 @@ __Credits:__
 
 ## Hardware Setup
 
-1. Schematic [F360 link](https://a360.co/3s11Ogf): [Schematuc.pdf](https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL/blob/main/Schematic.pdf)
+1. Schematic: [F360 link](https://a360.co/3s11Ogf) & [Schematuc.pdf](https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL/blob/main/Schematic.pdf)
 ![Screenshot 2022-04-20 at 8 33 29 PM](https://user-images.githubusercontent.com/4619862/164231916-6705f384-f0fe-4fe1-af7a-472f45dfab4b.png)
 
 2. PCB deisgn [F360 link](https://a360.co/3EvgDMN)
