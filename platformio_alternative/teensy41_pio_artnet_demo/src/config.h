@@ -12,10 +12,9 @@
 // ------------------------------------------------------------------------------------------------------------ //
 // For SSD1306 OLED 128x32 screen related
 // ------------------------------------------------------------------------------------------------------------ //
-#define OLED_RESET_PIN 17 // Reset pin # (or -1 if sharing Arduino reset pin)
-//#define OLED_SCREEN_ADDRESS 0x3C       //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
-uint8_t SSD1306_ADDRESSES[2] = {0x3c, 0x3D};
-uint8_t OLED_SCREEN_ADDRESS = 0x3C; //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+#define OLED_RESET_PIN 17                    // Reset pin # (or -1 if sharing Arduino reset pin)
+uint8_t SSD1306_ADDRESSES[2] = {0x3c, 0x3D}; // LUT for ssd1306 oled displays, used to validate discovered addr.
+uint8_t OLED_SCREEN_ADDRESS = 0x3C;          //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 // On board OLED display's parameters (for our SSD1306-128x32)
 // Note: If you are using another SSD1306 screen resolution, say 128x64, then change the screen height ...
 #define SCREEN_WIDTH 128
@@ -31,8 +30,7 @@ const int channelsPerLed = 3;              // (for RGB, GRB etc. it is 3 ) (for 
 // ------------------------------------------------------------------------------------------------------------ //
 // For Art net DMX library
 // ------------------------------------------------------------------------------------------------------------ //
-// A fixed IP addres for your Teensy4.1 uC, as an Artnet node, on the network (Change it a/c to your Router settings)
-byte fixedIP[] = {192, 168, 132, 150};
+byte fixedIP[] = {192, 168, 132, 150}; // A fixed IP addres for your Teensy4.1 uC, as an Artnet node (Change it a/c to your Router settings)
 byte broadcast[] = {192, 168, 132, 255};
 
 // ------------------------------------------------------------------------------------------------------------ //
