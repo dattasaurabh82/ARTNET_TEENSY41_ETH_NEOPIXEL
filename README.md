@@ -99,28 +99,25 @@ Not used: /Users/<user>/Library/Arduino15/packages/teensy/hardware/avr/1.56.1/li
 ### 3. __Development environment:__ [platformio](https://platformio.org/) (in VSCode)
 
 ---
-PIO specific instructions: (from scratch)
+### PIO specific instructions (from scratch) : 
 
-1. Add manually __Adafruit Busio lib__ from pio's library registry, to this project.
-2. Add manually __Adafruit GFX lib__ from pio's library registry, to this project.
-3. Add manually __Adafruit SSD1306__ pio's library registry, to this project.
-4. These steps will update the `platformio.ini` file.
-5. Then, in `main.cpp` try importing the following libs:
+  1. Needed to add manually Adafruit Busio lib from pio's library registry, to this project.
+  2. Needed to add manually Adafruit GFX lib from pio's library registry, to this project.
+  3. Needed to add manually Adafruit SSD1306 pio's library registry, to this project.
+  4. In platformio.ini, in "lib_deps" section, add https://github.com/vjmuzik/NativeEthernet . (although is baked in Teensy System, but it might not be the latest)
+  5. In platformio.ini, in "lib_deps" section, add https://github.com/natcl/Artnet . (May be available in pio lib registry, but it's not latest [as of Mar 20222])
 
-    ```c++
+  For 1st time:
+  It will highlight in red complaining it can't find the follwoing libraries in path, in some header files:
+  ```c
     #include <Arduino.h>
     #include <SPI.h>
     #include <Wire.h>
     #include <Adafruit_GFX.h>
     #include <Adafruit_SSD1306.h>
-    ```
-
-6. Some of them will get highlight in red, complaining that those couldn't be found in the library's PATHs.
-7. In vscode, here a small light bulb will appear, asking "Fix it in a quick way"; do that (for for the highlighted libraries)
-8. Come back to `main.cpp` and compile, the ERRORS would be gone.
-9. Then we need to add 2 more libraries in the `platformio.ini`.
-10. In `lib_deps:` section, add <https://github.com/vjmuzik/NativeEthernet> (although is baked in Teensy System, but it might not be the latest).
-11. In `platformio.ini`, in `lib_deps:` section, add <https://github.com/natcl/Artnet>, (__Note:__ **In pio lib registry, there is the Artnet library, but it's not latest [as of Mar 20222])
+   ```
+  1. In vscode, in the appropriate header files, a small light bulb will appear, asking "Fix the quickway", do that (for both the libraries)
+  2. Come back to main.cpp and compile, the errors would be gone.
 
 ---
 
