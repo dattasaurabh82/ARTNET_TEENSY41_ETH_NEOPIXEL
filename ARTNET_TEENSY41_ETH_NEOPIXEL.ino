@@ -31,7 +31,7 @@
 // ------- User Configurable Parameters -------- //
 // --------------------------------------------- //
 // Un-commenting => Enables and comment out => Disables, Serial interface for messages (e.g: for debug logs)
-#define DEBUG false
+#define DEBUG
 
 // On board OLED display's parameters (for our SSD1306-128x32)
 // Note: If you are using another SSD1306 screen resolution, say 128x64, then change the screen height ...
@@ -57,7 +57,7 @@ byte broadcast[] = {192, 168, 132, 255};
 // ------------------------------------------------------------------------------------------------------------ //
 // Enable/disable Serial print functionalities
 // ------------------------------------------------------------------------------------------------------------ //
-#if DEBUG == true
+#ifdef DEBUG
 #define log(x) Serial.print(x);
 #define logln(x) Serial.println(x);
 #define loglnHex(x) Serial.println(x, HEX);
@@ -213,7 +213,7 @@ void setupOLEDdisplay() {
 // ------------------------------------------------------------------------------------------------------------ //
 #define totalLEDStrips 4
 
-boolean stripsEnabled[totalLEDStrips] = {1, 1, 1, 1};
+boolean stripsEnabled[totalLEDStrips] = {1, 1, 0, 0};
 
 const byte stripPins[totalLEDStrips] = { 24, 25, 26, 27 };
 
@@ -325,7 +325,7 @@ void assignMAC(byte * _mac) {
     teensyMAC[i] = _mac[i];
   }
 
-#if DEBUG == true
+#ifdef DEBUG
   Serial.printf("byte teensyMAC[] = { 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x };\n", teensyMAC[0], teensyMAC[1], teensyMAC[2], teensyMAC[3], teensyMAC[4], teensyMAC[5]);
 #endif
 
@@ -511,7 +511,7 @@ void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
 
 
 void setup() {
-#if DEBUG == true
+#ifdef DEBUG
   Serial.begin(115200);
   while (!Serial) {
     ; // wait for serial port to connect
