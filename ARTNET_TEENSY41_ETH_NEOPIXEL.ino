@@ -36,7 +36,7 @@
 // On board OLED display's parameters (for our SSD1306-128x32)
 // Note: If you are using another SSD1306 screen resolution, say 128x64, then change the screen height ...
 #define SCREEN_WIDTH  128
-#define SCREEN_HEIGHT 64
+#define SCREEN_HEIGHT 32
 
 // For neopixel on strips
 const int ledsPerStrip = 144;                   // change for your setup ( e.g: My 1M high-density neopixel strip has 144 LEDs ).
@@ -74,14 +74,11 @@ byte broadcast[] = {192, 168, 132, 255};
 // ------------------------------------------------------------------------------------------------------------ //
 // On-board LEDs to show, according to our logic, if network interface was succeful or not
 // ------------------------------------------------------------------------------------------------------------ //
-#define NET_INIT_SUCCESS_LED_PIN 17
-#define NET_INIT_FAIL_LED_PIN 16
+#define LED_PIN 9
 
 void initDebugLeds() {
-  pinMode(NET_INIT_SUCCESS_LED_PIN, OUTPUT);
-  pinMode(NET_INIT_FAIL_LED_PIN, OUTPUT);
-  digitalWrite(NET_INIT_SUCCESS_LED_PIN, LOW);
-  digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
 }
 
 
@@ -107,7 +104,7 @@ void initDebugLeds() {
 // ------------------------------------- //
 // ------ SSD1306 128x32 OLED DISP------ //
 // ------------------------------------- //
-#define OLED_RESET_PIN  4                // Reset pin # (or -1 if sharing Arduino reset pin)
+#define OLED_RESET_PIN  17                // Reset pin # (or -1 if sharing Arduino reset pin)
 //#define OLED_SCREEN_ADDRESS 0x3C       //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 uint8_t OLED_SCREEN_ADDRESS = 0x3C;      //< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 uint8_t SSD1306_ADDRESSES[2] = { 0x3c, 0x3D };
@@ -216,9 +213,9 @@ void setupOLEDdisplay() {
 // ------------------------------------------------------------------------------------------------------------ //
 #define totalLEDStrips 4
 
-boolean stripsEnabled[totalLEDStrips] = {0, 0, 1, 1};
+boolean stripsEnabled[totalLEDStrips] = {1, 1, 1, 1};
 
-const byte stripPins[totalLEDStrips] = { 24, 25, 15, 14 };
+const byte stripPins[totalLEDStrips] = { 24, 25, 26, 27 };
 
 Adafruit_NeoPixel strips[totalLEDStrips] = {
   Adafruit_NeoPixel(ledsPerStrip, stripPins[0], NEO_GRB + NEO_KHZ800),
@@ -472,8 +469,7 @@ void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
   if (currIP[0] != 0 && currIP[1] != 0 && currIP[2] != 0 && currIP[3] != 0 && Ethernet.linkStatus() == 1) {
     logln("\nARTNET INITIATED: OK!\n");
     // Show on on-board LEDs
-    digitalWrite(NET_INIT_SUCCESS_LED_PIN, HIGH);
-    digitalWrite(NET_INIT_FAIL_LED_PIN, LOW);
+    digitalWrite(LED_PIN, HIGH);
     // Draw IP addr on the oled display
     if (ENABLE_OLED) {
       oled.clearDisplay();
@@ -486,8 +482,7 @@ void inititateArtnet(byte _teensyMAC[], byte _fixedIP[]) {
   } else {
     logln("\nARTNET INITIATED: FAILED [x]!\n");
     // show on on board LEDs
-    digitalWrite(NET_INIT_SUCCESS_LED_PIN, LOW);
-    digitalWrite(NET_INIT_FAIL_LED_PIN, HIGH);
+    digitalWrite(LED_PIN, LOW);
     // Show failed result on OLED
     if (ENABLE_OLED) {
       oled.clearDisplay();
