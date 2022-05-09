@@ -25,6 +25,7 @@ __Credits:__
 3. GERBER: [TeensyEthernetNeoPixel v21 v444_2022-04-11.zip](https://github.com/dattasaurabh82/ARTNET_TEENSY41_ETH_NEOPIXEL/blob/main/GERBERS/TeensyEthernetNeoPixel%20v21%20v444_2022-04-11.zip)
 
 ![assembly v7](https://user-images.githubusercontent.com/4619862/164235523-db50fcdd-3af4-470b-9f34-19a7222f135f.png)
+<img width="1678" alt="Screenshot 2022-05-09 at 11 23 33 AM" src="https://user-images.githubusercontent.com/4619862/167335416-20042251-5908-4861-87a3-e6d49e06f863.png">
 
 
 ## Development Environment Setup
